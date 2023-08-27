@@ -1,0 +1,14 @@
+work/
+*.wlf
+transcript
+
+*.cache/
+*.hw/
+
+*.jou
+vivado.log
+vivado*.str
+xsim*
+webtalk*
+*.pb
+*.wdb

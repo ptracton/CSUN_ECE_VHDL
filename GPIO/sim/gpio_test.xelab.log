@@ -1,0 +1,29 @@
+Vivado Simulator 2019.1
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: /opt/Xilinx/Vivado/2019.1/bin/unwrapped/lnx64.o/xelab -top xil_defaultlib.testbench -prj rtl_vivado.prj -debug all -snapshot gpio_test.snapshot --log gpio_test.xelab.log 
+Multi-threading is on. Using 10 slave threads.
+Determining compilation order of HDL files.
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/rtl/gpio/gpio_bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'gpio_bit'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/rtl/gpio/gpio.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'gpio'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/rtl/top.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'top'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/testbench/testbench.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'testbench'
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package std.env
+Compiling architecture rtl of entity xil_defaultlib.gpio_bit [gpio_bit_default]
+Compiling architecture behavioral of entity xil_defaultlib.gpio [\gpio(width=16)\]
+Compiling architecture rtl of entity xil_defaultlib.top [top_default]
+Compiling architecture behavioral of entity xil_defaultlib.test_case [test_case_default]
+Compiling architecture behavioral of entity xil_defaultlib.testbench
+Built simulation snapshot gpio_test.snapshot

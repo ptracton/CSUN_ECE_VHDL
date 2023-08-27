@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="testbench" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="3599995691fs"></ZoomStartTime>
+      <ZoomEndTime time="3600000862fs"></ZoomEndTime>
+      <Cursor1Time time="3600000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="268"></NameColumnWidth>
+      <ValueColumnWidth column_width="178"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="4" />
+   <wvobject type="group" fp_name="group4">
+      <obj_property name="label">TESTBENCH</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/testbench/XLEDS">
+         <obj_property name="ElementShortName">XLEDS[15:0]</obj_property>
+         <obj_property name="ObjectShortName">XLEDS[15:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/XSWITCHES">
+         <obj_property name="ElementShortName">XSWITCHES[15:0]</obj_property>
+         <obj_property name="ObjectShortName">XSWITCHES[15:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/shifting">
+         <obj_property name="ElementShortName">shifting[15:0]</obj_property>
+         <obj_property name="ObjectShortName">shifting[15:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group8">
+      <obj_property name="label">DUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/testbench/DUT/XLEDS">
+         <obj_property name="ElementShortName">XLEDS[15:0]</obj_property>
+         <obj_property name="ObjectShortName">XLEDS[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/XSWITCHES">
+         <obj_property name="ElementShortName">XSWITCHES[15:0]</obj_property>
+         <obj_property name="ObjectShortName">XSWITCHES[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/gpio_bus">
+         <obj_property name="ElementShortName">gpio_bus[15:0]</obj_property>
+         <obj_property name="ObjectShortName">gpio_bus[15:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group14">
+      <obj_property name="label">LEDS</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/testbench/DUT/LEDS/oe">
+         <obj_property name="ElementShortName">oe[15:0]</obj_property>
+         <obj_property name="ObjectShortName">oe[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/LEDS/inp">
+         <obj_property name="ElementShortName">inp[15:0]</obj_property>
+         <obj_property name="ObjectShortName">inp[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/LEDS/outp">
+         <obj_property name="ElementShortName">outp[15:0]</obj_property>
+         <obj_property name="ObjectShortName">outp[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/LEDS/bidir">
+         <obj_property name="ElementShortName">bidir[15:0]</obj_property>
+         <obj_property name="ObjectShortName">bidir[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/LEDS/WIDTH">
+         <obj_property name="ElementShortName">WIDTH</obj_property>
+         <obj_property name="ObjectShortName">WIDTH</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group20">
+      <obj_property name="label">SWITCHES</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/testbench/DUT/SWITCHES/oe">
+         <obj_property name="ElementShortName">oe[15:0]</obj_property>
+         <obj_property name="ObjectShortName">oe[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/SWITCHES/inp">
+         <obj_property name="ElementShortName">inp[15:0]</obj_property>
+         <obj_property name="ObjectShortName">inp[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/SWITCHES/outp">
+         <obj_property name="ElementShortName">outp[15:0]</obj_property>
+         <obj_property name="ObjectShortName">outp[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/SWITCHES/bidir">
+         <obj_property name="ElementShortName">bidir[15:0]</obj_property>
+         <obj_property name="ObjectShortName">bidir[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/SWITCHES/WIDTH">
+         <obj_property name="ElementShortName">WIDTH</obj_property>
+         <obj_property name="ObjectShortName">WIDTH</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

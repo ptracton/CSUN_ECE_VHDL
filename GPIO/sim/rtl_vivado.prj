@@ -1,0 +1,9 @@
+
+# DUT source code
+vhdl xil_defaultlib "../rtl/gpio/gpio_bit.vhd"\
+"../rtl/gpio/gpio.vhd"\
+"../rtl/top.vhd"\
+"../testbench/testbench.vhd"\
+
+#xelab -debug typical top -s testbench
+#xsim testbench

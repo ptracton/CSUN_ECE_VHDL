@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# xsim v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sun Aug 27 15:40:44 2023
+# Process ID: 32423
+# Current directory: /home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/sim
+# Command line: xsim -log gpio_test_2.vivado.log -mode tcl -source {xsim.dir/gpio_test_2.snapshot/xsim_script.tcl}
+# Log file: /home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/sim/gpio_test_2.vivado.log
+# Journal file: /home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/sim/xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/gpio_test_2.snapshot/xsim_script.tcl
+# xsim {gpio_test_2.snapshot} -autoloadwcfg -tclbatch {simulation.tcl}
+Vivado Simulator 2019.1
+Time resolution is 1 ps
+source simulation.tcl
+## run all
+Note: TEST PASSED
+Time: 2600 ns  Iteration: 0  Process: /testbench/test/test  File: /home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/sim/gpio_test_2.vhd
+$finish called at time : 2600 ns : File "/home/ptracton/CSUN/CSUN_ECE_VHDL/GPIO/sim/gpio_test_2.vhd" Line 54
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Aug 27 15:40:51 2023...
