@@ -76,18 +76,44 @@ The simulation name can be quickly and easily changed to a different test case.
 
 ### Regression
 
+A regression is a collection of tests to prove a design is working.  The ability to run all of the self checking tests and collect the results to see if the design working is critical.  To do this, there is a tool in the tools directory, [run_regression.py](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/tools/run_regression.py).  
+
+To run the tool you need to feed it a list of  test cases to run through.  In the sim directory there is a file, [regression_rtl.f](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/sim/regression_rtl.f).  it is just a list of test cases to go through.  Notice no file extension.  The run\_regression.py tool will iterate through this list and call run\_sim.py for each of the test cases.  When done it will inform the user of the number of tests ran, who passed, who failed and some statistics about it.
+
+This command will run the regression using Modelsim
+
+![run regression](./images/regression.png)
+
+This is the result of the above command.
+
+![regression results](./images/regression_results.png)
+
 ## Backend
 
-### GUI Simulation
+The backend process is for synthesis, implementation, bit file generation and programming the board.  This can be done via the GUI or the command line.  The command line version uses a Makefile to build the image and download to the target.
 
-#### Vivado
-#### Modelsim
+The constraints directory has the single [basys3.xdc](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/constraints/basys3.xdc) file used by both the GUI and command line.
 
-### CLI Simulation
+### Vivado GUI
+In the backend/vivado/basys3 directory is the XPR file, [basys3.xpr](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/vivado/basys3/basys3.xpr).  This is the project file for Vivado.  This file can be loaded into Vivado and then the usual flow for generating the bit file is performed.  
 
-#### Vivado
-#### Modelsim
+![basys3 project](./images/basys3_vivado_xpr.png)
 
+From here you can synthesize, implement or make your bit file bit clicking on the red boxed items.
+
+
+### Command Line Interface
+In the backend/scripting/basys3 there is a [Makefile](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/scripting/basys3/Makefile).  This is the process used to build the FPGA bit file and program the board.  
+
+To build the bit file all you need to type is "make"
+![missing makefile](./images/make.png)
+
+
+The output of running the build process.
+![missing make output](./images/script_bit.png)
+
+The resulting bit file is located in ./bitgen/basys3.bit.
+The timing simulation is located in implementation/top\_timesim.vhd and the [SDF](https://www.vlsi-expert.com/2011/03/how-to-read-sdf-standard-delay-format.html) is located in implementation/top\_timesim.sdf.  This is the material needed for a timing simulation but that is work still TBD.
 
 ## Tools
 
@@ -101,7 +127,7 @@ This tool is NOT covered in any ECE class I am teaching right now.  It is a veri
 
 ## TODO
 + Use [GHDL](https://github.com/ghdl/ghdl) and [GtkWave](https://gtkwave.sourceforge.net/)
-+ Post implementation simulation
++ Post implementation timing simulations
 + Trying different sizes for WIDTH and number of GPIO bits created
 + GPIO asserting an interrupt internally
 + Interface for CPU (AHB, AXI, WB, Picoblaze, other?)

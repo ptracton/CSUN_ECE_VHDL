@@ -23,5 +23,5 @@ catch { report_route_status -file implementation/basys3_route_status.rpt -pb imp
 catch { report_clock_utilization -file implementation/basys3_clock_utilization_routed.rpt }
 
 open_checkpoint implementation/basys3_routed.dcp
-write_verilog -mode timesim -sdf_anno true implementation/top_timesim.v
+write_vhdl implementation/top_timesim.vhd
 write_sdf implementation/top_timesim.sdf
