@@ -12,3 +12,6 @@ xsim*
 webtalk*
 *.pb
 *.wdb
+*.vdb
+*.rlx
+*.pb

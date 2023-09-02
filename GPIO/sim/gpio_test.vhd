@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : CSUN
 -- Created    : 2023-08-27
--- Last update: 2023-08-27
+-- Last update: 2023-08-31
 -- Platform   : Modelsim on Linux
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -24,32 +24,33 @@ use IEEE.STD_LOGIC_1164.all;
 use std.env.finish;
 use ieee.numeric_std.all;               -- needed for shifting
 
-
 entity test_case is
+  generic (
+    WIDTH : integer := 8);
   port(
-    XLEDS     : in  std_logic_vector(15 downto 0);
-    XSWITCHES : out std_logic_vector(15 downto 0)
+    XLEDS     : in  std_logic_vector(WIDTH-1 downto 0);
+    XSWITCHES : out std_logic_vector(WIDTH-1 downto 0)
     );
 end test_case;
 
 architecture behavioral of test_case is
-  signal shifting : std_logic_vector(15 downto 0) := x"0001";
+  signal shifting : std_logic_vector(WIDTH-1 downto 0) := (0 => '1', others => '0');
 begin
   test : process is
   begin
 
     -- all LEDS off
-    XSWITCHES <= x"0000";
+    XSWITCHES <= (others => '0');
 
     wait for 1 us;
 
-    XSWITCHES <= x"FFFF";
+    XSWITCHES <= (others => '1');
 
     wait for 1 us;
 
-    for i in 0 to 15 loop
+    for i in 0 to WIDTH-1 loop
       XSWITCHES <= shifting;
-      shifting  <= shifting(14 downto 0) & shifting(15);
+      shifting  <= shifting(WIDTH-2 downto 0) & shifting(WIDTH-1);
       wait for 100 ns;
     end loop;
 

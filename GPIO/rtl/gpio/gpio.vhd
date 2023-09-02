@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : CSUN
 -- Created    : 2023-08-27
--- Last update: 2023-08-27
+-- Last update: 2023-08-31
 -- Platform   : Modelsim on Linux
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -20,7 +20,6 @@
 -------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
-
 
 entity gpio is
   generic (

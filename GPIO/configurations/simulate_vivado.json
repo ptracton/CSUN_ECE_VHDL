@@ -8,9 +8,10 @@
     "flow_steps": {
 	    "1" : "clean",
 
-        "3" : "test_case",
-        "4" : "elaborate",
-        "5" : "simulation"
+        "3" : "board",
+        "4" : "test_case",
+        "5" : "elaborate",
+        "6" : "simulation"
     },
     "flow" : {
 	      "clean" :{
@@ -25,13 +26,17 @@
             "executable" : "xvhdl ",
             "arguments" : "  $simulation.vhd --work xil_defaultlib"
         },
+        "board" : {
+            "executable" : "xvhdl ",
+            "arguments" : "  ../rtl/$board/${board}_pkg.vhd --work work"
+        },        
 	    "elaborate" : {
 	        "executable": "xelab",
 	        "arguments" : " -top xil_defaultlib.testbench -prj rtl_vivado.prj  -debug all -snapshot $simulation.snapshot --log $simulation.xelab.log"
 	    },
         "simulation" : {
             "executable" : "xsim",
-            "arguments" : " $simulation.snapshot -t simulation.tcl --log $simulation.vivado.log"
+            "arguments" : " $simulation.snapshot -t simulation.tcl --log $simulation.$board.vivado.log"
         }
     },
     "remove_files" : " vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
