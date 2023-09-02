@@ -69,10 +69,6 @@ begin
       XLEDS     => XLEDS,
       XSWITCHES => XSWITCHES
       );
-  process is
-  begin
-    report "TB WIDTH " & integer'image(WIDTH);
-    wait;
-  end process;
+
 
 end Behavioral;

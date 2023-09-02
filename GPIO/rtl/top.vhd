@@ -27,7 +27,7 @@ use IEEE.STD_LOGIC_1164.all;
 use work.board_pkg.all;
 
 entity top is
- generic (WIDTH : integer := WIDTH);
+  generic (WIDTH : integer := WIDTH);
   port(
     XLEDS     : inout std_logic_vector(WIDTH - 1 downto 0);
     XSWITCHES : inout std_logic_vector(WIDTH - 1 downto 0)

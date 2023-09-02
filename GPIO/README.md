@@ -11,6 +11,10 @@ The [gpio.vhd](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/rtl/gpio
 The [gpio_bit.vhd](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/rtl/gpio/gpio_bit.vhd) file has the actual bi-directional logic.
 ![missing image for single bit](./images/GPIO_BIT.png)
 
+In the rtl directory there is a sub directory for each board that this image can run on.  Right now that is the [ArtyS7](https://digilent.com/reference/programmable-logic/arty-s7/start), [Basys3](https://digilent.com/shop/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/), and [Zybo](https://digilent.com/shop/zybo-z7-zynq-7000-arm-fpga-soc-development-board/).  In each of these sub-directories there is a file with the name of the board and a _pkg.vhd added to it.  Each of these package files has a package named board\_pkg.  All boards need the package to have the same name so  they can be swapped out in simulation or synthesis.  In the package are the board specific configuration details of the design.  Basys has 16 switches and LEDs while Zybo and Arty only have 4.  This detail is spelled out here.
+
+In top.vhd work.board_pkg.all is brought in.  This brings in the board specific configuration into the design.  For simulation or synthesis you can only use 1 of these board files at a time.
+
 ## Simulation
 
 Both modelsim and vivado can simulate the design.  You can do either from their respective GUIs or from the command line.  The command line uses a python script, [run\_sim.py](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/tools/run_sim.py) to execute.  There is also a [run\_regression.py](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/tools/run_regression.py) script that can run a collection of tests and report back their performance.
@@ -45,9 +49,11 @@ Modelsim is an easier environment to set up multiple test cases.  Modelsim is dr
 
 To run a test case it is
 
-do modelsim.do gpio_test
+do modelsim.do gpio_test basys3
 
 Notice that there is no file extension for the test case name.  That is because it is appended in the script to run the simulation and to configure the log file name.  You must run this from the sim directory.  If you are not in that directory you can use the cd command to navigate your way there.
+
+You also need to specify the board you are running on.  This will load up the appropriate package to configure the device.
 
 ![missing modelsim run](./images/running_modelsim.png)
 
@@ -61,7 +67,7 @@ There is a [wave.do](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/si
 
 This is something not covered in any of my classes at this time.  From the command line you can run a simulation and collect the log files.  There is no GUI window to show the waveforms.  This relies much more on test cases being self checking.  It also makes it easier to run a regression and collect the results from all of the test cases ran at once.
 
-The run_sim.py tool is very simple.  There is no actual knowledge of simulations in it.  It is fed a JSON file that tells it all the steps to take to execute the simulation.  The python file just iterates through the configuration and executes.  In the configurations directory there is [simulate\_modelsim.json](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/configurations/simulate_modelsim.json) and [simulate\_vivado.json](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/configurations/simulate_vivado.json).  To add a new simulation tool will require a new file in here with the name of simulation\_<NEW TOOL>.json.  The run_sim.py will need to be upated to add the option for this tool like it has for modelsim and vivado.
+The run\_sim.py tool is very simple.  There is no actual knowledge of simulations in it.  It is fed a JSON file that tells it all the steps to take to execute the simulation.  The python file just iterates through the configuration and executes.  In the configurations directory there is [simulate\_modelsim.json](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/configurations/simulate_modelsim.json) and [simulate\_vivado.json](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/configurations/simulate_vivado.json).  To add a new simulation tool will require a new file in here with the name of simulation\_<NEW TOOL>.json.  The run_sim.py will need to be upated to add the option for this tool like it has for modelsim and vivado.
 
 #### Vivado
 
@@ -76,9 +82,9 @@ The simulation name can be quickly and easily changed to a different test case.
 
 ### Regression
 
-A regression is a collection of tests to prove a design is working.  The ability to run all of the self checking tests and collect the results to see if the design working is critical.  To do this, there is a tool in the tools directory, [run_regression.py](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/tools/run_regression.py).  
+A regression is a collection of tests to prove a design is working.  The ability to run all of the self checking tests and collect the results to see if the design working is critical.  To do this, there is a tool in the tools directory, [run_regression.py](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/tools/run_regression.py).
 
-To run the tool you need to feed it a list of  test cases to run through.  In the sim directory there is a file, [regression_rtl.f](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/sim/regression_rtl.f).  it is just a list of test cases to go through.  Notice no file extension.  The run\_regression.py tool will iterate through this list and call run\_sim.py for each of the test cases.  When done it will inform the user of the number of tests ran, who passed, who failed and some statistics about it.
+To run the tool you need to feed it a list of  test cases to run through.  It will then run all of the listed tests against all of the known boards to run on.  So for our 2 current tests and 3 known boards, we wind up running 6 simulations.  In the sim directory there is a file, [regression_rtl.f](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/sim/regression_rtl.f).  it is just a list of test cases to go through.  Notice no file extension.  The run\_regression.py tool will iterate through this list and call run\_sim.py for each of the test cases.  When done it will inform the user of the number of tests ran, who passed, who failed and some statistics about it.
 
 This command will run the regression using Modelsim
 
@@ -92,10 +98,16 @@ This is the result of the above command.
 
 The backend process is for synthesis, implementation, bit file generation and programming the board.  This can be done via the GUI or the command line.  The command line version uses a Makefile to build the image and download to the target.
 
-The constraints directory has the single [basys3.xdc](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/constraints/basys3.xdc) file used by both the GUI and command line.
+
+### Constraints
+
+Constraints are how ti tell the design to physically be connected to the board.  This is where we specify the top level IO ports from top.vhd and tell Vivado which physical IO pin to use for it.  There are [master XDC files](https://github.com/Digilent/digilent-xdc/tree/master) for each of the boards.  Use these to figure out the correct pins to connect signals to.
+
+The constraints directory has the single [basys3.xdc](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/constraints/basys3.xdc) file used by both the GUI and command line.  This directory has an XDC file for each of the known boards.
+
 
 ### Vivado GUI
-In the backend/vivado/basys3 directory is the XPR file, [basys3.xpr](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/vivado/basys3/basys3.xpr).  This is the project file for Vivado.  This file can be loaded into Vivado and then the usual flow for generating the bit file is performed.  
+In the backend/vivado/basys3 directory is the XPR file, [basys3.xpr](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/vivado/basys3/basys3.xpr).  This is the project file for Vivado.  This file can be loaded into Vivado and then the usual flow for generating the bit file is performed.
 
 ![basys3 project](./images/basys3_vivado_xpr.png)
 
@@ -103,7 +115,7 @@ From here you can synthesize, implement or make your bit file bit clicking on th
 
 
 ### Command Line Interface
-In the backend/scripting/basys3 there is a [Makefile](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/scripting/basys3/Makefile).  This is the process used to build the FPGA bit file and program the board.  
+In the backend/scripting/basys3 there is a [Makefile](https://github.com/ptracton/CSUN_ECE_VHDL/blob/main/GPIO/backend/scripting/basys3/Makefile).  This is the process used to build the FPGA bit file and program the board.
 
 To build the bit file all you need to type is "make"
 ![missing makefile](./images/make.png)
@@ -114,6 +126,8 @@ The output of running the build process.
 
 The resulting bit file is located in ./bitgen/basys3.bit.
 The timing simulation is located in implementation/top\_timesim.vhd and the [SDF](https://www.vlsi-expert.com/2011/03/how-to-read-sdf-standard-delay-format.html) is located in implementation/top\_timesim.sdf.  This is the material needed for a timing simulation but that is work still TBD.
+
+There is a directory for each of the known boards that has the same Makefile and tcl files.  From here you can build the design for the specified board.
 
 ## Tools
 
@@ -128,9 +142,9 @@ This tool is NOT covered in any ECE class I am teaching right now.  It is a veri
 ## TODO
 + Use [GHDL](https://github.com/ghdl/ghdl) and [GtkWave](https://gtkwave.sourceforge.net/)
 + Post implementation timing simulations
-+ Trying different sizes for WIDTH and number of GPIO bits created
++ ~~Trying different sizes for WIDTH and number of GPIO bits created~~
 + GPIO asserting an interrupt internally
 + Interface for CPU (AHB, AXI, WB, Picoblaze, other?)
-+ Porting to other boards ([Zybo](https://digilent.com/reference/programmable-logic/zybo/start) or [Arty](https://digilent.com/reference/programmable-logic/arty-a7/start))
++ ~~Porting to other boards ([Zybo](https://digilent.com/reference/programmable-logic/zybo/start) or [Arty](https://digilent.com/reference/programmable-logic/arty-a7/start))~~
 + Port to [Altera](https://www.intel.com/content/www/us/en/products/programmable.html) and one of their boards from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=1046&PartNo=1#contents)
 + Improve run\_sim.py and run\_regression.py
