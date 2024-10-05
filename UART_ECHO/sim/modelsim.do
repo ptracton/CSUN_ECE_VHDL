@@ -17,19 +17,24 @@ vcom -2008 ../rtl/${2}/${2}_pkg.vhd -work xil_defaultlib
 
 
 # DUT source code
-vcom -2008 ../rtl/gpio/gpio_bit.vhd
-vcom -2008 ../rtl/gpio/gpio.vhd
+vcom -2008 ../rtl/UART/UART.vhd
+vcom -2008 ../rtl/UART/UART_tx.vhd
+vcom -2008 ../rtl/UART/UART_rx.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Simulate the specified test case
+vcom -2008 ../testbench/uart_tb_pkg.vhd -work xil_defaultlib
 vcom -2008 ${1}.vhd
 
 # Testbench and simulation source code
 vcom -2008 ../testbench/testbench.vhd
+vcom -2008 ../testbench/uart_tx_tb.vhd
+vcom -2008 ../testbench/uart_rx_tb.vhd
+
 
 
 vsim -onfinish stop work.testbench -l ${1}_${2}_modelsim.log
 
 do wave.do
 
-run -all;
+run -all
