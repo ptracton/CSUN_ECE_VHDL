@@ -17,15 +17,16 @@ import string
 
 
 def which(program):
-    """
-    Find the path to an executable program
-    """
+    """Find the path to an executable program."""
 
     def is_exe(fpath):
         """
-        Return True is the fpath exists and is executable.  This is needed since the
-        executables are specifed in the JSON files, but not the path to them.  The
-        executables may be in different locations based on which PC is running this.
+        Return True is the fpath exists and is executable.
+
+        This is needed since the executables are specifed in the
+        JSON files, but not the path to them.  The executables
+        may be in different locations based on which PC is
+        running this.
         """
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
