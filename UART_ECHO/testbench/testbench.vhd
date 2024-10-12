@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : CSUN
 -- Created    : 2024-01-14
--- Last update: 2024-10-05
+-- Last update: 2024-10-12
 -- Platform   : Modelsim on Linux
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -40,7 +40,6 @@ architecture Behavioral of testbench is
   end component;
 
   component test_case is
-    generic (WIDTH : integer := 8);
     port(
       XCLK   : in  std_logic;
       XRESET : in  std_logic;

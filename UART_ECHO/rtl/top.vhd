@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-10-05
+-- Last update: 2024-10-12
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -16,7 +16,7 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2024-10-05  1.0      ptracton	Created
+-- 2024-10-05  1.0      ptracton        Created
 -------------------------------------------------------------------------------
 
 
@@ -34,43 +34,85 @@ end uart_echo;
 
 architecture Behavioral of uart_echo is
 
-  component UART is
+  component uart is
+    generic(
+      clk_freq  : integer   := 50_000_000;  --frequency of system clock in Hertz
+      baud_rate : integer   := 19_200;  --data link baud rate in bits/second
+      os_rate   : integer   := 16;  --oversampling rate to find center of receive bits (in samples per baud period)
+      d_width   : integer   := 8;       --data bus width
+      parity    : integer   := 1;       --0 for no parity, 1 for parity
+      parity_eo : std_logic := '0');    --'0' for even, '1' for odd parity
     port(
-      clk      : in std_logic;
-      reset    : in std_logic;
-      tx_start : in std_logic;
+      clk      : in  std_logic;         --system clock
+      reset_n  : in  std_logic;         --ascynchronous reset
+      tx_ena   : in  std_logic;         --initiate transmission
+      tx_data  : in  std_logic_vector(d_width-1 downto 0);  --data to transmit
+      rx       : in  std_logic;         --receive pin
+      rx_busy  : out std_logic;         --data reception in progress
+      rx_error : out std_logic;     --start, parity, or stop bit error detected
+      rx_data  : out std_logic_vector(d_width-1 downto 0);  --data received
+      tx_busy  : out std_logic;         --transmission in progress
+      tx       : out std_logic);        --transmit pin
+  end component;
 
-      data_in       : in  std_logic_vector (7 downto 0);
-      data_out      : out std_logic_vector (7 downto 0);
-      rx_data_ready : out std_logic;
 
-      rx : in  std_logic;
-      tx : out std_logic
+  component edge_detector is
+    port (
+      clk     : in  std_logic;
+      reset   : in  std_logic;
+      data_in : in  std_logic;
+      rising  : out std_logic;
+      falling : out std_logic
       );
   end component;
 
-  signal tx_start      : std_logic;
-  signal uart_data_rx  : std_logic_vector(7 downto 0);
-  signal uart_data_tx  : std_logic_vector(7 downto 0);
-  signal rx_data_ready : std_logic;
-
+  signal tx_start        : std_logic;
+  signal uart_data_rx    : std_logic_vector(7 downto 0);
+  signal uart_data_tx    : std_logic_vector(7 downto 0);
+  signal rx_busy         : std_logic;
+  signal rx_error        : std_logic;
+  signal rx_busy_rising  : std_logic;
+  signal rx_busy_falling : std_logic;
+  signal reset_n         : std_logic;
 begin
 
+  reset_n <= not XRESET;
+
   --
-  -- Taken from https://github.com/AlexHDL/UART_controller
+  -- Taken from DigiKey
   --
   uart_inst : UART
+    generic map(
+      clk_freq  => 125_000_000,
+      baud_rate => 115200,
+      parity => 0
+      )
     port map (
-      clk           => XCLK,
-      reset         => XRESET,
-      tx_start      => tx_start,
-      data_in       => uart_data_tx,
-      data_out      => uart_data_rx,
-      rx_data_ready => rx_data_ready,
-      rx            => XRX,
-      tx            => XTX
+      clk      => XCLK,
+      reset_n  => reset_n,
+      tx_ena   => tx_start,
+      tx_data  => uart_data_tx,
+      rx_data  => uart_data_rx,
+      rx_error => rx_error,
+      rx_busy  => rx_busy,
+      rx       => XRX,
+      tx       => XTX
       );
 
+
+  --
+  -- Detect the falling edge of rx_busy to indicate it has finished receiving a
+  -- letter
+  --
+
+  edge : edge_detector
+    port map(
+      clk     => XCLK,
+      reset   => XRESET,
+      data_in => rx_busy,
+      rising  => rx_busy_rising,
+      falling => rx_busy_falling
+      );
 
   --
   -- Catch received byte and transmit it back to user
@@ -81,7 +123,7 @@ begin
       if (XRESET = '1') then
         tx_start     <= '0';
         uart_data_tx <= x"00";
-      elsif rx_data_ready = '1' then
+      elsif rx_busy_falling = '1' then
         tx_start     <= '1';
         uart_data_tx <= uart_data_rx;
       else

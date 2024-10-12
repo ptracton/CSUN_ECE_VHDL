@@ -17,9 +17,8 @@ vcom -2008 ../rtl/${2}/${2}_pkg.vhd -work xil_defaultlib
 
 
 # DUT source code
-vcom -2008 ../rtl/UART/UART.vhd
-vcom -2008 ../rtl/UART/UART_tx.vhd
-vcom -2008 ../rtl/UART/UART_rx.vhd
+vcom -2008 ../../Common/DigiKey/UART/uart.vhd
+vcom -2008 ../rtl/edge_detector.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Simulate the specified test case

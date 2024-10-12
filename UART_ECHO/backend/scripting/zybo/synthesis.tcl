@@ -7,8 +7,8 @@ set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 read_vhdl -library xil_defaultlib {
     ../../../rtl/zybo/zybo_pkg.vhd
-    ../../../rtl/gpio/gpio_bit.vhd
-    ../../../rtl/gpio/gpio.vhd
+    ../../../../Common/DigiKey/UART/uart.vhd
+    ../../../rtl/edge_detector.vhd
     ../../../rtl/top.vhd    
 }
 
@@ -16,7 +16,7 @@ read_vhdl -library xil_defaultlib {
 read_xdc ../../constraints/zybo.xdc
 set_property used_in_implementation false [get_files zybo.xdc]
 
-synth_design -top top -part  xc7z010clg400-1
+synth_design -top uart_echo -part  xc7z010clg400-1
 write_checkpoint -noxdef -force synthesis/zybo.dcp
 catch { report_utilization -file synthesis/zybo_utilization_synth.rpt -pb synthesis/zybo_utilization_synth.pb }
 
