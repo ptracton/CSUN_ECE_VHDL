@@ -15,3 +15,7 @@ webtalk*
 *.vdb
 *.rlx
 *.pb
+*.ini
+UNISIM/
+modelsim_lib/
+*.log
