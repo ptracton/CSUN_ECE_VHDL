@@ -24,6 +24,8 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 
+use work.board_pkg.all;
+
 entity uart_echo is
   port (XCLK   : in  std_logic;
         XRESET : in  std_logic;
@@ -83,8 +85,8 @@ begin
   --
   uart_inst : UART
     generic map(
-      clk_freq  => 125_000_000,
-      baud_rate => 115200,
+      clk_freq  => BOARD_ROOT_CLK_SPEED,
+      baud_rate => BOARD_BAUD_RATE,
       parity => 0
       )
     port map (

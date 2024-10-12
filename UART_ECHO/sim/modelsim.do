@@ -13,7 +13,7 @@ vmap xpm modelsim_lib/msim/xpm
 vmap unisim UNISIM
 
 # Specify the board package to use
-vcom -2008 ../rtl/${2}/${2}_pkg.vhd -work xil_defaultlib
+vcom -2008 ../rtl/${2}/${2}_pkg.vhd -work work
 
 
 # DUT source code

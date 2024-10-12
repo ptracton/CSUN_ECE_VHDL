@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : CSUN
 -- Created    : 2023-08-31
--- Last update: 2023-08-31
+-- Last update: 2024-10-12
 -- Platform   : Modelsim on Linux
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -16,13 +16,14 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2023-08-31  1.0      ptracton	Created
+-- 2023-08-31  1.0      ptracton        Created
 -------------------------------------------------------------------------------
 
 package board_pkg is
 
   -- This is for the zyboz7010 board which has 4 Switches and LEDs
-  constant WIDTH : integer := 4;
-  
+  constant WIDTH          : integer := 4;
+  constant BOARD_ROOT_CLK_SPEED : integer := 125_000_000;
+  constant BOARD_BAUD_RATE      : integer := 115200;
 end package;
 
