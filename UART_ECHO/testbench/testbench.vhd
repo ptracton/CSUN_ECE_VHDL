@@ -25,6 +25,8 @@ use IEEE.STD_LOGIC_1164.all;
 use std.env.finish;
 use ieee.numeric_std.all;
 
+use work.board_pkg.all;
+
 entity testbench is
 end testbench;
 
@@ -76,7 +78,7 @@ architecture Behavioral of testbench is
 begin
 
   -- generate the free running 125 MHz clock from the Zybo board
-  clk_gen(clk, 125.0e6);
+  clk_gen(clk, BOARD_TB_CLK_SPEED);
 
   -- generate a reset pulse to put the DUT into the correct state
   tb_reset : process

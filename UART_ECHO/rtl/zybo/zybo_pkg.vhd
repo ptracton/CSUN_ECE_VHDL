@@ -22,8 +22,10 @@
 package board_pkg is
 
   -- This is for the zyboz7010 board which has 4 Switches and LEDs
-  constant WIDTH          : integer := 4;
-  constant BOARD_ROOT_CLK_SPEED : integer := 125_000_000;
-  constant BOARD_BAUD_RATE      : integer := 115200;
+  constant WIDTH                 : integer := 4;
+  constant BOARD_ROOT_CLK_SPEED  : integer := 125_000_000;
+  constant BOARD_TB_CLK_SPEED    : real    := 125.0e6;
+  constant BOARD_TB_CLKS_PER_BIT : integer := 1085;
+  constant BOARD_BAUD_RATE       : integer := 115200;
 end package;
 

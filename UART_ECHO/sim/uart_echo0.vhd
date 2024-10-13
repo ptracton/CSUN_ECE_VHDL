@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-10-05
+-- Last update: 2024-10-12
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -26,6 +26,8 @@ use std.env.finish;
 -- UART TB Support
 library xil_defaultlib;
 use xil_defaultlib.uart_tb_pkg.all;
+
+use work.board_pkg.all;
 
 entity test_case is
   port (
@@ -80,7 +82,7 @@ begin
 
     transmit : UART_TX_tb
     generic map (
-      g_CLKS_PER_BIT => 1085)
+      g_CLKS_PER_BIT => BOARD_TB_CLKS_PER_BIT)
     port map (
       i_Clk       => XCLK,
       i_TX_DV     => tx_dv,
@@ -92,7 +94,7 @@ begin
 
   receive : UART_RX_tb
     generic map (
-      g_CLKS_PER_BIT => 1085)
+      g_CLKS_PER_BIT => BOARD_TB_CLKS_PER_BIT)
     port map (
       i_Clk       => XCLK,
       i_RX_Serial => XRX,

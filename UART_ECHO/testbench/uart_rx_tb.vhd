@@ -15,6 +15,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.board_pkg.all;
+
 entity UART_RX_tb is
   generic (
     g_CLKS_PER_BIT : integer := 217     -- Needs to be set correctly
