@@ -1,2 +1,1 @@
-gpio_test
-gpio_test_2
+uart_echo0

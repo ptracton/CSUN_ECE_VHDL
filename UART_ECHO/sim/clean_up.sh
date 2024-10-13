@@ -7,3 +7,5 @@ rm -rf xsim*
 rm -rf vsim.wlf
 rm -rf vivado* xelab* xsim*
 rm -rf *wdb
+rm -rf *.log
+rm -rf transcript

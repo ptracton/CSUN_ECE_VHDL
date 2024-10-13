@@ -2,8 +2,8 @@
 SYNTH_DIR = synthesis
 IMPL_DIR  = implementation
 BIT_DIR   = bitgen
-BOARD     = zybo
-PART      = xc7z010clg400-1
+BOARD     = artys7
+PART      = xc7s50csga324-1
 
 MAKE_DIRS = $(SYNTH_DIR) $(IMPL_DIR) $(BIT_DIR)
 
@@ -34,4 +34,5 @@ clean:
 	rm -rf $(MAKE_DIRS) $(BOARD).cache $(BOARD).hw $(BOARD).xpr $(BOARD).ip_user_files
 	rm -rf ip/clk_wiz_0/doc/ ip/clk_wiz_0/mmcm_pll_drp_func_* ip/clk_wiz_0/*.v ip/clk_wiz_0/*vhdl ip/clk_wiz_0/*xdc ip/clk_wiz_0/*veo ip/clk_wiz_0/*dcp ip/clk_wiz_0/*xml
 	rm -rf .cache/
+	rm -rf clockInfo.txt
 	find . -name "*~" | xargs rm -rf

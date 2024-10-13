@@ -1,15 +1,13 @@
-## Switches
-set_property -dict { PACKAGE_PIN H14   IOSTANDARD LVCMOS33 } [get_ports { XSWITCHES[0] }]; #IO_L20N_T3_A19_15 Sch=sw[0]
-set_property -dict { PACKAGE_PIN H18   IOSTANDARD LVCMOS33 } [get_ports { XSWITCHES[1] }]; #IO_L21P_T3_DQS_15 Sch=sw[1]
-set_property -dict { PACKAGE_PIN G18   IOSTANDARD LVCMOS33 } [get_ports { XSWITCHES[2] }]; #IO_L21N_T3_DQS_A18_15 Sch=sw[2]
-set_property -dict { PACKAGE_PIN M5    IOSTANDARD SSTL135  } [get_ports { XSWITCHES[3] }]; #IO_L6N_T0_VREF_34 Sch=sw[3]
+## Clock signal
+set_property -dict {PACKAGE_PIN R2 IOSTANDARD SSTL135} [get_ports XCLK]
+create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports XCLK]
 
-## LEDs
-set_property -dict { PACKAGE_PIN E18   IOSTANDARD LVCMOS33 } [get_ports { XLEDS[0] }]; #IO_L16N_T2_A27_15 Sch=led[2]
-set_property -dict { PACKAGE_PIN F13   IOSTANDARD LVCMOS33 } [get_ports { XLEDS[1] }]; #IO_L17P_T2_A26_15 Sch=led[3]
-set_property -dict { PACKAGE_PIN E13   IOSTANDARD LVCMOS33 } [get_ports { XLEDS[2] }]; #IO_L17N_T2_A25_15 Sch=led[4]
-set_property -dict { PACKAGE_PIN H15   IOSTANDARD LVCMOS33 } [get_ports { XLEDS[3] }]; #IO_L18P_T2_A24_15 Sch=led[5]
+## Buttons
+set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { XRESET }]; #IO_L18N_T2_A23_15 Sch=btn[0]
 
+## USB-UART Interface
+set_property -dict { PACKAGE_PIN R12   IOSTANDARD LVCMOS33 } [get_ports { XTX }]; #IO_25_14 Sch=uart_rxd_out
+set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { XRX }]; #IO_L24N_T3_A00_D16_14 Sch=uart_txd_in
 
 ## Configuration options, can be used for all designs
 set_property BITSTREAM.CONFIG.CONFIGRATE 50 [current_design]
