@@ -13,16 +13,19 @@ vmap xpm modelsim_lib/msim/xpm
 vmap unisim UNISIM
 
 # DUT source code
-vcom -2008 ../rtl/gpio/gpio_bit.vhd
-vcom -2008 ../rtl/gpio/gpio.vhd
+vcom -2008 ../../Common/DigiKey/UART/uart.vhd
+vcom -2008 ../rtl/edge_detector.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Testbench and simulation source code
 vcom -2008 ../testbench/testbench.vhd
+vcom -2008 ../testbench/uart_tx_tb.vhd
+vcom -2008 ../testbench/uart_rx_tb.vhd
+vcom -2008 ../testbench/uart_tb_pkg.vhd -work xil_defaultlib
 
 vsim -onfinish stop work.testbench
 
-do wave.do
 
 run -all;
 quit
+

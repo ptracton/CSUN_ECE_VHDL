@@ -11,9 +11,10 @@
         "3":  "make_vlib",
         "4":  "vlib",
         "5" : "xil_defaultlib",
-        "5":  "test_case",
-        "6" : "board",
-        "7" : "simulation"
+        "6" : "board",        
+        "7" : "uart_tb_pkg",        
+        "8":  "test_case",
+        "9" : "simulation"
     },
     "flow" : {
         "clean":{
@@ -36,6 +37,10 @@
             "executable": "vlib",
             "arguments" : " xil_defaultlib"
         },
+        "uart_tb_pkg" : {
+            "executable": "vcom",
+            "arguments" : " -2008 ../testbench/uart_tb_pkg.vhd  "
+        },        
         "test_case" : {
             "executable": "vcom",
             "arguments" : " -2008 $simulation.vhd  "

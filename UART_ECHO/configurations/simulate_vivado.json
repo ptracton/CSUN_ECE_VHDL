@@ -1,43 +1,43 @@
 {
-    "project":"simulate_vivado",
+    "project": "simulate_vivado",
     "installed tools": [
         "xilinx",
         "altera",
         "icarus"
     ],
     "flow_steps": {
-	    "1" : "clean",
-
-        "3" : "board",
-        "4" : "test_case",
-        "5" : "elaborate",
-        "6" : "simulation"
+        "1": "clean",
+        "3": "board",
+        "4" :"uart_tb_pkg",
+        "5": "test_case",
+        "6": "elaborate",
+        "7": "simulation"
     },
-    "flow" : {
-	      "clean" :{
-	          "executable" : "rm",
-	          "arguments" : "-rf  vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
-	      },
-	      "verilog" :{
-	          "executable" : "xvhdl ",
-              "arguments" : " --prj rtl_vivado.prj --log $simulation.vivado.xvlog.log"
-	      },
-        "test_case" : {
-            "executable" : "xvhdl ",
-            "arguments" : "  $simulation.vhd --work xil_defaultlib"
+    "flow": {
+        "clean": {
+            "executable": "rm",
+            "arguments": "-rf  vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
         },
-        "board" : {
-            "executable" : "xvhdl ",
-            "arguments" : "  ../rtl/$board/${board}_pkg.vhd --work work"
+        "test_case": {
+            "executable": "xvhdl ",
+            "arguments": "  $simulation.vhd --work xil_defaultlib"
+        },
+        "board": {
+            "executable": "xvhdl ",
+            "arguments": "  ../rtl/$board/${board}_pkg.vhd --work work"
+        },
+        "uart_tb_pkg": {
+            "executable": "xvhdl ",
+            "arguments": "  ../testbench/uart_tb_pkg.vhd --work work"
         },        
-	    "elaborate" : {
-	        "executable": "xelab",
-	        "arguments" : " -top xil_defaultlib.testbench -prj rtl_vivado.prj  -debug all -snapshot $simulation.snapshot --log $simulation.xelab.log"
-	    },
-        "simulation" : {
-            "executable" : "xsim",
-            "arguments" : " $simulation.snapshot -t simulation.tcl --log $simulation.$board.vivado.log"
+        "elaborate": {
+            "executable": "xelab",
+            "arguments": " -top xil_defaultlib.testbench -prj rtl_vivado.prj  -debug all -snapshot $simulation.snapshot --log $simulation.xelab.log"
+        },
+        "simulation": {
+            "executable": "xsim",
+            "arguments": " $simulation.snapshot -t simulation.tcl --log $simulation.$board.vivado.log"
         }
     },
-    "remove_files" : " vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
+    "remove_files": " vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
 }

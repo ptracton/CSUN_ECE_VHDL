@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-10-12
+-- Last update: 2024-10-13
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -23,10 +23,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use std.env.finish;
 
--- UART TB Support
-library xil_defaultlib;
-use xil_defaultlib.uart_tb_pkg.all;
-
+use work.uart_tb_pkg.all;
 use work.board_pkg.all;
 
 entity test_case is

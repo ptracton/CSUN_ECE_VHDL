@@ -1,9 +1,10 @@
 
 # DUT source code
-vhdl xil_defaultlib "../rtl/gpio/gpio_bit.vhd"\
-"../rtl/gpio/gpio.vhd"\
+vhdl xil_defaultlib "../rtl/edge_detector.vhd"\
+"../../Common/DigiKey/UART/uart.vhd"\
 "../rtl/top.vhd"\
+"../testbench/uart_tb_pkg.vhd"\
+"../testbench/uart_rx_tb.vhd"\
+"../testbench/uart_tx_tb.vhd"\
 "../testbench/testbench.vhd"\
 
-#xelab -debug typical top -s testbench
-#xsim testbench
