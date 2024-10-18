@@ -5,6 +5,10 @@ create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_
 ## Buttons
 set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { XRESET }]; #IO_L18N_T2_A23_15 Sch=btn[0]
 
+## RGB LEDs
+#set_property -dict { PACKAGE_PIN J15   IOSTANDARD LVCMOS33 } [get_ports { led0_r }]; #IO_L23N_T3_FWE_B_15 Sch=led0_r
+set_property -dict { PACKAGE_PIN G17   IOSTANDARD LVCMOS33 } [get_ports { XLOCKED }]; #IO_L14N_T2_SRCC_15 Sch=led0_g
+
 ## USB-UART Interface
 set_property -dict { PACKAGE_PIN R12   IOSTANDARD LVCMOS33 } [get_ports { XTX }]; #IO_25_14 Sch=uart_rxd_out
 set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { XRX }]; #IO_L24N_T3_A00_D16_14 Sch=uart_txd_in
