@@ -14,7 +14,8 @@ vmap unisim UNISIM
 
 # DUT source code
 vcom -2008 ../../Common/DigiKey/UART/uart.vhd
-vcom -2008 ../rtl/edge_detector.vhd
+vcom -2008 ../../Common/CSUN/system_controller.vhd
+vcom -2008 ../../Common/CSUN/edge_detector.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Testbench and simulation source code

@@ -28,10 +28,11 @@ use work.board_pkg.all;
 
 entity test_case is
   port (
-    XCLK   : in  std_logic;
-    XRESET : in  std_logic;
-    XRX    : in  std_logic;
-    XTX    : out std_logic
+    XCLK    : in  std_logic;
+    XRESET  : in  std_logic;
+    XLOCKED : in  std_logic;
+    XRX     : in  std_logic;
+    XTX     : out std_logic
     );
 end test_case;
 
@@ -74,10 +75,10 @@ architecture behavioral of test_case is
   signal test_done : boolean   := false;
   signal terminate : std_logic := '0';
 
-  
+
 begin
 
-    transmit : UART_TX_tb
+  transmit : UART_TX_tb
     generic map (
       g_CLKS_PER_BIT => BOARD_TB_CLKS_PER_BIT)
     port map (
@@ -104,6 +105,7 @@ begin
     tx_dv   <= '0';
     tx_byte <= x"00";
     wait until falling_edge(XRESET);
+    wait until rising_edge(XLOCKED);
     wait for 5 us;
 
     transmit_8bits(XCLK, tx_dv, tx_byte, x"73");

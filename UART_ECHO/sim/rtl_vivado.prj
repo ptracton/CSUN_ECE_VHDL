@@ -1,10 +1,27 @@
+# compile glbl module
+verilog xil_defaultlib "../../Common/Xilinx/glbl.v"
+
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../backend/vivado/zybo/zybo.ip_user_files/ipstatic/" \
+"../backend/vivado/zybo/zybo.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" \
+"../backend/vivado/zybo/zybo.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v"
+# "$XILINX_VIVADO/data/verilog/src/unisims/IBUF.v"\
+# "$XILINX_VIVADO/data/verilog/src/unisims/BUFG.v"\
+# "$XILINX_VIVADO/data/verilog/src/unisims/MMCME2_ADV.v"\
+
 
 # DUT source code
-vhdl xil_defaultlib "../rtl/edge_detector.vhd"\
+vhdl2008  xil_defaultlib "../../Common/CSUN/edge_detector.vhd"\
+"../../Common/CSUN/system_controller.vhd"\
 "../../Common/DigiKey/UART/uart.vhd"\
 "../rtl/top.vhd"\
 "../testbench/uart_tb_pkg.vhd"\
 "../testbench/uart_rx_tb.vhd"\
 "../testbench/uart_tx_tb.vhd"\
 "../testbench/testbench.vhd"\
+"$XILINX_VIVADO/data/vhdl/src/unisims/unisim_VCOMP.vhd"
 
+
+
+# Do not sort compile order
+nosort

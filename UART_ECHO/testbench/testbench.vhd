@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : CSUN
 -- Created    : 2024-01-14
--- Last update: 2024-10-12
+-- Last update: 2024-10-13
 -- Platform   : Modelsim on Linux
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -34,23 +34,23 @@ architecture Behavioral of testbench is
 
 -- This is our Device Under Test (DUT)
   component uart_echo
-    port (XCLK   : in  std_logic;
-          XRESET : in  std_logic;
-          XRX    : in  std_logic;
-          XTX    : out std_logic);
+    port (XCLK    : in  std_logic;
+          XRESET  : in  std_logic;
+          XLOCKED : out std_logic;
+          XRX     : in  std_logic;
+          XTX     : out std_logic);
 
   end component;
 
   component test_case is
     port(
-      XCLK   : in  std_logic;
-      XRESET : in  std_logic;
-      XRX    : in  std_logic;
-      XTX    : out std_logic
+      XCLK    : in  std_logic;
+      XRESET  : in  std_logic;
+      XLOCKED : in  std_logic;
+      XRX     : in  std_logic;
+      XTX     : out std_logic
       );
   end component;
-
-
 
   -- https://stackoverflow.com/questions/17904514/vhdl-how-should-i-create-a-clock-in-a-testbench
   -- Procedure for clock generation
@@ -70,10 +70,11 @@ architecture Behavioral of testbench is
     end loop;
   end procedure;
 
-  signal clk   : std_logic;
-  signal reset : std_logic;
-  signal tx    : std_logic;
-  signal rx    : std_logic;
+  signal clk    : std_logic;
+  signal reset  : std_logic;
+  signal locked : std_logic;
+  signal tx     : std_logic;
+  signal rx     : std_logic;
 
 begin
 
@@ -99,18 +100,21 @@ begin
 
   DUT : uart_echo
     port map (
-      XCLK   => clk,
-      XRESET => reset,
-      XRX    => rx,
-      XTX    => tx
+      XCLK    => clk,
+      XRESET  => reset,
+      XLOCKED => locked,
+      XRX     => rx,
+      XTX     => tx
       );
 
   test : test_case
     port map(
-      XCLK   => clk,
-      XRESET => reset,
-      XRX    => tx,
-      XTX    => rx
+      XCLK    => clk,
+      XRESET  => reset,
+      XLOCKED => locked,
+      XRX     => tx,
+      XTX     => rx
       );
+
 
 end Behavioral;

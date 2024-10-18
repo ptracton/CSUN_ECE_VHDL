@@ -18,7 +18,8 @@ vcom -2008 ../rtl/${2}/${2}_pkg.vhd -work work
 
 # DUT source code
 vcom -2008 ../../Common/DigiKey/UART/uart.vhd
-vcom -2008 ../rtl/edge_detector.vhd
+vcom -2008 ../../Common/CSUN/system_controller.vhd
+vcom -2008 ../../Common/CSUN/edge_detector.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Simulate the specified test case
