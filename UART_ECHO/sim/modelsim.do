@@ -10,7 +10,20 @@ vlib modelsim_lib/msim/xpm
 vmap xil_defaultlib modelsim_lib/msim/xil_defaultlib
 vmap xpm modelsim_lib/msim/xpm
 
+vlib UNISIM
 vmap unisim UNISIM
+
+# Compile the unisim VCOMP file into the unisim library
+vcom -2008 /opt/Xilinx/Vivado/2023.2/data/vhdl/src/unisims/unisim_VCOMP.vhd -work unisim
+
+#
+# Build the IP Cores simulation files.  NOTE they are all VERILOG!  This is why
+# we use vlog instead of vcomp.  The glbl.v file is needed if you have any verilog
+# code in a simulation
+#
+vlog -work xil_defaultlib  "+incdir+../ipstatic" "../ip/clk_wiz_1/clk_wiz_1.v" 
+vlog -work xil_defaultlib  "+incdir+../ipstatic"  "../ip/clk_wiz_1/clk_wiz_1_clk_wiz.v" 
+
 
 # Specify the board package to use
 vcom -2008 ../rtl/${2}/${2}_pkg.vhd -work work
