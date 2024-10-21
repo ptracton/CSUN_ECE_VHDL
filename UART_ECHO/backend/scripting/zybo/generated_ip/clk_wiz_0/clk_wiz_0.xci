@@ -4,7 +4,7 @@
     "xci_name": "clk_wiz_0",
     "component_reference": "xilinx.com:ip:clk_wiz:6.0",
     "ip_revision": "13",
-    "gen_directory": "../../../../zybo.gen/sources_1/ip/clk_wiz_0",
+    "gen_directory": ".",
     "parameters": {
       "component_parameters": {
         "Component_Name": [ { "value": "clk_wiz_0", "resolve_type": "user", "usage": "all" } ],
@@ -588,7 +588,7 @@
         "BOARD_CONNECTIONS": [ { "value": "" } ],
         "DEVICE": [ { "value": "xc7z010" } ],
         "PACKAGE": [ { "value": "clg400" } ],
-        "PREFHDL": [ { "value": "VHDL" } ],
+        "PREFHDL": [ { "value": "VERILOG" } ],
         "SILICON_REVISION": [ { "value": "" } ],
         "SIMULATOR_LANGUAGE": [ { "value": "MIXED" } ],
         "SPEEDGRADE": [ { "value": "-1" } ],
@@ -599,7 +599,7 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "13" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../zybo.gen/sources_1/ip/clk_wiz_0" } ],
+        "OUTPUTDIR": [ { "value": "." } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2023.2" } ],
