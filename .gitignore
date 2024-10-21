@@ -20,3 +20,11 @@ UNISIM/
 modelsim_lib/
 *.log
 Xilinx_Libs/
+setup/
+compile/
+bitgen/
+xil_defaultlib/
+clk_wiz_0_1/
+.cxl*
+*.veo
+*.vho

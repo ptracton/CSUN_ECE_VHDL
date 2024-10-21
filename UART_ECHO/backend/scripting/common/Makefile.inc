@@ -37,8 +37,6 @@ clean:
 	@rm -rf ip/clk_wiz_0/doc/ ip/clk_wiz_0/mmcm_pll_drp_func_* ip/clk_wiz_0/*.v ip/clk_wiz_0/*vhdl ip/clk_wiz_0/*xdc ip/clk_wiz_0/*veo ip/clk_wiz_0/*dcp ip/clk_wiz_0/*xml
 	@rm -rf .cache/
 	@rm -rf clockInfo.txt
-	@rm -rf generated_ip/
-	@rm -rf IP/clk_wiz_0/
 	@rm -rf uart_echo.cache  uart_echo.hw  uart_echo.ip_user_files  uart_echo.xpr
 	@rm -rf .gen/ .ip_user_files/ .srcs/
 	@find . -name "*~" | xargs rm -rf

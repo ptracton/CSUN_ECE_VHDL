@@ -7,17 +7,10 @@ set_property default_lib work [current_project]
 load_features ipintegrator
 tclapp::install ultrafast -quiet
 
-file delete -force ./generated_IP
-file mkdir ./generated_IP
 
-#read_ip ../source/ip/sine_rom/sine_rom.xci
-read_ip  IP/clk_wiz_0.xci
+read_ip  generated_ip/clk_wiz_0/clk_wiz_0.xci
 upgrade_ip -quiet [get_ips *]
 generate_target {all} [get_ips *]
-
-# Read in the hdl source.
-#read_vhdl [glob ../source/chirp_gen.vhd]
-#read_vhdl [glob ../source/top.vhd]
 
 read_vhdl -vhdl2008 -library xil_defaultlib {
     ../../../rtl/artys7/artys7_pkg.vhd
@@ -27,6 +20,5 @@ read_vhdl -vhdl2008 -library xil_defaultlib {
     ../../../rtl/top.vhd      
 }
 
-#read_xdc ../source/top.xdc
 read_xdc ../../constraints/artys7.xdc
 close_project
