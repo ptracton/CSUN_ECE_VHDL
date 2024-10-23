@@ -57,16 +57,23 @@ add wave -noupdate -group {DUT UART} -radix hexadecimal /testbench/DUT/uart_inst
 add wave -noupdate -group {DUT UART} -radix hexadecimal /testbench/DUT/uart_inst/tx_ena
 add wave -noupdate -group {DUT UART} -radix hexadecimal /testbench/DUT/uart_inst/tx_parity
 add wave -noupdate -group {DUT UART} -radix hexadecimal /testbench/DUT/uart_inst/tx_state
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/clk
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/data_in
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/edge
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/falling
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/reset
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/rising
-add wave -noupdate -expand -group EDGE /testbench/DUT/edge/synch
+add wave -noupdate -group EDGE /testbench/DUT/edge/clk
+add wave -noupdate -group EDGE /testbench/DUT/edge/data_in
+add wave -noupdate -group EDGE /testbench/DUT/edge/edge
+add wave -noupdate -group EDGE /testbench/DUT/edge/falling
+add wave -noupdate -group EDGE /testbench/DUT/edge/reset
+add wave -noupdate -group EDGE /testbench/DUT/edge/rising
+add wave -noupdate -group EDGE /testbench/DUT/edge/synch
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/clk_in
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/reset_in
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/clk_out
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/locked
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/reset_out
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/reset_counter
+add wave -noupdate -expand -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/locked_wiz
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ps} 0}
-quietly wave cursor active 0
+WaveRestoreCursors {{Cursor 1} {213792000000 fs} 0}
+quietly wave cursor active 1
 configure wave -namecolwidth 280
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
@@ -81,4 +88,4 @@ configure wave -griddelta 40
 configure wave -timeline 1
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {387802800 ps}
+WaveRestoreZoom {0 fs} {370162800 ps}

@@ -21,8 +21,8 @@ vcom -2008 /opt/Xilinx/Vivado/2023.2/data/vhdl/src/unisims/unisim_VCOMP.vhd -wor
 # we use vlog instead of vcomp.  The glbl.v file is needed if you have any verilog
 # code in a simulation
 #
-vlog -work xil_defaultlib  "+incdir+../ipstatic" "../ip/clk_wiz_1/clk_wiz_1.v" 
-vlog -work xil_defaultlib  "+incdir+../ipstatic"  "../ip/clk_wiz_1/clk_wiz_1_clk_wiz.v" 
+vlog -work xil_defaultlib  "+incdir+../ipstatic" "../backend/scripting/${2}/generated_ip/clk_wiz_0/clk_wiz_0.v" 
+vlog -work xil_defaultlib  "+incdir+../ipstatic"  "../backend/scripting/${2}/generated_ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" 
 
 
 # Specify the board package to use
@@ -36,7 +36,7 @@ vcom -2008 ../../Common/CSUN/edge_detector.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Simulate the specified test case
-vcom -2008 ../testbench/uart_tb_pkg.vhd -work xil_defaultlib
+vcom -2008 ../testbench/uart_tb_pkg.vhd -work work
 vcom -2008 ${1}.vhd
 
 # Testbench and simulation source code
@@ -44,9 +44,11 @@ vcom -2008 ../testbench/testbench.vhd
 vcom -2008 ../testbench/uart_tx_tb.vhd
 vcom -2008 ../testbench/uart_rx_tb.vhd
 
+# Build glbl for the IP catalog components
+vlog ../../Common/Xilinx/glbl.v
 
 
-vsim -onfinish stop work.testbench -l ${1}_${2}_modelsim.log
+vsim -onfinish stop work.testbench -l ${1}_${2}_modelsim.log -L xil_defaultlib -L unisims_ver xil_defaultlib.clk_wiz_0 xil_defaultlib.glbl
 
 do wave.do
 

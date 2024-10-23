@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-13
--- Last update: 2024-10-14
+-- Last update: 2024-10-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ use IEEE.NUMERIC_STD.all;
 --Uncomment the following library declaration if instantiating
 --any Xilinx leaf cells in this code.
 library UNISIM;
-use UNISIM.VComponents.all;
+use UNISIM.vcomponents.all;
 
 entity system_controller is
   generic (RESET_COUNT : integer := 32);

@@ -86,6 +86,9 @@ if __name__ == "__main__":
     flow_steps = json_data["flow_steps"]
     print(flow_steps)
 
+    os.environ["SIMULATION_TEST_CASE"] = args.simulation
+    os.environ["SIMULATION_BOARD"] = args.board
+
     for step in sorted(flow_steps.keys()):
         print("Running Step: %s " % step)
         executable = json_data["flow"][flow_steps[step]]["executable"]
