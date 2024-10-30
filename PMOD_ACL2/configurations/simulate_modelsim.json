@@ -1,0 +1,53 @@
+{
+    "project":"simulate_modelsim",
+    "installed tools": [
+        "xilinx",
+        "altera",
+        "icarus"
+    ],
+    "flow_steps": {
+        "1": "clean",
+        "2" : "clean_vlib",
+        "3":  "make_vlib",
+        "4":  "vlib",
+        "5" : "xil_defaultlib",
+        "6" : "board",        
+        "7":  "test_case",
+        "8" : "simulation"
+    },
+    "flow" : {
+        "clean":{
+            "executable":"rm",
+            "arguments":" -rf *~ modelsim_logfile.txt vsim.wlf work/ UNISIM/ vlib/ xil_defaultlib/ xsim.dir/ modelsim_lib/ *.pb"
+        },
+        "clean_vlib":{
+            "executable": "rm -rf",
+            "arguments" : " work"
+        },
+        "make_vlib":{
+            "executable": "mkdir -p",
+            "arguments" : " work xil_defaultlib"
+        },
+        "vlib" : {
+            "executable": "vlib",
+            "arguments" : " work"
+        },
+        "xil_defaultlib" : {
+            "executable": "vlib",
+            "arguments" : " xil_defaultlib"
+        },       
+        "test_case" : {
+            "executable": "vcom",
+            "arguments" : " -2008 $simulation.vhd  "
+        },
+        "board" : {
+            "executable": "vcom",
+            "arguments" : " -2008 ../rtl/$board/${board}_pkg.vhd"
+        },
+        "simulation" : {
+            "executable": "vsim",
+            "arguments" : "  -c -do rtl_modelsim.f -l $simulation.$board.modelsim.log"
+        }
+    },
+    "remove_files": "vlib/ work/ vsim.wlf transcript regression_sim_results.txt"
+}

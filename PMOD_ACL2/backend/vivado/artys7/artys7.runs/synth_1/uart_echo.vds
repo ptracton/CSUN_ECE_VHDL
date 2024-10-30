@@ -1,0 +1,264 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Thu Oct 17 19:10:43 2024
+# Process ID: 1042740
+# Current directory: /home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1
+# Command line: vivado -log uart_echo.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source uart_echo.tcl
+# Log file: /home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1/uart_echo.vds
+# Journal file: /home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1/vivado.jou
+# Running On: BigBox, OS: Linux, CPU Frequency: 3200.000 MHz, CPU Physical cores: 6, Host memory: 16689 MB
+#-----------------------------------------------------------
+source uart_echo.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1290.906 ; gain = 25.836 ; free physical = 1492 ; free virtual = 6312
+Command: synth_design -top uart_echo -part xc7s50csga324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7s50'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7s50'
+INFO: [Device 21-403] Loading part xc7s50csga324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 1042844
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2041.340 ; gain = 403.715 ; free physical = 443 ; free virtual = 5273
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'uart_echo' [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/rtl/top.vhd:38]
+INFO: [Synth 8-3491] module 'system_controller' declared at '/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/system_controller.vhd:34' bound to instance 'sys_con' of component 'system_controller' [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/rtl/top.vhd:102]
+INFO: [Synth 8-638] synthesizing module 'system_controller' [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/system_controller.vhd:45]
+	Parameter RESET_COUNT bound to: 32 - type: integer 
+INFO: [Synth 8-3491] module 'clk_wiz_0' declared at '/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1/.Xil/Vivado-1042740-BigBox/realtime/clk_wiz_0_stub.v:6' bound to instance 'clk_wizard' of component 'clk_wiz_0' [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/system_controller.vhd:82]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1/.Xil/Vivado-1042740-BigBox/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (0#1) [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1/.Xil/Vivado-1042740-BigBox/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'system_controller' (0#1) [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/system_controller.vhd:45]
+	Parameter clk_freq bound to: 100000000 - type: integer 
+	Parameter baud_rate bound to: 115200 - type: integer 
+	Parameter parity bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'uart' declared at '/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/DigiKey/UART/uart.vhd:28' bound to instance 'uart_inst' of component 'uart' [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/rtl/top.vhd:117]
+INFO: [Synth 8-638] synthesizing module 'uart' [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/DigiKey/UART/uart.vhd:49]
+	Parameter clk_freq bound to: 100000000 - type: integer 
+	Parameter baud_rate bound to: 115200 - type: integer 
+	Parameter os_rate bound to: 16 - type: integer 
+	Parameter d_width bound to: 8 - type: integer 
+	Parameter parity bound to: 0 - type: integer 
+	Parameter parity_eo bound to: 1'b0 
+WARNING: [Synth 8-614] signal 'os_pulse' is read in the process but is not in the sensitivity list [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/DigiKey/UART/uart.vhd:95]
+INFO: [Synth 8-256] done synthesizing module 'uart' (0#1) [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/DigiKey/UART/uart.vhd:49]
+INFO: [Synth 8-3491] module 'edge_detector' declared at '/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/edge_detector.vhd:24' bound to instance 'edge' of component 'edge_detector' [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/rtl/top.vhd:139]
+INFO: [Synth 8-638] synthesizing module 'edge_detector' [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/edge_detector.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'edge_detector' (0#1) [/home/ptracton/CSUN/CSUN_ECE_VHDL/Common/CSUN/edge_detector.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'uart_echo' (0#1) [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/rtl/top.vhd:38]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2120.309 ; gain = 482.684 ; free physical = 299 ; free virtual = 5128
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2135.152 ; gain = 497.527 ; free physical = 296 ; free virtual = 5125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2135.152 ; gain = 497.527 ; free physical = 296 ; free virtual = 5125
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2135.152 ; gain = 0.000 ; free physical = 296 ; free virtual = 5125
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.gen/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'sys_con/clk_wizard'
+Finished Parsing XDC File [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.gen/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'sys_con/clk_wizard'
+Parsing XDC File [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/constraints/artys7.xdc]
+Finished Parsing XDC File [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/constraints/artys7.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/constraints/artys7.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/uart_echo_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/uart_echo_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2279.902 ; gain = 0.000 ; free physical = 286 ; free virtual = 5117
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2279.938 ; gain = 0.000 ; free physical = 281 ; free virtual = 5112
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 195 ; free virtual = 5030
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7s50csga324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 195 ; free virtual = 5030
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property IO_BUFFER_TYPE = NONE for XCLK. (constraint file  /home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.gen/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc, line 3).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for XCLK. (constraint file  /home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.gen/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc, line 4).
+Applied set_property KEEP_HIERARCHY = SOFT for sys_con/clk_wizard. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 195 ; free virtual = 5030
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 192 ; free virtual = 5028
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   10 Bit       Adders := 1     
+	   2 Input    6 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 4     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               10 Bit    Registers := 2     
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 3     
+	                1 Bit    Registers := 11    
++---Muxes : 
+	   2 Input   10 Bit        Muxes := 2     
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 6     
+	   2 Input    1 Bit        Muxes := 13    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 120 (col length:60)
+BRAMs: 150 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 177 ; free virtual = 5017
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 175 ; free virtual = 5012
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 175 ; free virtual = 5012
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 175 ; free virtual = 5012
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |clk_wiz_0     |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |clk_wiz |     1|
+|2     |LUT1    |     1|
+|3     |LUT2    |     9|
+|4     |LUT3    |    14|
+|5     |LUT4    |    13|
+|6     |LUT5    |    11|
+|7     |LUT6    |    21|
+|8     |FDCE    |    41|
+|9     |FDPE    |    33|
+|10    |FDRE    |    29|
+|11    |IBUF    |     2|
+|12    |OBUF    |     2|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 314 ; free virtual = 5142
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2279.938 ; gain = 497.527 ; free physical = 311 ; free virtual = 5141
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2279.938 ; gain = 642.312 ; free physical = 311 ; free virtual = 5141
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2279.938 ; gain = 0.000 ; free physical = 311 ; free virtual = 5140
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2279.938 ; gain = 0.000 ; free physical = 586 ; free virtual = 5415
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 9a93d8d4
+INFO: [Common 17-83] Releasing license: Synthesis
+28 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:21 . Memory (MB): peak = 2279.938 ; gain = 965.250 ; free physical = 587 ; free virtual = 5415
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1820.598; main = 1504.625; forked = 384.002
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3238.477; main = 2279.906; forked = 990.586
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2303.914 ; gain = 0.000 ; free physical = 587 ; free virtual = 5415
+INFO: [Common 17-1381] The checkpoint '/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/synth_1/uart_echo.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file uart_echo_utilization_synth.rpt -pb uart_echo_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 17 19:11:14 2024...

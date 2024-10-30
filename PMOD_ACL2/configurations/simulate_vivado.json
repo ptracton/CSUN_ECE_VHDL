@@ -1,0 +1,43 @@
+{
+    "project": "simulate_vivado",
+    "installed tools": [
+        "xilinx",
+        "altera",
+        "icarus"
+    ],
+    "flow_steps": {
+        "1": "clean",
+        "3": "board",
+        "4" :"uart_tb_pkg",
+        "5": "test_case",
+        "6": "elaborate",
+        "7": "simulation"
+    },
+    "flow": {
+        "clean": {
+            "executable": "rm",
+            "arguments": "-rf  vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
+        },
+        "test_case": {
+            "executable": "xvhdl ",
+            "arguments": " --2008  $simulation.vhd --work xil_defaultlib"
+        },
+        "board": {
+            "executable": "xvhdl ",
+            "arguments": " --2008 ../rtl/$board/${board}_pkg.vhd --work work"
+        },
+        "uart_tb_pkg": {
+            "executable": "xvhdl ",
+            "arguments": "  --2008 ../testbench/uart_tb_pkg.vhd --work work"
+        },        
+        "elaborate": {
+            "executable": "xelab",
+            "arguments": " -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm xil_defaultlib.glbl -top xil_defaultlib.testbench -prj rtl_vivado.prj  -debug all -snapshot $simulation.snapshot --log $simulation.xelab.log"
+        },
+        "simulation": {
+            "executable": "xsim",
+            "arguments": " $simulation.snapshot -t simulation.tcl --log $simulation.$board.vivado.log"
+        }
+    },
+    "remove_files": " vivado* xsim.dir xelab* xvlog* webtalk.log *.wdb"
+}
