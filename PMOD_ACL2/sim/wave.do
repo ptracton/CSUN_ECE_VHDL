@@ -8,26 +8,26 @@ add wave -noupdate -group TESTBENCH /testbench/ss_n
 add wave -noupdate -group TESTBENCH /testbench/miso
 add wave -noupdate -group TESTBENCH /testbench/mosi
 add wave -noupdate -group TESTBENCH /testbench/sclk
-add wave -noupdate -group DUT /testbench/DUT/XSS_N
-add wave -noupdate -group DUT /testbench/DUT/XMISO
-add wave -noupdate -group DUT /testbench/DUT/XMOSI
-add wave -noupdate -group DUT /testbench/DUT/XSCLK
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_x
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_y
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_z
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/tx_start
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/uart_data_rx
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/uart_data_tx
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XCLK
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XRESET
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XRX
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XTX
-add wave -noupdate -group DUT /testbench/DUT/reset_n
-add wave -noupdate -group DUT /testbench/DUT/rx_busy
-add wave -noupdate -group DUT /testbench/DUT/rx_busy_falling
-add wave -noupdate -group DUT /testbench/DUT/rx_busy_rising
-add wave -noupdate -group DUT /testbench/DUT/rx_error
-add wave -noupdate -group DUT /testbench/DUT/tx_start
+add wave -noupdate -expand -group DUT /testbench/DUT/XSS_N
+add wave -noupdate -expand -group DUT /testbench/DUT/XMISO
+add wave -noupdate -expand -group DUT /testbench/DUT/XMOSI
+add wave -noupdate -expand -group DUT /testbench/DUT/XSCLK
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_x
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_y
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_z
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/tx_start
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/uart_data_rx
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/uart_data_tx
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XCLK
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XRESET
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XRX
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XTX
+add wave -noupdate -expand -group DUT /testbench/DUT/reset_n
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy_falling
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy_rising
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_error
+add wave -noupdate -expand -group DUT /testbench/DUT/tx_start
 add wave -noupdate -group TEST /testbench/test/XSCLK
 add wave -noupdate -group TEST /testbench/test/XSS_N
 add wave -noupdate -group TEST /testbench/test/XMISO
@@ -80,33 +80,33 @@ add wave -noupdate -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/lo
 add wave -noupdate -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/reset_out
 add wave -noupdate -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/reset_counter
 add wave -noupdate -group {SYS CON} -radix hexadecimal /testbench/DUT/sys_con/locked_wiz
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/slaves
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/d_width
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clock
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/reset_n
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/enable
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/cpol
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/cpha
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/cont
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clk_div
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/addr
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/tx_data
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/miso
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/sclk
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/ss_n
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/mosi
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/busy
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/rx_data
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/state
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/slave
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clk_ratio
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/count
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clk_toggles
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/assert_data
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/continue
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/rx_buffer
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/tx_buffer
-add wave -noupdate -expand -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/last_bit_rx
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/slaves
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/d_width
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clock
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/reset_n
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/enable
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/cpol
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/cpha
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/cont
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clk_div
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/addr
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/tx_data
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/miso
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/sclk
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/ss_n
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/mosi
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/busy
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/rx_data
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/state
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/slave
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clk_ratio
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/count
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/clk_toggles
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/assert_data
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/continue
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/rx_buffer
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/tx_buffer
+add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_master_0/last_bit_rx
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/clk_freq
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/data_rate
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/data_range
@@ -128,7 +128,7 @@ add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_ena
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_cont
 add wave -noupdate -group {SPI PMOD} -color {Medium Orchid} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/spi_tx_data
-add wave -noupdate -group {SPI PMOD} -radix hexadecimal -childformat {{/testbench/DUT/spi_pmod_acl2/spi_rx_data(7) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(6) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(5) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(4) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(3) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(2) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(1) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(0) -radix hexadecimal}} -subitemconfig {/testbench/DUT/spi_pmod_acl2/spi_rx_data(7) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(6) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(5) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(4) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(3) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(2) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(1) {-radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(0) {-radix hexadecimal}} /testbench/DUT/spi_pmod_acl2/spi_rx_data
+add wave -noupdate -group {SPI PMOD} -radix hexadecimal -childformat {{/testbench/DUT/spi_pmod_acl2/spi_rx_data(7) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(6) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(5) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(4) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(3) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(2) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(1) -radix hexadecimal} {/testbench/DUT/spi_pmod_acl2/spi_rx_data(0) -radix hexadecimal}} -subitemconfig {/testbench/DUT/spi_pmod_acl2/spi_rx_data(7) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(6) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(5) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(4) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(3) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(2) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(1) {-height 16 -radix hexadecimal} /testbench/DUT/spi_pmod_acl2/spi_rx_data(0) {-height 16 -radix hexadecimal}} /testbench/DUT/spi_pmod_acl2/spi_rx_data
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/acceleration_x_int
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/acceleration_y_int
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/acceleration_z_int
@@ -186,6 +186,7 @@ add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi
 add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/data_write
 add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/data_read
 add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/write_sig
+add wave -noupdate -group {PMOD SPI} /testbench/test/pmod/spi_slave/read_sig
 add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/bit_count
 add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/bit_count_previous
 add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/spi_data_in
@@ -222,12 +223,24 @@ add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/re
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/clk
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/reset
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/clk_51p2KHz
+add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/address
+add wave -noupdate -group {PMOD ACCEL} /testbench/test/pmod/accelerometer/read_sig
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/xdata
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/ydata
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/zdata
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/temperature
+add wave -noupdate -expand -group {TB UART RX} -radix unsigned /testbench/test/receive/g_CLKS_PER_BIT
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_Clk
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_RX_Serial
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/o_RX_DV
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/o_RX_Byte
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_SM_Main
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_Clk_Count
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_Bit_Index
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_RX_Byte
+add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_RX_DV
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {9224000000 fs} 0}
+WaveRestoreCursors {{Cursor 1} {231308525936 fs} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 280
 configure wave -valuecolwidth 100
@@ -243,4 +256,4 @@ configure wave -griddelta 40
 configure wave -timeline 1
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {5651539274 fs} {10936620116 fs}
+WaveRestoreZoom {53662221442 fs} {588766740760 fs}

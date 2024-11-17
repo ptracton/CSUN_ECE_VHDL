@@ -32,12 +32,12 @@ entity adxl362 is
     temp_file    : string := "temperature.txt"
     );
   port (
-    SCLK : in     std_logic;
-    nCS  : in     std_logic;
-    MOSI : in     std_logic;
-    MISO : out    std_logic;
-    INT1 : out    std_logic;
-    INT2 : out    std_logic
+    SCLK : in  std_logic;
+    nCS  : in  std_logic;
+    MOSI : in  std_logic;
+    MISO : out std_logic;
+    INT1 : out std_logic;
+    INT2 : out std_logic
     );
 end adxl362;
 
@@ -68,6 +68,7 @@ architecture behavioral of adxl362 is
       data_write      : out std_logic_vector(7 downto 0);
       data_read       : in  std_logic_vector(7 downto 0);
       write_sig       : out std_logic;
+      read_sig        : out std_logic;
       data_fifo_write : out std_logic;
       read_data_fifo  : out std_logic;
       data_fifo_read  : out std_logic_vector(15 downto 0)
@@ -116,6 +117,10 @@ architecture behavioral of adxl362 is
       reset       : in std_logic;
       clk_51p2KHz : in std_logic;
 
+      -- bus interface
+      address  : in std_logic_vector(5 downto 0);
+      read_sig : in std_logic;
+
       -- data
       xdata       : out std_logic_vector(11 downto 0);
       ydata       : out std_logic_vector(11 downto 0);
@@ -135,6 +140,7 @@ architecture behavioral of adxl362 is
   signal data_write      : std_logic_vector(7 downto 0);
   signal data_read       : std_logic_vector(7 downto 0);
   signal write_sig       : std_logic;
+  signal read_sig        : std_logic;
   signal data_fifo_write : std_logic;
   signal read_data_fifo  : std_logic;
   signal data_fifo_read  : std_logic_vector(15 downto 0);
@@ -192,6 +198,7 @@ begin
       data_write      => data_write,
       data_read       => data_read,
       write_sig       => write_sig,
+      read_sig        => read_sig,
       data_fifo_write => data_fifo_write,
       read_data_fifo  => read_data_fifo,
       data_fifo_read  => data_fifo_read
@@ -243,6 +250,10 @@ begin
       clk         => clk,
       reset       => reset,
       clk_51p2KHz => clk_51p2KHz,
+
+      -- bus interface
+      address  => address,
+      read_sig => read_sig,
 
       --data
       xdata       => xdata,

@@ -42,6 +42,7 @@ entity adxl362_spi is
     data_write      : out std_logic_vector(7 downto 0);
     data_read       : in  std_logic_vector(7 downto 0);
     write_sig       : out std_logic;
+    read_sig        : out std_logic;
     data_fifo_write : out std_logic;
     read_data_fifo  : out std_logic;
     data_fifo_read  : out std_logic_vector(15 downto 0)
@@ -66,6 +67,7 @@ architecture behavioral of adxl362_spi is
   signal spi_byte_done  : boolean;
   signal spi_byte_begin : boolean;
   signal first          : std_logic;
+  signal read_sig_r : std_logic;
 begin
 
   ------------------------------------------------------------------------------
@@ -84,7 +86,7 @@ begin
           bit_count          <= 0;
           bit_count_previous <= 0;
           spi_data_in        <= (others => '0');
-         -- miso               <= '0';
+        -- miso               <= '0';
         else
           bit_count_previous <= bit_count;
 
@@ -114,8 +116,10 @@ begin
     if rising_edge(clk) then
       if (reset = '1') then
         state <= IDLE;
+        read_sig <= '0';
       else
         state <= next_state;
+        read_sig <= read_sig_r;
       end if;
     end if;
   end process;
@@ -138,6 +142,8 @@ begin
             data_write   <= (others => '0');
             first        <= '0';
             command      <= (others => '0');
+            write_sig    <= '0';
+            read_sig_r   <= '0';
           else
             if spi_byte_done then
               command    <= spi_data_in;
@@ -229,6 +235,7 @@ begin
             spi_data_out <= data_read;
             if (spi_byte_begin = true) then
               next_state <= wait_DONE_READ_RESPONSE;
+              read_sig_r <= '1';
             else
               next_state <= wait_START_READ_RESPONSE;
             end if;
@@ -238,6 +245,7 @@ begin
 
         when wait_DONE_READ_RESPONSE =>
           if (nss = '0') then
+            read_sig_r <= '0';
             if (spi_byte_done = true) then
               first      <= '1';
               next_state <= READ_INCREMENT_ADDRESS;

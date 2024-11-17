@@ -121,7 +121,7 @@ begin
     generic map (
       g_CLKS_PER_BIT => BOARD_TB_CLKS_PER_BIT)
     port map (
-      i_Clk       => XSCLK,
+      i_Clk       => XCLK,
       i_RX_Serial => XRX,
       o_RX_DV     => rx_dv,
       o_RX_Byte   => rx_byte
@@ -147,9 +147,6 @@ begin
     wait for 5 us;
 
     transmit_8bits(XCLK, tx_dv, tx_byte, x"73");
-
-     wait for 20 us;
-    test_done <= true;
     
     -- wait for transmission to complete
     wait until rx_dv = '1';
