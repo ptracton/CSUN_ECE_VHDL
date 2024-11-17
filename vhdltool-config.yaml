@@ -4,7 +4,11 @@ Libraries:
     - name: work
       paths:
         - "GPIO/**/*.vhd"
-
+        - "UART_ECHO/**/*.vhd"
+        - "PMOD_ACL2/**/*.vhd"
+        - "Common/**/*.vhd"
+        - "Common/**/**/*.vhd"
+        
     #Point to the IEEE standard libraries
     - name: ieee
       paths:

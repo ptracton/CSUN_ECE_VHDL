@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-24
--- Last update: 2024-10-29
+-- Last update: 2024-11-17
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ architecture behavioral of adxl362 is
       time_active        : out std_logic_vector(7 downto 0);
       threshold_inactive : out std_logic_vector(10 downto 0);
       time_inactive      : out std_logic_vector(7 downto 0);
-      act_inact_ctrl     : out std_logic_vector(7 downto 0);
+      act_inact_ctrl     : out std_logic_vector(7 downto 0) := x"00";
       fifo_ctrl          : out std_logic_vector(3 downto 0);
       fifo_samples       : out std_logic_vector(7 downto 0);
       intmap1            : out std_logic_vector(7 downto 0);
@@ -158,7 +158,7 @@ architecture behavioral of adxl362 is
   signal ydata       : std_logic_vector(11 downto 0);
   signal zdata       : std_logic_vector(11 downto 0);
   signal temperature : std_logic_vector(11 downto 0);
-  signal status      : std_logic_vector(11 downto 0);
+  signal status      : std_logic_vector(11 downto 0) := x"000";
 
 begin
 

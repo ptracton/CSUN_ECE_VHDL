@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-10-29
+-- Last update: 2024-11-17
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -148,6 +148,9 @@ begin
 
     transmit_8bits(XCLK, tx_dv, tx_byte, x"73");
 
+     wait for 20 us;
+    test_done <= true;
+    
     -- wait for transmission to complete
     wait until rx_dv = '1';
     -- received_8bits(rx_dv, rx_byte, rx_data);

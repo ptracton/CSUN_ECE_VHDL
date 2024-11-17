@@ -1,0 +1,24 @@
+* GPIO
+** Boards
+*** Zybo
+*** Arty S50
+*** Basys3
+** Functionality
+*** Switch to LED for each board
+** Documentation
+Done
+* UART Echo
+* PMOD ACL2
+* Microblaze
+* Click Boards
+** Boards of Interest
+*** Display
+**** https://www.mikroe.com/oled-w-click
+*** Communications
+**** https://www.mikroe.com/oled-c-click#/263-clickid-yes
+**** https://www.mikroe.com/gnss-14-click
+*** Bio-Sensors
+**** https://www.mikroe.com/heart-rate-11-click
+**** 
+** Extra Components
+https://www.mikroe.com/arduino-uno-click-shield
