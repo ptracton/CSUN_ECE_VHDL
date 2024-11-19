@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-10-24
+-- Last update: 2024-11-18
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -18,8 +18,6 @@
 -- Date        Version  Author  Description
 -- 2024-10-05  1.0      ptracton        Created
 -------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
@@ -71,11 +69,13 @@ architecture Behavioral of top is
   component system_controller is
     generic (RESET_COUNT : integer := 32);
     port(
-      clk_in    : in  std_logic;
-      reset_in  : in  std_logic;
-      clk_out   : out std_logic;
-      locked    : out std_logic;
-      reset_out : out std_logic
+      clk_in     : in  std_logic;
+      reset_in   : in  std_logic;
+      clk_out    : out std_logic;
+      clk_pmod   : out std_logic;
+      locked     : out std_logic;
+      reset_out  : out std_logic;
+      reset_pmod : out std_logic
       );
   end component;
 
@@ -103,7 +103,28 @@ architecture Behavioral of top is
       mosi           : out    std_logic;       --SPI bus: master out, slave in
       acceleration_x : out    std_logic_vector(11 downto 0);  --x-axis acceleration data
       acceleration_y : out    std_logic_vector(11 downto 0);  --y-axis acceleration data
-      acceleration_z : out    std_logic_vector(11 downto 0));  --z-axis acceleration data
+      acceleration_z : out    std_logic_vector(11 downto 0);  --z-axis acceleration data
+      data_ready     : out    std_logic
+      );
+  end component;
+
+  component accelerometer_processing is
+    port (
+      -- System Interface
+      clk      : in std_logic;
+      clk_pmod : in std_logic;
+      reset    : in std_logic;
+
+      -- Accelerometer Signals
+      data_ready     : in std_logic;
+      acceleration_x : in std_logic_vector(11 downto 0);
+      acceleration_y : in std_logic_vector(11 downto 0);
+      acceleration_z : in std_logic_vector(11 downto 0);
+
+      -- Data Out
+      acceleration_out_x : out std_logic_vector(11 downto 0);
+      acceleration_out_y : out std_logic_vector(11 downto 0);
+      acceleration_out_z : out std_logic_vector(11 downto 0));
   end component;
 
   -- UART Signals
@@ -116,14 +137,23 @@ architecture Behavioral of top is
   signal rx_busy_falling : std_logic;
 
   -- System Signals
-  signal clk     : std_logic;
-  signal reset   : std_logic;
-  signal reset_n : std_logic;
+  signal clk        : std_logic;
+  signal reset      : std_logic;
+  signal reset_n    : std_logic;
+  signal clk_pmod   : std_logic;
+  signal reset_pmod : std_logic;
 
-  --SPI Signals
-  signal acceleration_x : std_logic_vector(11 downto 0);  --x-axis acceleration data
-  signal acceleration_y : std_logic_vector(11 downto 0);  --y-axis acceleration data
-  signal acceleration_z : std_logic_vector(11 downto 0);  --z-axis acceleration data
+  --PMOD ACL2  Signals
+  signal acceleration_x   : std_logic_vector(11 downto 0);  --x-axis acceleration data
+  signal acceleration_y   : std_logic_vector(11 downto 0);  --y-axis acceleration data
+  signal acceleration_z   : std_logic_vector(11 downto 0);  --z-axis acceleration data
+  signal accel_data_ready : std_logic;
+
+  --FIFO Signals
+  signal acceleration_out_x : std_logic_vector(11 downto 0);
+  signal acceleration_out_y : std_logic_vector(11 downto 0);
+  signal acceleration_out_z : std_logic_vector(11 downto 0);
+
 begin
 
   ------------------------------------------------------------------------------
@@ -133,11 +163,13 @@ begin
   ------------------------------------------------------------------------------
   sys_con : system_controller
     port map(
-      clk_in    => XCLK,
-      reset_in  => XRESET,
-      clk_out   => clk,
-      reset_out => reset,
-      locked    => XLOCKED
+      clk_in     => XCLK,
+      reset_in   => XRESET,
+      clk_out    => clk,
+      reset_out  => reset,
+      clk_pmod   => clk_pmod,
+      reset_pmod => reset_pmod,
+      locked     => XLOCKED
       );
 
   -- Inverted reset for the UART module
@@ -196,22 +228,46 @@ begin
   end process;
 
   ------------------------------------------------------------------------------
-  -- Taken from DigiKey
+  -- Taken from DigiKey, PMOD ACL Master
   ------------------------------------------------------------------------------
   spi_pmod_acl2 : pmod_accelerometer_adxl362
     generic map(
-      clk_freq => 125
+      clk_freq => 10
       )
     port map(
-      clk            => clk,
-      reset_n        => reset_n,
+      clk            => clk_pmod,
+      reset_n        => reset_pmod,
       miso           => XMISO,
       sclk           => XSCLK,
       ss_n           => XSS_N,
       mosi           => XMOSI,
       acceleration_x => acceleration_x,
       acceleration_y => acceleration_y,
-      acceleration_z => acceleration_z
+      acceleration_z => acceleration_z,
+      data_ready     => accel_data_ready
       );
+
+  ------------------------------------------------------------------------------
+  -- FIFO and process the accel data
+  ------------------------------------------------------------------------------
+  data_processing : accelerometer_processing
+    port map(
+      -- System Interface
+      clk      => clk,
+      clk_pmod => clk_pmod,
+      reset    => reset,
+
+      --Accelerometer Signals
+      data_ready     => accel_data_ready,
+      acceleration_x => acceleration_x,
+      acceleration_y => acceleration_y,
+      acceleration_z => acceleration_z,
+
+      -- Data Out
+      acceleration_out_x => acceleration_out_x,
+      acceleration_out_y => acceleration_out_y,
+      acceleration_out_z => acceleration_out_z
+      );
+
 
 end Behavioral;

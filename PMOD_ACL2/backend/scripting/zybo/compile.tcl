@@ -6,11 +6,11 @@ set board zybo
 #file mkdir $setupDir
 #file mkdir $compileDir
 #file mkdir $bitgenDir
-open_project uart_echo.xpr
+open_project pmod_acl2.xpr
 
 synth_ip -force [get_ips *]
 
-synth_design -top uart_echo
+synth_design -top pmod_acl2
 write_checkpoint -force $setupDir/post_synth.dcp
 report_timing_summary -file $setupDir/post_synth_timing_summary.rpt
 report_utilization -file $setupDir/post_synth_util.rpt

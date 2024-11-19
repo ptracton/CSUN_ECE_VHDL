@@ -8,26 +8,30 @@ add wave -noupdate -group TESTBENCH /testbench/ss_n
 add wave -noupdate -group TESTBENCH /testbench/miso
 add wave -noupdate -group TESTBENCH /testbench/mosi
 add wave -noupdate -group TESTBENCH /testbench/sclk
-add wave -noupdate -expand -group DUT /testbench/DUT/XSS_N
-add wave -noupdate -expand -group DUT /testbench/DUT/XMISO
-add wave -noupdate -expand -group DUT /testbench/DUT/XMOSI
-add wave -noupdate -expand -group DUT /testbench/DUT/XSCLK
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_x
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_y
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_z
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/tx_start
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/uart_data_rx
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/uart_data_tx
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XCLK
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XRESET
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XRX
-add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XTX
-add wave -noupdate -expand -group DUT /testbench/DUT/reset_n
-add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy
-add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy_falling
-add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy_rising
-add wave -noupdate -expand -group DUT /testbench/DUT/rx_error
-add wave -noupdate -expand -group DUT /testbench/DUT/tx_start
+add wave -noupdate -group DUT /testbench/DUT/XSS_N
+add wave -noupdate -group DUT /testbench/DUT/XMISO
+add wave -noupdate -group DUT /testbench/DUT/XMOSI
+add wave -noupdate -group DUT /testbench/DUT/XSCLK
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_x
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_y
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_z
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/tx_start
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/uart_data_rx
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/uart_data_tx
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XCLK
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XRESET
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XRX
+add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XTX
+add wave -noupdate -group DUT /testbench/DUT/clk
+add wave -noupdate -group DUT /testbench/DUT/reset
+add wave -noupdate -group DUT /testbench/DUT/clk_pmod
+add wave -noupdate -group DUT /testbench/DUT/reset_pmod
+add wave -noupdate -group DUT /testbench/DUT/reset_n
+add wave -noupdate -group DUT /testbench/DUT/rx_busy
+add wave -noupdate -group DUT /testbench/DUT/rx_busy_falling
+add wave -noupdate -group DUT /testbench/DUT/rx_busy_rising
+add wave -noupdate -group DUT /testbench/DUT/rx_error
+add wave -noupdate -group DUT /testbench/DUT/tx_start
 add wave -noupdate -group TEST /testbench/test/XSCLK
 add wave -noupdate -group TEST /testbench/test/XSS_N
 add wave -noupdate -group TEST /testbench/test/XMISO
@@ -110,7 +114,7 @@ add wave -noupdate -group {SPI PMOD MASTER} -radix hexadecimal /testbench/DUT/sp
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/clk_freq
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/data_rate
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/data_range
-add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/clk
+add wave -noupdate -group {SPI PMOD} /testbench/DUT/spi_pmod_acl2/clk
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/reset_n
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/miso
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/sclk
@@ -229,20 +233,84 @@ add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/a
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/ydata
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/zdata
 add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/temperature
-add wave -noupdate -expand -group {TB UART RX} -radix unsigned /testbench/test/receive/g_CLKS_PER_BIT
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_Clk
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_RX_Serial
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/o_RX_DV
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/o_RX_Byte
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_SM_Main
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_Clk_Count
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_Bit_Index
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_RX_Byte
-add wave -noupdate -expand -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_RX_DV
+add wave -noupdate -group {TB UART RX} -radix unsigned /testbench/test/receive/g_CLKS_PER_BIT
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_Clk
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_RX_Serial
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/o_RX_DV
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/o_RX_Byte
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_SM_Main
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_Clk_Count
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_Bit_Index
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_RX_Byte
+add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/r_RX_DV
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/clk
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/clk_pmod
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/reset
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/data_ready
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_x
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_y
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_z
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_out_x
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_out_y
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_out_z
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_out_x_int
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_out_y_int
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/acceleration_out_z_int
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_dout
+add wave -noupdate -expand -group {Data Processing} -color Magenta -radix hexadecimal /testbench/DUT/data_processing/fifo_x_full
+add wave -noupdate -expand -group {Data Processing} -color Khaki -radix hexadecimal /testbench/DUT/data_processing/fifo_x_empty
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_wr_busy
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_rd_busy
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_dout
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_full
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_empty
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_wr_busy
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_rd_busy
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_dout
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_full
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_empty
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_wr_busy
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_rd_busy
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/processing_x
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/processing_y
+add wave -noupdate -expand -group {Data Processing} -radix hexadecimal /testbench/DUT/data_processing/processing_z
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/rst
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/wr_clk
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/rd_clk
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/din
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/wr_en
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/rd_en
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/dout
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/full
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/empty
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/wr_rst_busy
+add wave -noupdate -group {FIFO X} -radix hexadecimal /testbench/DUT/data_processing/fifo_x_accel/rd_rst_busy
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/rst
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/wr_clk
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/rd_clk
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/din
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/wr_en
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/rd_en
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/dout
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/full
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/empty
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/wr_rst_busy
+add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/rd_rst_busy
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rst
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_clk
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_clk
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/din
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_en
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_en
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/dout
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/full
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/empty
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_rst_busy
+add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_rst_busy
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {231308525936 fs} 0}
+WaveRestoreCursors {{Cursor 1} {480896100000 fs} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 280
+configure wave -namecolwidth 327
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -256,4 +324,4 @@ configure wave -griddelta 40
 configure wave -timeline 1
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {53662221442 fs} {588766740760 fs}
+WaveRestoreZoom {480796294875 fs} {481082782444 fs}

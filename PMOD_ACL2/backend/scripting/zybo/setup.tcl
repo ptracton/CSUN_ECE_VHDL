@@ -1,8 +1,8 @@
 # This script sets up a Vivado project with all ip references resolved.
-file delete -force uart_echo.xpr *.os *.jou *.log uart_echo.srcs uart_echo.cache uart_echo.runs
+file delete -force pmod_acl2.xpr *.os *.jou *.log pmod_acl2.srcs pmod_acl2.cache pmod_acl2.runs
 #
 # Create the project/environment
-create_project -part  xc7z010clg400-1 -force uart_echo
+create_project -part  xc7z010clg400-1 -force pmod_acl2
 set_property target_language VHDL [current_project]
 set_property default_lib work [current_project]
 load_features ipintegrator
@@ -17,8 +17,8 @@ generate_target {all} [get_ips *]
 read_vhdl -vhdl2008 -library xil_defaultlib {
     ../../../rtl/zybo/zybo_pkg.vhd
     ../../../../Common/DigiKey/UART/uart.vhd
-    ../../../../Common/CSUN/system_controller.vhd
     ../../../../Common/CSUN/edge_detector.vhd
+    ../../../rtl/system_controller.vhd
     ../../../rtl/top.vhd      
 }
 

@@ -5,6 +5,9 @@
    <db_ref_list>
       <db_ref path="testbench_behav.wdb" id="1">
          <top_modules>
+            <top_module name="adxl362_pkg" />
+            <top_module name="board_pkg" />
+            <top_module name="glbl" />
             <top_module name="testbench" />
             <top_module name="uart_tb_pkg" />
          </top_modules>
@@ -12,17 +15,18 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="369.336001 us"></ZoomEndTime>
-      <Cursor1Time time="1.000000 us"></Cursor1Time>
+      <ZoomEndTime time="687.472340 us"></ZoomEndTime>
+      <Cursor1Time time="248.152000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="198"></NameColumnWidth>
-      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+      <NameColumnWidth column_width="271"></NameColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="3" />
+   <WVObjectSize size="6" />
    <wvobject type="group" fp_name="group22">
       <obj_property name="label">TB</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/testbench/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -31,6 +35,10 @@
          <obj_property name="ElementShortName">reset</obj_property>
          <obj_property name="ObjectShortName">reset</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/testbench/locked">
+         <obj_property name="ElementShortName">locked</obj_property>
+         <obj_property name="ObjectShortName">locked</obj_property>
+      </wvobject>
       <wvobject type="logic" fp_name="/testbench/tx">
          <obj_property name="ElementShortName">tx</obj_property>
          <obj_property name="ObjectShortName">tx</obj_property>
@@ -38,6 +46,30 @@
       <wvobject type="logic" fp_name="/testbench/rx">
          <obj_property name="ElementShortName">rx</obj_property>
          <obj_property name="ObjectShortName">rx</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/sclk">
+         <obj_property name="ElementShortName">sclk</obj_property>
+         <obj_property name="ObjectShortName">sclk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/ss_n">
+         <obj_property name="ElementShortName">ss_n[0:0]</obj_property>
+         <obj_property name="ObjectShortName">ss_n[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/sclk_buffer">
+         <obj_property name="ElementShortName">sclk_buffer</obj_property>
+         <obj_property name="ObjectShortName">sclk_buffer</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/ss_n_buffer">
+         <obj_property name="ElementShortName">ss_n_buffer[0:0]</obj_property>
+         <obj_property name="ObjectShortName">ss_n_buffer[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/miso">
+         <obj_property name="ElementShortName">miso</obj_property>
+         <obj_property name="ObjectShortName">miso</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/mosi">
+         <obj_property name="ElementShortName">mosi</obj_property>
+         <obj_property name="ObjectShortName">mosi</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group21">
@@ -51,6 +83,10 @@
          <obj_property name="ElementShortName">XRESET</obj_property>
          <obj_property name="ObjectShortName">XRESET</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XLOCKED">
+         <obj_property name="ElementShortName">XLOCKED</obj_property>
+         <obj_property name="ObjectShortName">XLOCKED</obj_property>
+      </wvobject>
       <wvobject type="logic" fp_name="/testbench/DUT/XRX">
          <obj_property name="ElementShortName">XRX</obj_property>
          <obj_property name="ObjectShortName">XRX</obj_property>
@@ -58,6 +94,22 @@
       <wvobject type="logic" fp_name="/testbench/DUT/XTX">
          <obj_property name="ElementShortName">XTX</obj_property>
          <obj_property name="ObjectShortName">XTX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XSCLK">
+         <obj_property name="ElementShortName">XSCLK</obj_property>
+         <obj_property name="ObjectShortName">XSCLK</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/XSS_N">
+         <obj_property name="ElementShortName">XSS_N[0:0]</obj_property>
+         <obj_property name="ObjectShortName">XSS_N[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XMISO">
+         <obj_property name="ElementShortName">XMISO</obj_property>
+         <obj_property name="ObjectShortName">XMISO</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XMOSI">
+         <obj_property name="ElementShortName">XMOSI</obj_property>
+         <obj_property name="ObjectShortName">XMOSI</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/testbench/DUT/tx_start">
          <obj_property name="ElementShortName">tx_start</obj_property>
@@ -87,9 +139,37 @@
          <obj_property name="ElementShortName">rx_busy_falling</obj_property>
          <obj_property name="ObjectShortName">rx_busy_falling</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
       <wvobject type="logic" fp_name="/testbench/DUT/reset_n">
          <obj_property name="ElementShortName">reset_n</obj_property>
          <obj_property name="ObjectShortName">reset_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/clk_pmod">
+         <obj_property name="ElementShortName">clk_pmod</obj_property>
+         <obj_property name="ObjectShortName">clk_pmod</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/reset_pmod">
+         <obj_property name="ElementShortName">reset_pmod</obj_property>
+         <obj_property name="ObjectShortName">reset_pmod</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_x">
+         <obj_property name="ElementShortName">acceleration_x[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_x[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_y">
+         <obj_property name="ElementShortName">acceleration_y[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_y[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_z">
+         <obj_property name="ElementShortName">acceleration_z[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_z[11:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group38">
@@ -103,6 +183,10 @@
          <obj_property name="ElementShortName">XRESET</obj_property>
          <obj_property name="ObjectShortName">XRESET</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/XLOCKED">
+         <obj_property name="ElementShortName">XLOCKED</obj_property>
+         <obj_property name="ObjectShortName">XLOCKED</obj_property>
+      </wvobject>
       <wvobject type="logic" fp_name="/testbench/test/XRX">
          <obj_property name="ElementShortName">XRX</obj_property>
          <obj_property name="ObjectShortName">XRX</obj_property>
@@ -110,6 +194,22 @@
       <wvobject type="logic" fp_name="/testbench/test/XTX">
          <obj_property name="ElementShortName">XTX</obj_property>
          <obj_property name="ObjectShortName">XTX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/XSCLK">
+         <obj_property name="ElementShortName">XSCLK</obj_property>
+         <obj_property name="ObjectShortName">XSCLK</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/test/XSS_N">
+         <obj_property name="ElementShortName">XSS_N[0:0]</obj_property>
+         <obj_property name="ObjectShortName">XSS_N[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/XMISO">
+         <obj_property name="ElementShortName">XMISO</obj_property>
+         <obj_property name="ObjectShortName">XMISO</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/XMOSI">
+         <obj_property name="ElementShortName">XMOSI</obj_property>
+         <obj_property name="ObjectShortName">XMOSI</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/testbench/test/tx_byte">
          <obj_property name="ElementShortName">tx_byte[7:0]</obj_property>
@@ -139,10 +239,6 @@
          <obj_property name="ElementShortName">rx_dv</obj_property>
          <obj_property name="ObjectShortName">rx_dv</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/testbench/test/phil">
-         <obj_property name="ElementShortName">phil[7:0]</obj_property>
-         <obj_property name="ObjectShortName">phil[7:0]</obj_property>
-      </wvobject>
       <wvobject type="other" fp_name="/testbench/test/test_fail">
          <obj_property name="ElementShortName">test_fail</obj_property>
          <obj_property name="ObjectShortName">test_fail</obj_property>
@@ -154,6 +250,326 @@
       <wvobject type="logic" fp_name="/testbench/test/terminate">
          <obj_property name="ElementShortName">terminate</obj_property>
          <obj_property name="ObjectShortName">terminate</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/int1">
+         <obj_property name="ElementShortName">int1</obj_property>
+         <obj_property name="ObjectShortName">int1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/int2">
+         <obj_property name="ElementShortName">int2</obj_property>
+         <obj_property name="ObjectShortName">int2</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group135">
+      <obj_property name="label">PMOD ACL 2 Master</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/reset_n">
+         <obj_property name="ElementShortName">reset_n</obj_property>
+         <obj_property name="ObjectShortName">reset_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/miso">
+         <obj_property name="ElementShortName">miso</obj_property>
+         <obj_property name="ObjectShortName">miso</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/sclk">
+         <obj_property name="ElementShortName">sclk</obj_property>
+         <obj_property name="ObjectShortName">sclk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/ss_n">
+         <obj_property name="ElementShortName">ss_n[0:0]</obj_property>
+         <obj_property name="ObjectShortName">ss_n[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/mosi">
+         <obj_property name="ElementShortName">mosi</obj_property>
+         <obj_property name="ObjectShortName">mosi</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/acceleration_x">
+         <obj_property name="ElementShortName">acceleration_x[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_x[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/acceleration_y">
+         <obj_property name="ElementShortName">acceleration_y[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_y[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/acceleration_z">
+         <obj_property name="ElementShortName">acceleration_z[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_z[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/spi_pmod_acl2/state">
+         <obj_property name="ElementShortName">state</obj_property>
+         <obj_property name="ObjectShortName">state</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/spi_pmod_acl2/parameter">
+         <obj_property name="ElementShortName">parameter</obj_property>
+         <obj_property name="ObjectShortName">parameter</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/parameter_addr">
+         <obj_property name="ElementShortName">parameter_addr[5:0]</obj_property>
+         <obj_property name="ObjectShortName">parameter_addr[5:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/parameter_data">
+         <obj_property name="ElementShortName">parameter_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">parameter_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/spi_busy_prev">
+         <obj_property name="ElementShortName">spi_busy_prev</obj_property>
+         <obj_property name="ObjectShortName">spi_busy_prev</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/spi_busy">
+         <obj_property name="ElementShortName">spi_busy</obj_property>
+         <obj_property name="ObjectShortName">spi_busy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/spi_ena">
+         <obj_property name="ElementShortName">spi_ena</obj_property>
+         <obj_property name="ObjectShortName">spi_ena</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/spi_pmod_acl2/spi_cont">
+         <obj_property name="ElementShortName">spi_cont</obj_property>
+         <obj_property name="ObjectShortName">spi_cont</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/spi_tx_data">
+         <obj_property name="ElementShortName">spi_tx_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">spi_tx_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/spi_rx_data">
+         <obj_property name="ElementShortName">spi_rx_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">spi_rx_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/acceleration_x_int">
+         <obj_property name="ElementShortName">acceleration_x_int[15:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_x_int[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/acceleration_y_int">
+         <obj_property name="ElementShortName">acceleration_y_int[15:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_y_int[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/acceleration_z_int">
+         <obj_property name="ElementShortName">acceleration_z_int[15:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_z_int[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/spi_pmod_acl2/clk_freq">
+         <obj_property name="ElementShortName">clk_freq</obj_property>
+         <obj_property name="ObjectShortName">clk_freq</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/data_rate">
+         <obj_property name="ElementShortName">data_rate[0:2]</obj_property>
+         <obj_property name="ObjectShortName">data_rate[0:2]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/spi_pmod_acl2/data_range">
+         <obj_property name="ElementShortName">data_range[0:1]</obj_property>
+         <obj_property name="ObjectShortName">data_range[0:1]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group136">
+      <obj_property name="label">DATA PROCESSING</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/clk_pmod">
+         <obj_property name="ElementShortName">clk_pmod</obj_property>
+         <obj_property name="ObjectShortName">clk_pmod</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/data_ready">
+         <obj_property name="ElementShortName">data_ready</obj_property>
+         <obj_property name="ObjectShortName">data_ready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_x">
+         <obj_property name="ElementShortName">acceleration_x[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_x[11:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_out_x_int">
+         <obj_property name="ElementShortName">acceleration_out_x_int[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_x_int[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_out_x">
+         <obj_property name="ElementShortName">acceleration_out_x[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_x[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_full">
+         <obj_property name="ElementShortName">fifo_x_full</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_full</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_empty">
+         <obj_property name="ElementShortName">fifo_x_empty</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_empty</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_full_rising">
+         <obj_property name="ElementShortName">fifo_x_full_rising</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_full_rising</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_empty_rising">
+         <obj_property name="ElementShortName">fifo_x_empty_rising</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_empty_rising</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/processing_x">
+         <obj_property name="ElementShortName">processing_x</obj_property>
+         <obj_property name="ObjectShortName">processing_x</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_full_falling">
+         <obj_property name="ElementShortName">fifo_x_full_falling</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_full_falling</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_empty_falling">
+         <obj_property name="ElementShortName">fifo_x_empty_falling</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_empty_falling</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_x_rd_data_count">
+         <obj_property name="ElementShortName">fifo_x_rd_data_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_rd_data_count[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_x_wr_data_count">
+         <obj_property name="ElementShortName">fifo_x_wr_data_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_wr_data_count[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_x_dout">
+         <obj_property name="ElementShortName">fifo_x_dout[11:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_x_dout[11:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_y_dout">
+         <obj_property name="ElementShortName">fifo_y_dout[11:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_y_dout[11:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_y_full">
+         <obj_property name="ElementShortName">fifo_y_full</obj_property>
+         <obj_property name="ObjectShortName">fifo_y_full</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_y_empty">
+         <obj_property name="ElementShortName">fifo_y_empty</obj_property>
+         <obj_property name="ObjectShortName">fifo_y_empty</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_z_dout">
+         <obj_property name="ElementShortName">fifo_z_dout[11:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_z_dout[11:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_z_full">
+         <obj_property name="ElementShortName">fifo_z_full</obj_property>
+         <obj_property name="ObjectShortName">fifo_z_full</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_z_empty">
+         <obj_property name="ElementShortName">fifo_z_empty</obj_property>
+         <obj_property name="ObjectShortName">fifo_z_empty</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/processing_y">
+         <obj_property name="ElementShortName">processing_y</obj_property>
+         <obj_property name="ObjectShortName">processing_y</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/processing_z">
+         <obj_property name="ElementShortName">processing_z</obj_property>
+         <obj_property name="ObjectShortName">processing_z</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_y">
+         <obj_property name="ElementShortName">acceleration_y[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_y[11:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_z">
+         <obj_property name="ElementShortName">acceleration_z[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_z[11:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_out_y_int">
+         <obj_property name="ElementShortName">acceleration_out_y_int[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_y_int[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_out_y">
+         <obj_property name="ElementShortName">acceleration_out_y[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_y[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_out_z_int">
+         <obj_property name="ElementShortName">acceleration_out_z_int[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_z_int[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/acceleration_out_z">
+         <obj_property name="ElementShortName">acceleration_out_z[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_z[11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_y_rd_data_count">
+         <obj_property name="ElementShortName">fifo_y_rd_data_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_y_rd_data_count[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_y_wr_data_count">
+         <obj_property name="ElementShortName">fifo_y_wr_data_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_y_wr_data_count[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_z_rd_data_count">
+         <obj_property name="ElementShortName">fifo_z_rd_data_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_z_rd_data_count[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_z_wr_data_count">
+         <obj_property name="ElementShortName">fifo_z_wr_data_count[4:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_z_wr_data_count[4:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group265">
+      <obj_property name="label">FIFO X</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/rst">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/wr_clk">
+         <obj_property name="ElementShortName">wr_clk</obj_property>
+         <obj_property name="ObjectShortName">wr_clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/rd_clk">
+         <obj_property name="ElementShortName">rd_clk</obj_property>
+         <obj_property name="ObjectShortName">rd_clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_x_accel/din">
+         <obj_property name="ElementShortName">din[11:0]</obj_property>
+         <obj_property name="ObjectShortName">din[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/wr_en">
+         <obj_property name="ElementShortName">wr_en</obj_property>
+         <obj_property name="ObjectShortName">wr_en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/rd_en">
+         <obj_property name="ElementShortName">rd_en</obj_property>
+         <obj_property name="ObjectShortName">rd_en</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/data_processing/fifo_x_accel/dout">
+         <obj_property name="ElementShortName">dout[11:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/full">
+         <obj_property name="ElementShortName">full</obj_property>
+         <obj_property name="ObjectShortName">full</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/empty">
+         <obj_property name="ElementShortName">empty</obj_property>
+         <obj_property name="ObjectShortName">empty</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/wr_rst_busy">
+         <obj_property name="ElementShortName">wr_rst_busy</obj_property>
+         <obj_property name="ObjectShortName">wr_rst_busy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/data_processing/fifo_x_accel/rd_rst_busy">
+         <obj_property name="ElementShortName">rd_rst_busy</obj_property>
+         <obj_property name="ObjectShortName">rd_rst_busy</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

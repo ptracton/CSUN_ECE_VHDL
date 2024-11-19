@@ -170,6 +170,7 @@ begin
       report "RECEIVED 0xA5";
     end if;
 
+    wait for 200 us;  
 
     test_done <= true;
 

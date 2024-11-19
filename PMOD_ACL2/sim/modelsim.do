@@ -24,6 +24,7 @@ vcom -2008 /opt/Xilinx/Vivado/2023.2/data/vhdl/src/unisims/unisim_VCOMP.vhd -wor
 vlog -work xil_defaultlib  "+incdir+../ipstatic" "../backend/scripting/${2}/generated_ip/clk_wiz_0/clk_wiz_0.v" 
 vlog -work xil_defaultlib  "+incdir+../ipstatic"  "../backend/scripting/${2}/generated_ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" 
 
+vlog -work xil_defaultlib  "+incdir+../ipstatic"  "../backend/scripting/${2}/generated_ip/fifo_generator_0/sim/fifo_generator_0.v"
 
 # Specify the board package to use
 vcom -2008 ../../Common/Boards/${2}/${2}_pkg.vhd -work work
@@ -33,8 +34,9 @@ vcom -2008 ../../Common/Boards/${2}/${2}_pkg.vhd -work work
 vcom -2008 ../../Common/DigiKey/UART/uart.vhd
 vcom  ../../Common/DigiKey/PMOD/pmod_accelerometer_adxl362.vhd
 vcom  ../../Common/DigiKey/SPI/spi_master.vhd
-vcom -2008 ../../Common/CSUN/system_controller.vhd
 vcom -2008 ../../Common/CSUN/edge_detector.vhd
+vcom -2008 ../rtl//accelerometer_processing.vhd
+vcom -2008 ../rtl//system_controller.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Simulate the specified test case
@@ -58,7 +60,7 @@ vcom -2008 ../testbench/uart_rx_tb.vhd
 vlog ../../Common/Xilinx/glbl.v
 
 
-vsim -onfinish stop work.testbench -l ${1}_${2}_modelsim.log -L xil_defaultlib -L unisims_ver xil_defaultlib.clk_wiz_0 xil_defaultlib.glbl
+vsim -onfinish stop work.testbench -l ${1}_${2}_modelsim.log -L xil_defaultlib -L unisims_ver xil_defaultlib.clk_wiz_0 xil_defaultlib.fifo_generator_0 xil_defaultlib.glbl -L fifo_generator_v13_2_9
 
 do wave.do
 
