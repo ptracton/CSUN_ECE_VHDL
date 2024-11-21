@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
--- Title      : UART ECHO
+-- Title      : PMOD ACL2 to UART
 -- Project    : 
 -------------------------------------------------------------------------------
 -- File       : top.vhd<rtl>
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-11-18
+-- Last update: 2024-11-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -121,20 +121,48 @@ architecture Behavioral of top is
       acceleration_y : in std_logic_vector(11 downto 0);
       acceleration_z : in std_logic_vector(11 downto 0);
 
-      -- Data Out
+      -- Data out
+      uart_data_ready_x : out std_logic;
+      uart_data_ready_y : out std_logic;
+      uart_data_ready_z : out std_logic;
+
       acceleration_out_x : out std_logic_vector(11 downto 0);
       acceleration_out_y : out std_logic_vector(11 downto 0);
       acceleration_out_z : out std_logic_vector(11 downto 0));
   end component;
 
+  component accelerometer_to_uart is
+    port(
+      -- System Interface
+      clk   : in std_logic;
+      reset : in std_logic;
+
+      -- Accelerometer Data
+      uart_data_ready_x  : in std_logic;
+      uart_data_ready_y  : in std_logic;
+      uart_data_ready_z  : in std_logic;
+      acceleration_out_x : in std_logic_vector(11 downto 0);
+      acceleration_out_y : in std_logic_vector(11 downto 0);
+      acceleration_out_z : in std_logic_vector(11 downto 0);
+
+      -- UART Interface
+      uart_tx_start : out std_logic;
+      uart_data_tx  : out std_logic_vector(7 downto 0);
+      uart_tx_busy  : in  std_logic
+      );
+  end component;
+
   -- UART Signals
-  signal tx_start        : std_logic;
-  signal uart_data_rx    : std_logic_vector(7 downto 0);
-  signal uart_data_tx    : std_logic_vector(7 downto 0);
-  signal rx_busy         : std_logic;
-  signal rx_error        : std_logic;
-  signal rx_busy_rising  : std_logic;
-  signal rx_busy_falling : std_logic;
+  signal tx_start           : std_logic;
+  signal uart_data_rx       : std_logic_vector(7 downto 0);
+  signal uart_data_tx       : std_logic_vector(7 downto 0);
+  signal accel_uart_data_tx : std_logic_vector(7 downto 0);
+  signal rx_busy            : std_logic;
+  signal tx_busy            : std_logic;
+  signal rx_error           : std_logic;
+  signal rx_busy_rising     : std_logic;
+  signal rx_busy_falling    : std_logic;
+  signal uart_tx_start      : std_logic;
 
   -- System Signals
   signal clk        : std_logic;
@@ -153,6 +181,11 @@ architecture Behavioral of top is
   signal acceleration_out_x : std_logic_vector(11 downto 0);
   signal acceleration_out_y : std_logic_vector(11 downto 0);
   signal acceleration_out_z : std_logic_vector(11 downto 0);
+
+  signal uart_data_ready_x : std_logic;
+  signal uart_data_ready_y : std_logic;
+  signal uart_data_ready_z : std_logic;
+
 
 begin
 
@@ -192,6 +225,7 @@ begin
       rx_data  => uart_data_rx,
       rx_error => rx_error,
       rx_busy  => rx_busy,
+      tx_busy  => tx_busy,
       rx       => XRX,
       tx       => XTX
       );
@@ -221,6 +255,9 @@ begin
       elsif rx_busy_falling = '1' then
         tx_start     <= '1';
         uart_data_tx <= uart_data_rx;
+      elsif uart_tx_start then
+        tx_start     <= '1';
+        uart_data_tx <= accel_uart_data_tx;
       else
         tx_start <= '0';
       end if;
@@ -263,11 +300,36 @@ begin
       acceleration_y => acceleration_y,
       acceleration_z => acceleration_z,
 
-      -- Data Out
+      -- Data out
+      uart_data_ready_x  => uart_data_ready_x,
+      uart_data_ready_y  => uart_data_ready_y,
+      uart_data_ready_z  => uart_data_ready_z,
       acceleration_out_x => acceleration_out_x,
       acceleration_out_y => acceleration_out_y,
       acceleration_out_z => acceleration_out_z
       );
 
+  ------------------------------------------------------------------------------
+  -- Transmit Accelerometer Data via UART
+  ------------------------------------------------------------------------------
+  accel_to_uart : accelerometer_to_uart
+    port map(
+      -- System Interface
+      clk   => clk,
+      reset => reset,
+
+      -- Accelerometer Data
+      uart_data_ready_x  => uart_data_ready_x,
+      uart_data_ready_y  => uart_data_ready_y,
+      uart_data_ready_z  => uart_data_ready_z,
+      acceleration_out_x => acceleration_out_x,
+      acceleration_out_y => acceleration_out_y,
+      acceleration_out_z => acceleration_out_z,
+
+      -- UART Interface
+      uart_tx_busy  => tx_busy,
+      uart_tx_start => uart_tx_start,
+      uart_data_tx  => accel_uart_data_tx
+      );
 
 end Behavioral;

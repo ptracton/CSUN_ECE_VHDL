@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : Accelerometer Processing
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : accelerometer_processing.vhd
 -- Author     : Phil Tracton  <ptracton@gmail.com>
--- Company    : 
+-- Company    :
 -- Created    : 2024-11-18
--- Last update: 2024-11-18
--- Platform   : 
+-- Last update: 2024-11-20
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: 
+-- Description:
 -------------------------------------------------------------------------------
--- Copyright (c) 2024 
+-- Copyright (c) 2024
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -36,7 +36,10 @@ entity accelerometer_processing is
     acceleration_y : in std_logic_vector(11 downto 0);
     acceleration_z : in std_logic_vector(11 downto 0);
 
-    -- Data Out
+    -- Data out
+    uart_data_ready_x  : out std_logic;
+    uart_data_ready_y  : out std_logic;
+    uart_data_ready_z  : out std_logic;
     acceleration_out_x : out std_logic_vector(11 downto 0);
     acceleration_out_y : out std_logic_vector(11 downto 0);
     acceleration_out_z : out std_logic_vector(11 downto 0));
@@ -231,6 +234,7 @@ begin
     if rising_edge(clk) then
       if reset = '1' then
         acceleration_out_x_int <= (others => '0');
+        uart_data_ready_x      <= '0';
       else
         if (fifo_x_full_rising = '1') then
           acceleration_out_x_int <= (others => '0');
@@ -241,6 +245,9 @@ begin
         if (processing_x_falling = '1') then
           -- Divide by 16 since we have that many samples
           acceleration_out_x <= "0000" & acceleration_out_x_int(11 downto 4);
+          uart_data_ready_x  <= '1';
+        else
+          uart_data_ready_x <= '0';
         end if;
       end if;
     end if;
@@ -294,6 +301,7 @@ begin
     if rising_edge(clk) then
       if reset = '1' then
         acceleration_out_y_int <= (others => '0');
+        uart_data_ready_y      <= '0';
       else
         if (fifo_y_full_rising = '1') then
           acceleration_out_y_int <= (others => '0');
@@ -304,6 +312,9 @@ begin
         if (processing_y_falling = '1') then
           -- Divide by 16 since we have that many samples
           acceleration_out_y <= "0000" & acceleration_out_y_int(11 downto 4);
+          uart_data_ready_y  <= '1';
+        else
+          uart_data_ready_y <= '0';
         end if;
       end if;
     end if;
@@ -353,12 +364,13 @@ begin
       rising  => processing_z_rising,
       falling => processing_z_falling
       );
-  
+
   accel_z_data : process(clk)
   begin
     if rising_edge(clk) then
       if reset = '1' then
         acceleration_out_z_int <= (others => '0');
+        uart_data_ready_z      <= '0';
       else
         if (fifo_z_full_rising = '1') then
           acceleration_out_z_int <= (others => '0');
@@ -369,13 +381,12 @@ begin
         if (processing_z_falling = '1') then
           -- Divide by 16 since we have that many samples
           acceleration_out_z <= "0000" & acceleration_out_z_int(11 downto 4);
+          uart_data_ready_z  <= '1';
+        else
+          uart_data_ready_z <= '0';
         end if;
       end if;
     end if;
   end process;
-
---  acceleration_out_x <= acceleration_out_x_int;
---  acceleration_out_y <= acceleration_out_y_int;
---  acceleration_out_z <= acceleration_out_z_int;
 
 end Behavioral;

@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-11-17
+-- Last update: 2024-11-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,17 +29,17 @@ use work.board_pkg.all;
 entity test_case is
   port (
     -- System Interface
-    XCLK    : in     std_logic;
-    XRESET  : in     std_logic;
-    XLOCKED : in     std_logic;
+    XCLK    : in  std_logic;
+    XRESET  : in  std_logic;
+    XLOCKED : in  std_logic;
     -- UART Interface
-    XRX     : in     std_logic;
-    XTX     : out    std_logic;
+    XRX     : in  std_logic;
+    XTX     : out std_logic;
     -- SPI Interface
-    XSCLK   : in     std_logic;
-    XSS_N   : in     std_logic_vector(0 downto 0);
-    XMISO   : out    std_logic;
-    XMOSI   : in     std_logic
+    XSCLK   : in  std_logic;
+    XSS_N   : in  std_logic_vector(0 downto 0);
+    XMISO   : out std_logic;
+    XMOSI   : in  std_logic
     );
 end test_case;
 
@@ -82,12 +82,12 @@ architecture behavioral of test_case is
       temp_file    : string := "temperature.txt"
       );
     port (
-      SCLK : in     std_logic;
-      nCS  : in     std_logic;
-      MOSI : in     std_logic;
-      MISO : out    std_logic;
-      INT1 : out    std_logic;
-      INT2 : out    std_logic
+      SCLK : in  std_logic;
+      nCS  : in  std_logic;
+      MOSI : in  std_logic;
+      MISO : out std_logic;
+      INT1 : out std_logic;
+      INT2 : out std_logic
       );
   end component;
 
@@ -144,33 +144,54 @@ begin
     tx_byte <= x"00";
     wait until falling_edge(XRESET);
     wait until rising_edge(XLOCKED);
-    wait for 5 us;
 
-    transmit_8bits(XCLK, tx_dv, tx_byte, x"73");
-    
-    -- wait for transmission to complete
+    -- transmit_8bits(XCLK, tx_dv, tx_byte, x"73");
+
+    -- -- wait for transmission to complete
+    -- wait until rx_dv = '1';
+    -- -- received_8bits(rx_dv, rx_byte, rx_data);
+    -- if rx_byte /= x"73" then
+    --   wait for 10 us;
+    --   test_fail <= true;
+    -- else
+    --   report "RECEIVED 0x73";
+    -- end if;
+
+    -- transmit_8bits(XCLK, tx_dv, tx_byte, x"A5");
+
+    -- -- wait for transmission to complete
+    -- wait until rx_dv = '1';
+    -- --received_8bits(rx_dv, rx_byte, rx_data);
+    -- if rx_byte /= x"A5" then
+    --   wait for 10 us;
+    --   test_fail <= true;
+    -- else
+    --   report "RECEIVED 0xA5";
+    -- end if;
+
+
     wait until rx_dv = '1';
-    -- received_8bits(rx_dv, rx_byte, rx_data);
-    if rx_byte /= x"73" then
-      wait for 10 us;
-      test_fail <= true;
-    else
-      report "RECEIVED 0x73";
-    end if;
-
-    transmit_8bits(XCLK, tx_dv, tx_byte, x"A5");
-
-    -- wait for transmission to complete
     wait until rx_dv = '1';
-    --received_8bits(rx_dv, rx_byte, rx_data);
-    if rx_byte /= x"A5" then
-      wait for 10 us;
-      test_fail <= true;
-    else
-      report "RECEIVED 0xA5";
-    end if;
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
+    wait until rx_dv = '1';
 
-    wait for 200 us;  
+    wait for 200 us;
 
     test_done <= true;
 
