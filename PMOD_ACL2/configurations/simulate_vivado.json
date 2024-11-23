@@ -24,7 +24,7 @@
         },
         "board": {
             "executable": "xvhdl ",
-            "arguments": " --2008 ../rtl/$board/${board}_pkg.vhd --work work"
+            "arguments": " --2008 ../../Common/Boards/$board/${board}_pkg.vhd --work work"
         },
         "uart_tb_pkg": {
             "executable": "xvhdl ",

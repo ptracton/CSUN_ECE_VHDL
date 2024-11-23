@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : PMOD ACL2 to UART
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : top.vhd<rtl>
 -- Author     : Phil Tracton  <ptracton@gmail.com>
--- Company    : 
+-- Company    :
 -- Created    : 2024-10-05
--- Last update: 2024-11-20
--- Platform   : 
+-- Last update: 2024-11-21
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: 
+-- Description:
 -------------------------------------------------------------------------------
--- Copyright (c) 2024 
+-- Copyright (c) 2024
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -39,7 +39,11 @@ entity top is
     XSCLK : buffer std_logic;
     XSS_N : buffer std_logic_vector(0 downto 0);
     XMISO : in     std_logic;
-    XMOSI : out    std_logic
+    XMOSI : out    std_logic;
+
+    --I2C Interface
+    XSCL : inout std_logic;
+    XSDA : inout std_logic
     );
 end top;
 
@@ -152,6 +156,21 @@ architecture Behavioral of top is
       );
   end component;
 
+  component pmod_hygrometer is
+    generic(
+      sys_clk_freq           : integer               := 50_000_000;  --input clock speed from user logic in Hz
+      humidity_resolution    : integer range 0 to 14 := 14;  --RH resolution in bits (must be 14, 11, or 8)
+      temperature_resolution : integer range 0 to 14 := 14);  --temperature resolution in bits (must be 14 or 11)
+    port(
+      clk               : in     std_logic;  --system clock
+      reset_n           : in     std_logic;  --asynchronous active-low reset
+      scl               : inout  std_logic;  --I2C serial clock
+      sda               : inout  std_logic;  --I2C serial data
+      i2c_ack_err       : buffer std_logic;  --I2C slave acknowledge error flag
+      relative_humidity : out    std_logic_vector(humidity_resolution-1 downto 0);  --relative humidity data obtained
+      temperature       : out    std_logic_vector(temperature_resolution-1 downto 0));  --temperature data obtained
+  end component;
+
   -- UART Signals
   signal tx_start           : std_logic;
   signal uart_data_rx       : std_logic_vector(7 downto 0);
@@ -186,7 +205,11 @@ architecture Behavioral of top is
   signal uart_data_ready_y : std_logic;
   signal uart_data_ready_z : std_logic;
 
-
+  -- Hygrometer
+  signal i2c_ack_err       : std_logic;
+  signal relative_humidity : std_logic_vector(7 downto 0);
+  signal temperature       : std_logic_vector(10 downto 0);
+  signal scl               : std_logic;
 begin
 
   ------------------------------------------------------------------------------
@@ -330,6 +353,23 @@ begin
       uart_tx_busy  => tx_busy,
       uart_tx_start => uart_tx_start,
       uart_data_tx  => accel_uart_data_tx
+      );
+
+  
+  i2c_pmod_hygro : pmod_hygrometer
+    generic map(
+      sys_clk_freq           => 10_000_000,  -- 10MHz operation
+      humidity_resolution    => 8,           -- 12 bits of data like pmod acl2
+      temperature_resolution => 11
+      )
+    port map(
+      clk               => clk_pmod,
+      reset_n           => reset_pmod,
+      scl               => XSCL,
+      sda               => XSDA,
+      i2c_ack_err       => i2c_ack_err,
+      relative_humidity => relative_humidity,
+      temperature       => temperature
       );
 
 end Behavioral;

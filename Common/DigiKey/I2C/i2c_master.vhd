@@ -32,6 +32,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.all;
 
 ENTITY i2c_master IS
   GENERIC(
@@ -66,6 +67,7 @@ ARCHITECTURE logic OF i2c_master IS
   SIGNAL data_rx       : STD_LOGIC_VECTOR(7 DOWNTO 0);   --data received from slave
   SIGNAL bit_cnt       : INTEGER RANGE 0 TO 7 := 7;      --tracks bit number in transaction
   SIGNAL stretch       : STD_LOGIC := '0';               --identifies if slave is stretching scl
+  signal DEBUG_SCL     : STD_LOGIC_VECTOR(divider*4 downto 0);
 BEGIN
 
   --generate the timing for the bus clock (scl_clk) and the data clock (data_clk)
@@ -75,7 +77,9 @@ BEGIN
     IF(reset_n = '0') THEN                --reset asserted
       stretch <= '0';
       count := 0;
-    ELSIF(clk'EVENT AND clk = '1') THEN
+      DEBUG_SCL <= (others => '0');
+    ELSIF(clk'EVENT AND clk = '1') then
+      DEBUG_SCL <=  std_logic_vector(to_unsigned(count, DEBUG_SCL'length));
       data_clk_prev <= data_clk;          --store previous value of data clock
       IF(count = divider*4-1) THEN        --end of timing cycle
         count := 0;                       --reset timer

@@ -42,7 +42,7 @@
         },
         "board" : {
             "executable": "vcom",
-            "arguments" : " -2008 ../rtl/$board/${board}_pkg.vhd"
+            "arguments" : " -2008 ../../Common/Boards/$board/${board}_pkg.vhd"
         },
         "simulation" : {
             "executable": "vsim",

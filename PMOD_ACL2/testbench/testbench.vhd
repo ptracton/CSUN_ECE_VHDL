@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : CSUN
 -- Created    : 2024-01-14
--- Last update: 2024-10-29
+-- Last update: 2024-11-21
 -- Platform   : Modelsim on Linux
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -46,7 +46,11 @@ architecture Behavioral of testbench is
       XSCLK   : buffer std_logic;
       XSS_N   : buffer std_logic_vector(0 downto 0);
       XMISO   : in     std_logic;
-      XMOSI   : out    std_logic
+      XMOSI   : out    std_logic;
+
+      --I2C Interface
+      XSCL : inout std_logic;
+      XSDA : inout std_logic
       );
 
   end component;
@@ -54,17 +58,21 @@ architecture Behavioral of testbench is
   component test_case is
     port(
       -- System Interface
-      XCLK    : in     std_logic;
-      XRESET  : in     std_logic;
-      XLOCKED : in     std_logic;
+      XCLK    : in  std_logic;
+      XRESET  : in  std_logic;
+      XLOCKED : in  std_logic;
       -- UART Interface
-      XRX     : in     std_logic;
-      XTX     : out    std_logic;
+      XRX     : in  std_logic;
+      XTX     : out std_logic;
       -- SPI Interface
-      XSCLK   : in     std_logic;
-      XSS_N   : in     std_logic_vector(0 downto 0);
-      XMISO   : out    std_logic;
-      XMOSI   : in     std_logic
+      XSCLK   : in  std_logic;
+      XSS_N   : in  std_logic_vector(0 downto 0);
+      XMISO   : out std_logic;
+      XMOSI   : in  std_logic;
+
+      --I2C Interface
+      XSCL : in    std_logic;
+      XSDA : inout std_logic
       );
   end component;
 
@@ -98,10 +106,12 @@ architecture Behavioral of testbench is
   signal sclk_buffer : std_logic;
   signal ss_n_buffer : std_logic_vector(0 downto 0);
 
-  
   signal miso : std_logic;
   signal mosi : std_logic;
 
+  signal scl  : std_logic;
+  signal XSCL : std_logic;
+  signal XSDA : std_logic;
 begin
 
   -- generate the free running 125 MHz clock from the Zybo board
@@ -134,13 +144,16 @@ begin
       XSCLK   => sclk_buffer,
       XSS_N   => ss_n_buffer,
       XMISO   => miso,
-      XMOSI   => mosi
-
+      XMOSI   => mosi,
+      XSCL    => XSCL,
+      XSDA    => XSDA
       );
 
   sclk <= sclk_buffer;
   ss_n <= ss_n_buffer;
-  
+
+  -- pullup resistor
+  scl <= '1' when XSCL = 'Z' else '0';
   test : test_case
     port map(
       XCLK    => clk,
@@ -151,7 +164,9 @@ begin
       XSCLK   => sclk,
       XSS_N   => ss_n,
       XMISO   => miso,
-      XMOSI   => mosi
+      XMOSI   => mosi,
+      XSCL    => scl,
+      XSDA    => XSDA
       );
 
 

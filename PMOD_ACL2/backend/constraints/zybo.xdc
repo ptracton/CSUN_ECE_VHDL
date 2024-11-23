@@ -10,6 +10,22 @@ set_property -dict { PACKAGE_PIN K18   IOSTANDARD LVCMOS33 } [get_ports { XRESET
 set_property -dict { PACKAGE_PIN F17   IOSTANDARD LVCMOS33 } [get_ports { XLOCKED }]; #IO_L6N_T0_VREF_35 Sch=led6_g
 #set_property -dict { PACKAGE_PIN M17   IOSTANDARD LVCMOS33 } [get_ports { led6_b }]; #IO_L8P_T1_AD10P_35 Sch=led6_b
 
+##Pmod Header JC
+#Pin 3 SCL
+set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS33     } [get_ports { XSCL }]; #IO_L1P_T0_34 Sch=jc_p[2]
+
+#Pin 4 SDA
+set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS33     } [get_ports { XSDA }]; #IO_L1N_T0_34 Sch=jc_n[2]
+
+#set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33     } [get_ports { jc[0] }]; #IO_L10P_T1_34 Sch=jc_p[1]   			 
+#set_property -dict { PACKAGE_PIN W15   IOSTANDARD LVCMOS33     } [get_ports { jc[1] }]; #IO_L10N_T1_34 Sch=jc_n[1]		     
+#set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS33     } [get_ports { jc[2] }]; #IO_L1P_T0_34 Sch=jc_p[2]              
+#set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS33     } [get_ports { jc[3] }]; #IO_L1N_T0_34 Sch=jc_n[2]              
+#set_property -dict { PACKAGE_PIN W14   IOSTANDARD LVCMOS33     } [get_ports { jc[4] }]; #IO_L8P_T1_34 Sch=jc_p[3]              
+#set_property -dict { PACKAGE_PIN Y14   IOSTANDARD LVCMOS33     } [get_ports { jc[5] }]; #IO_L8N_T1_34 Sch=jc_n[3]              
+#set_property -dict { PACKAGE_PIN T12   IOSTANDARD LVCMOS33     } [get_ports { jc[6] }]; #IO_L2P_T0_34 Sch=jc_p[4]              
+#set_property -dict { PACKAGE_PIN U12   IOSTANDARD LVCMOS33     } [get_ports { jc[7] }]; #IO_L2N_T0_34 Sch=jc_n[4]     
+
 ##Pmod Header JD -- PMOD ACL2
 # https://digilent.com/reference/pmod/pmodacl2/start
 #Pin 1 ~CS

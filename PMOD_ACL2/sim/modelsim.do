@@ -35,8 +35,9 @@ vcom -2008 ../../Common/DigiKey/UART/uart.vhd
 vcom  ../../Common/DigiKey/PMOD/pmod_accelerometer_adxl362.vhd
 vcom  ../../Common/DigiKey/SPI/spi_master.vhd
 vcom -2008 ../../Common/CSUN/edge_detector.vhd
-vcom -2008 ../rtl//accelerometer_processing.vhd
-vcom -2008 ../rtl//system_controller.vhd
+vcom -2008 ../rtl/accelerometer_processing.vhd
+vcom -2008 ../rtl/accelerometer_to_uart.vhd
+vcom -2008 ../rtl/system_controller.vhd
 vcom -2008 ../rtl/top.vhd
 
 # Simulate the specified test case

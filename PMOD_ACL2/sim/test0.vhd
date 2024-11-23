@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-11-20
+-- Last update: 2024-11-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -29,17 +29,20 @@ use work.board_pkg.all;
 entity test_case is
   port (
     -- System Interface
-    XCLK    : in  std_logic;
-    XRESET  : in  std_logic;
-    XLOCKED : in  std_logic;
+    XCLK    : in    std_logic;
+    XRESET  : in    std_logic;
+    XLOCKED : in    std_logic;
     -- UART Interface
-    XRX     : in  std_logic;
-    XTX     : out std_logic;
+    XRX     : in    std_logic;
+    XTX     : out   std_logic;
     -- SPI Interface
-    XSCLK   : in  std_logic;
-    XSS_N   : in  std_logic_vector(0 downto 0);
-    XMISO   : out std_logic;
-    XMOSI   : in  std_logic
+    XSCLK   : in    std_logic;
+    XSS_N   : in    std_logic_vector(0 downto 0);
+    XMISO   : out   std_logic;
+    XMOSI   : in    std_logic;
+    --I2C Interface
+    XSCL    : in    std_logic;
+    XSDA    : inout std_logic
     );
 end test_case;
 
@@ -91,6 +94,13 @@ architecture behavioral of test_case is
       );
   end component;
 
+  component hdc1080 is
+    port (
+      scl : in    std_logic;
+      sda : inout std_logic
+      );
+  end component;
+
 
   signal rx_byte : std_logic_vector(7 downto 0);
   signal rx_data : std_logic_vector(7 downto 0);
@@ -102,6 +112,8 @@ architecture behavioral of test_case is
 
   signal int1 : std_logic;
   signal int2 : std_logic;
+
+  signal scl : std_logic;
 
 begin
 
@@ -128,7 +140,7 @@ begin
       );
 
 
-  pmod : adxl362
+  pmod0 : adxl362
     port map(
       SCLK => XSCLK,
       nCS  => XSS_N(0),
@@ -136,6 +148,12 @@ begin
       MISO => XMISO,
       INT1 => int1,
       INT2 => int2
+      );
+
+  pmod1 : hdc1080
+    port map(
+      scl => XSCL,
+      sda => XSDA
       );
 
   tx_test : process is
@@ -170,28 +188,29 @@ begin
     -- end if;
 
 
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
-    wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
+    -- wait until rx_dv = '1';
 
-    wait for 200 us;
+    wait for 300 us;
+--    wait for 50 ms;
 
     test_done <= true;
 

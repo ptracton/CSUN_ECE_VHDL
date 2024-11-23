@@ -2,18 +2,19 @@
 verilog xil_defaultlib "../../Common/Xilinx/glbl.v"
 
 # compile verilog/system verilog design source files
-verilog xil_defaultlib  --include "../backend/vivado/zybo/zybo.ip_user_files/ipstatic/" \
-"../backend/vivado/zybo/zybo.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" \
-"../backend/vivado/zybo/zybo.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v"
-# "$XILINX_VIVADO/data/verilog/src/unisims/IBUF.v"\
-# "$XILINX_VIVADO/data/verilog/src/unisims/BUFG.v"\
-# "$XILINX_VIVADO/data/verilog/src/unisims/MMCME2_ADV.v"\
+#verilog xil_defaultlib  --include "../backend/vivado/zybo/zybo.ip_user_files/ipstatic/" \
+#"../backend/vivado/zybo/zybo.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" \
+#"../backend/vivado/zybo/zybo.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v" \
+#"../backend/scripting/zybo/generated_ip/fifo_generator_0/sim/fifo_generator_0.v"
+
 
 
 # DUT source code
 vhdl2008  xil_defaultlib "../../Common/CSUN/edge_detector.vhd"\
-"../../Common/CSUN/system_controller.vhd"\
 "../../Common/DigiKey/UART/uart.vhd"\
+"../rtl/system_controller.vhd"\
+"../rtl/accelerometer_processing.vhd"\
+"../rtl/accelerometer_to_uart.vhd"\
 "../rtl/top.vhd"\
 "../testbench/uart_tb_pkg.vhd"\
 "../testbench/uart_rx_tb.vhd"\

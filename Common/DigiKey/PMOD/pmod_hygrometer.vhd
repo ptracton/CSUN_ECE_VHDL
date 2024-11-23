@@ -33,7 +33,7 @@ ENTITY pmod_hygrometer IS
     reset_n           : IN    STD_LOGIC;                                            --asynchronous active-low reset
     scl               : INOUT STD_LOGIC;                                            --I2C serial clock
     sda               : INOUT STD_LOGIC;                                            --I2C serial data
-    i2c_ack_err       : OUT   STD_LOGIC;                                            --I2C slave acknowledge error flag
+    i2c_ack_err       : BUFFER   STD_LOGIC;                                            --I2C slave acknowledge error flag
     relative_humidity : OUT   STD_LOGIC_VECTOR(humidity_resolution-1 DOWNTO 0);     --relative humidity data obtained
     temperature       : OUT   STD_LOGIC_VECTOR(temperature_resolution-1 DOWNTO 0)); --temperature data obtained
 END pmod_hygrometer;
@@ -126,7 +126,8 @@ BEGIN
       
         --give hygrometer 100ms to power up before communicating
         WHEN start =>
-          IF(pwr_up_cnt < sys_clk_freq/10) THEN  --100ms not yet reached
+--          IF(pwr_up_cnt < sys_clk_freq/10) THEN  --100ms not yet reached
+          IF(pwr_up_cnt < sys_clk_freq/10000) THEN  --100ms not yet reached
             pwr_up_cnt := pwr_up_cnt + 1;          --increment power up counter
           ELSE                                   --100ms reached
             pwr_up_cnt := 0;                       --clear power up counter

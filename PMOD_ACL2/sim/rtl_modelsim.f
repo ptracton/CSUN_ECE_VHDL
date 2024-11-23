@@ -26,14 +26,27 @@ vcom -2008 $XILINX_DIR/data/vhdl/src/unisims/unisim_VCOMP.vhd -work unisim
 # code in a simulation
 #
 vlog -work xil_defaultlib  "+incdir+../ipstatic" "../backend/scripting/${BOARD}/generated_ip/clk_wiz_0/clk_wiz_0.v" 
-vlog -work xil_defaultlib  "+incdir+../ipstatic"  "../backend/scripting/${BOARD}/generated_ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" 
+vlog -work xil_defaultlib  "+incdir+../ipstatic" "../backend/scripting/${BOARD}/generated_ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" 
+vlog -work xil_defaultlib  "+incdir+../ipstatic" "../backend/scripting/${BOARD}/generated_ip/fifo_generator_0/sim/fifo_generator_0.v"
 
 
 # DUT source code
 vcom -2008 ../../Common/DigiKey/UART/uart.vhd
-vcom -2008 ../../Common/CSUN/system_controller.vhd
 vcom -2008 ../../Common/CSUN/edge_detector.vhd
+vcom  ../../Common/DigiKey/PMOD/pmod_accelerometer_adxl362.vhd
+vcom  ../../Common/DigiKey/SPI/spi_master.vhd
+vcom -2008 ../rtl/system_controller.vhd
+vcom -2008 ../rtl/accelerometer_processing.vhd
+vcom -2008 ../rtl/accelerometer_to_uart.vhd
 vcom -2008 ../rtl/top.vhd
+
+# Simulate the PMOD ACL2 board
+vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_pkg.vhd -work work
+vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_accelerometer.vhd
+vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_regs.vhd
+vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_spi.vhd
+vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_system_controller.vhd
+vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362.vhd
 
 # Testbench and simulation source code
 vcom -2008 ../testbench/testbench.vhd
@@ -46,7 +59,7 @@ vlog ../../Common/Xilinx/glbl.v
 
 vcom -2008 ${TEST_CASE}.vhd
 
-vsim -onfinish stop work.testbench -L xil_defaultlib -L unisims_ver xil_defaultlib.clk_wiz_0 xil_defaultlib.glbl
+vsim -onfinish stop work.testbench -L xil_defaultlib -L unisims_ver xil_defaultlib.clk_wiz_0 xil_defaultlib.glbl  xil_defaultlib.fifo_generator_0 -L fifo_generator_v13_2_9
 
 
 run -all;
