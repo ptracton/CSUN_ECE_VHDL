@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    : 
 -- Created    : 2024-10-05
--- Last update: 2024-11-21
+-- Last update: 2024-12-02
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -210,7 +210,7 @@ begin
     -- wait until rx_dv = '1';
 
     wait for 300 us;
---    wait for 50 ms;
+    wait for 5 ms;
 
     test_done <= true;
 

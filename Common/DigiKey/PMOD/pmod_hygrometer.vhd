@@ -34,6 +34,8 @@ ENTITY pmod_hygrometer IS
     scl               : INOUT STD_LOGIC;                                            --I2C serial clock
     sda               : INOUT STD_LOGIC;                                            --I2C serial data
     i2c_ack_err       : BUFFER   STD_LOGIC;                                            --I2C slave acknowledge error flag
+    data_ready        : out   STD_LOGIC;  -- when high, new data is on
+                                          -- temperature and relative humidity
     relative_humidity : OUT   STD_LOGIC_VECTOR(humidity_resolution-1 DOWNTO 0);     --relative humidity data obtained
     temperature       : OUT   STD_LOGIC_VECTOR(temperature_resolution-1 DOWNTO 0)); --temperature data obtained
 END pmod_hygrometer;
@@ -105,7 +107,10 @@ BEGIN
   WITH temperature_resolution SELECT
     temp_time <= sys_clk_freq/273 WHEN 11,     --3.65ms
                  sys_clk_freq/157 WHEN OTHERS; --6.35ms            
-             
+
+  -- temp_time <= sys_clk_freq/11000;
+  -- rh_time <= sys_clk_freq/10000;
+  
   PROCESS(clk, reset_n)
     VARIABLE busy_cnt   : INTEGER RANGE 0 TO 4 := 0;               --counts the I2C busy signal transistions
     VARIABLE pwr_up_cnt : INTEGER RANGE 0 TO sys_clk_freq/10 := 0; --counts 100ms to wait before communicating
@@ -120,12 +125,14 @@ BEGIN
       relative_humidity <= (OTHERS => '0'); --clear the relative humidity result output
       temperature <= (OTHERS => '0');       --clear the temperature result output
       state <= start;                       --return to start state
+      data_ready <= '0';
 
     ELSIF(clk'EVENT AND clk = '1') THEN   --rising edge of system clock
       CASE state IS                         --state machine
       
         --give hygrometer 100ms to power up before communicating
         WHEN start =>
+          data_ready <= '0';
 --          IF(pwr_up_cnt < sys_clk_freq/10) THEN  --100ms not yet reached
           IF(pwr_up_cnt < sys_clk_freq/10000) THEN  --100ms not yet reached
             pwr_up_cnt := pwr_up_cnt + 1;          --increment power up counter
@@ -161,6 +168,7 @@ BEGIN
        
         --initiate the measurements
         WHEN initiate =>
+          data_ready <= '0';
           busy_prev <= i2c_busy;                        --capture the value of the previous i2c busy signal
           IF(busy_prev = '0' AND i2c_busy = '1') THEN   --i2c busy just went high
             busy_cnt := busy_cnt + 1;                     --counts the times busy has gone from low to high during transaction
@@ -224,6 +232,7 @@ BEGIN
   
         --output the relative humidity and temperature data
         WHEN output_result =>
+          data_ready <= '1';
           relative_humidity <= humidity_data(15 DOWNTO 16-humidity_resolution);  --write relative humidity data to output
           temperature <= temperature_data(15 DOWNTO 16-temperature_resolution);  --write temperature data to output
           state <= initiate;                                                     --initiate next measurement

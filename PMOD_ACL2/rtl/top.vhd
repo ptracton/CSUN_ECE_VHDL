@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    :
 -- Created    : 2024-10-05
--- Last update: 2024-11-21
+-- Last update: 2024-12-02
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -167,8 +167,27 @@ architecture Behavioral of top is
       scl               : inout  std_logic;  --I2C serial clock
       sda               : inout  std_logic;  --I2C serial data
       i2c_ack_err       : buffer std_logic;  --I2C slave acknowledge error flag
+      data_ready        : out    std_logic;
       relative_humidity : out    std_logic_vector(humidity_resolution-1 downto 0);  --relative humidity data obtained
       temperature       : out    std_logic_vector(temperature_resolution-1 downto 0));  --temperature data obtained
+  end component;
+
+  component hygrometer_to_uart is
+    port(
+      -- System Interface
+      clk   : in std_logic;
+      reset : in std_logic;
+
+      -- Hygrometer Data
+      temperature     : in std_logic_vector(10 downto 0);
+      humidity        : in std_logic_vector(7 downto 0);
+      uart_data_ready : in std_logic;
+
+      -- UART Interface
+      uart_tx_start : out std_logic;
+      uart_data_tx  : out std_logic_vector(7 downto 0);
+      uart_tx_busy  : in  std_logic
+      );
   end component;
 
   -- UART Signals
@@ -206,10 +225,14 @@ architecture Behavioral of top is
   signal uart_data_ready_z : std_logic;
 
   -- Hygrometer
-  signal i2c_ack_err       : std_logic;
-  signal relative_humidity : std_logic_vector(7 downto 0);
-  signal temperature       : std_logic_vector(10 downto 0);
-  signal scl               : std_logic;
+  signal hygro_data_ready    : std_logic;
+  signal i2c_ack_err         : std_logic;
+  signal relative_humidity   : std_logic_vector(7 downto 0);
+  signal temperature         : std_logic_vector(10 downto 0);
+  signal scl                 : std_logic;
+  signal hygro_uart_tx_start : std_logic;
+  signal hygro_uart_data_tx  : std_logic_vector(7 downto 0);
+
 begin
 
   ------------------------------------------------------------------------------
@@ -278,9 +301,12 @@ begin
       elsif rx_busy_falling = '1' then
         tx_start     <= '1';
         uart_data_tx <= uart_data_rx;
-      elsif uart_tx_start then
+      -- elsif uart_tx_start then
+      --   tx_start     <= '1';
+      --   uart_data_tx <= accel_uart_data_tx;
+      elsif hygro_uart_tx_start then
         tx_start     <= '1';
-        uart_data_tx <= accel_uart_data_tx;
+        uart_data_tx <= hygro_uart_data_tx;
       else
         tx_start <= '0';
       end if;
@@ -288,7 +314,7 @@ begin
   end process;
 
   ------------------------------------------------------------------------------
-  -- Taken from DigiKey, PMOD ACL Master
+  -- Taken from DigiKey, PMOD ACL2 Master
   ------------------------------------------------------------------------------
   spi_pmod_acl2 : pmod_accelerometer_adxl362
     generic map(
@@ -355,7 +381,9 @@ begin
       uart_data_tx  => accel_uart_data_tx
       );
 
-  
+  ------------------------------------------------------------------------------
+  -- Taken from DigiKey, PMOD Hygrometer Master
+  ------------------------------------------------------------------------------
   i2c_pmod_hygro : pmod_hygrometer
     generic map(
       sys_clk_freq           => 10_000_000,  -- 10MHz operation
@@ -368,8 +396,30 @@ begin
       scl               => XSCL,
       sda               => XSDA,
       i2c_ack_err       => i2c_ack_err,
+      data_ready        => hygro_data_ready,
       relative_humidity => relative_humidity,
       temperature       => temperature
       );
+
+  ------------------------------------------------------------------------------
+  -- Transmit Accelerometer Data via UART
+  ------------------------------------------------------------------------------
+  hygro_to_uart : hygrometer_to_uart
+    port map(
+      -- System Interface
+      clk   => clk,
+      reset => reset,
+
+      -- Accelerometer Data
+      uart_data_ready => hygro_data_ready,
+      temperature     => temperature,
+      humidity        => relative_humidity,
+
+      -- UART Interface
+      uart_tx_busy  => tx_busy,
+      uart_tx_start => hygro_uart_tx_start,
+      uart_data_tx  => hygro_uart_data_tx
+      );
+
 
 end Behavioral;

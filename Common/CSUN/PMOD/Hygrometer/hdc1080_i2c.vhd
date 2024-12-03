@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 -- Title      : HDC1080 I2C Module
--- Project    : 
+-- Project    :
 -------------------------------------------------------------------------------
 -- File       : hdc1080_i2c.vhd
 -- Author     : Phil Tracton  <ptracton@gmail.com>
--- Company    : 
+-- Company    :
 -- Created    : 2024-11-21
--- Last update: 2024-11-21
--- Platform   : 
+-- Last update: 2024-11-26
+-- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: 
+-- Description:
 -------------------------------------------------------------------------------
--- Copyright (c) 2024 
+-- Copyright (c) 2024
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
@@ -44,7 +44,7 @@ end entity;
 architecture rtl of hdc1080_i2c is
 
   -- I2C state machine
-  type i2c_state_t is (IDLE, GET_I2C_ADDR, GET_REG_ADDR, SEND_DATA, GET_DATA);
+  type i2c_state_t is (IDLE, GET_I2C_ADDR, GET_REG_ADDR, READ_DATA, WRITE_DATA);
   signal state : i2c_state_t := IDLE;
 
   signal sda_int   : std_logic := '0';
@@ -75,8 +75,11 @@ begin
       sda_current := sda_int;
       case (state) is
         when IDLE =>
-          bit_count  <= 8;
-          sda_enable <= '0';
+          bit_count      <= 8;
+          sda_enable     <= '0';
+          reg_write      <= '0';
+          reg_addr       <= x"00";
+          reg_write_data <= x"0000";
           if sda_prev = '1' and sda_int = '0' then
             state          <= GET_I2C_ADDR;
             start_detected <= '1';
@@ -103,27 +106,54 @@ begin
           end if;
 
         when GET_REG_ADDR =>
+          -- This is the "pointer" to which register in the HDC1080 to access
           data_shift <= data_shift(6 downto 0) & sda_current;
           if bit_count = 0 then
             reg_addr   <= data_shift;
             sda_out    <= '0';
             sda_enable <= '1';
             if rw_bit = '1' then
-              state     <= SEND_DATA;
+              state     <= READ_DATA;
               bit_count <= 8;
             else
-              state     <= GET_DATA;   
+              state <= WRITE_DATA;
             end if;
           else
             bit_count <= bit_count - 1;  -- not enough bits, keep shifting
             state     <= GET_REG_ADDR;
           end if;
 
-        when GET_DATA =>
-          state <= IDLE;
+        when WRITE_DATA =>
+          data_shift <= data_shift(6 downto 0) & sda_current;
+          if bit_count = 0 then
+            -- Write to the registers
+            reg_write                  <= '1';
+            reg_write_data(7 downto 0) <= data_shift;
 
-        when SEND_DATA =>
-          state <= IDLE;
+            sda_enable <= '1';
+            sda_out    <= '0';          -- ACK
+            state      <= IDLE;
+          else
+            reg_write <= '0';
+            bit_count <= bit_count - 1;
+            state     <= WRITE_DATA;
+          end if;
+
+
+        when READ_DATA =>
+          --sda_int    <= data_shift(7);
+          data_shift <= data_shift(6 downto 0) & '0';
+          if bit_count = 0 then
+            if sda_current = '0' then   -- ACK received
+              bit_count  <= 7;
+              -- READ THE REGISTERS
+              data_shift <= x"C7";
+            else
+              bit_count <= bit_count - 1;
+              state     <= READ_DATA;
+            end if;
+            state <= IDLE;
+          end if;
 
         when others =>
           -- Just in case something goes wrong
