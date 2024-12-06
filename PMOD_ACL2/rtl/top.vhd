@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    :
 -- Created    : 2024-10-05
--- Last update: 2024-12-02
+-- Last update: 2024-12-05
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -150,6 +150,8 @@ architecture Behavioral of top is
       acceleration_out_z : in std_logic_vector(11 downto 0);
 
       -- UART Interface
+      uart_request  : out std_logic;
+      uart_grant    : in  std_logic;
       uart_tx_start : out std_logic;
       uart_data_tx  : out std_logic_vector(7 downto 0);
       uart_tx_busy  : in  std_logic
@@ -184,6 +186,8 @@ architecture Behavioral of top is
       uart_data_ready : in std_logic;
 
       -- UART Interface
+      uart_request  : out std_logic;
+      uart_grant    : in  std_logic;
       uart_tx_start : out std_logic;
       uart_data_tx  : out std_logic_vector(7 downto 0);
       uart_tx_busy  : in  std_logic
@@ -232,6 +236,10 @@ architecture Behavioral of top is
   signal scl                 : std_logic;
   signal hygro_uart_tx_start : std_logic;
   signal hygro_uart_data_tx  : std_logic_vector(7 downto 0);
+
+  -- UART Arbiter Signals
+  signal uart_request : std_logic_vector(1 downto 0);
+  signal uart_grant   : std_logic_vector(1 downto 0);
 
 begin
 
@@ -292,26 +300,53 @@ begin
   ------------------------------------------------------------------------------
   -- Catch received byte and transmit it back to user
   ------------------------------------------------------------------------------
-  echo : process (clk)
+  -- echo : process (clk)
+  -- begin
+  --   if rising_edge(clk) then
+  --     if (reset = '1') then
+  --       tx_start     <= '0';
+  --       uart_data_tx <= x"00";
+  --     elsif rx_busy_falling = '1' then
+  --       tx_start     <= '1';
+  --       uart_data_tx <= uart_data_rx;
+  --     elsif uart_tx_start then
+  --       tx_start     <= '1';
+  --       uart_data_tx <= accel_uart_data_tx;
+  --     elsif hygro_uart_tx_start then
+  --       tx_start     <= '1';
+  --       uart_data_tx <= hygro_uart_data_tx;
+  --     else
+  --       tx_start <= '0';
+  --     end if;
+  --   end if;
+  -- end process;
+
+  ------------------------------------------------------------------------------
+  -- UART Arbiter
+  ------------------------------------------------------------------------------
+  uart_grant_proc : process(clk)
   begin
     if rising_edge(clk) then
-      if (reset = '1') then
-        tx_start     <= '0';
-        uart_data_tx <= x"00";
-      elsif rx_busy_falling = '1' then
-        tx_start     <= '1';
-        uart_data_tx <= uart_data_rx;
-      -- elsif uart_tx_start then
-      --   tx_start     <= '1';
-      --   uart_data_tx <= accel_uart_data_tx;
-      elsif hygro_uart_tx_start then
-        tx_start     <= '1';
-        uart_data_tx <= hygro_uart_data_tx;
+      if reset = '1' then
+        uart_grant <= (others => '0');
       else
-        tx_start <= '0';
+        uart_grant <= "10" when uart_request(1) = '1' and uart_grant(0) = '0' else
+                      "01" when uart_request(0) = '1' and uart_grant(1) = '0' else
+                      (others => '0');
       end if;
     end if;
   end process;
+
+
+  uart_data_tx <= uart_data_rx when uart_request = "00" else
+                  hygro_uart_data_tx when uart_request(1) = '1' and uart_grant(0) = '0' else
+                  accel_uart_data_tx when uart_request(0) = '1' and uart_grant(1) = '0' else
+                  (others => '0');
+
+  tx_start <= rx_busy_falling when uart_request = "00" else
+              hygro_uart_tx_start when uart_request(1) = '1' and uart_grant(0) = '0' else
+              uart_tx_start       when uart_request(0) = '1' and uart_grant(1) = '0' else
+              '0';
 
   ------------------------------------------------------------------------------
   -- Taken from DigiKey, PMOD ACL2 Master
@@ -376,6 +411,8 @@ begin
       acceleration_out_z => acceleration_out_z,
 
       -- UART Interface
+      uart_request  => uart_request(0),
+      uart_grant    => uart_grant(0),
       uart_tx_busy  => tx_busy,
       uart_tx_start => uart_tx_start,
       uart_data_tx  => accel_uart_data_tx
@@ -416,6 +453,8 @@ begin
       humidity        => relative_humidity,
 
       -- UART Interface
+      uart_request  => uart_request(1),
+      uart_grant    => uart_grant(1),
       uart_tx_busy  => tx_busy,
       uart_tx_start => hygro_uart_tx_start,
       uart_data_tx  => hygro_uart_data_tx

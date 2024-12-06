@@ -210,7 +210,7 @@ begin
     -- wait until rx_dv = '1';
 
     wait for 300 us;
-    wait for 5 ms;
+    wait for 50 ms;
 
     test_done <= true;
 

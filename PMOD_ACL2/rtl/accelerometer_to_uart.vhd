@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    :
 -- Created    : 2024-11-20
--- Last update: 2024-11-20
+-- Last update: 2024-12-05
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -38,6 +38,8 @@ entity accelerometer_to_uart is
     acceleration_out_z : in std_logic_vector(11 downto 0);
 
     -- UART Interface
+    uart_request  : out std_logic;
+    uart_grant    : in  std_logic;
     uart_tx_start : out std_logic;
     uart_data_tx  : out std_logic_vector(7 downto 0);
     uart_tx_busy  : in  std_logic
@@ -51,16 +53,16 @@ architecture Behavioral of accelerometer_to_uart is
   type t_TransmitBuffer is array (0 to 19) of std_logic_vector(7 downto 0);
   signal transmit_buffer : t_TransmitBuffer;
 --  signal transmit_addr   : integer;
-    signal transmit_addr   : std_logic_vector(4 downto 0);
+  signal transmit_addr   : std_logic_vector(4 downto 0);
 
   --State Machine
-  type state_type is (IDLE, PREP_TRANSMIT, TRANSMIT, START_TRANSMIT, wait_TRANSMIT);
+  type state_type is (IDLE, GET_bus, PREP_TRANSMIT, TRANSMIT, START_TRANSMIT, wait_TRANSMIT);
   signal state      : state_type;
   signal next_state : state_type;
 
   signal uart_tx_start_r : std_logic;
   signal uart_data_tx_r  : std_logic_vector(7 downto 0);
-
+  signal uart_request_r  : std_logic;
 
   function f_HEX_2_ASCII (
     r_HEX_IN : in std_logic_vector(3 downto 0))
@@ -154,7 +156,7 @@ begin
 
         if state = TRANSMIT then
 --          transmit_addr <= transmit_addr + 1;
-          transmit_addr <= std_logic_vector( unsigned(transmit_addr) + 1 );
+          transmit_addr <= std_logic_vector(unsigned(transmit_addr) + 1);
         end if;
 
       end if;
@@ -187,33 +189,45 @@ begin
       next_state      <= IDLE;
       uart_tx_start_r <= '0';
       uart_data_tx_r  <= (others => '0');
+      uart_request_r  <= '0';
     else
       case (state) is
 
         when IDLE =>
           -- wait in IDLE until we are here and there is new data ready from
           -- the accelerometer
+          uart_request_r <= '0';
           if (uart_data_ready_x = '1') or (uart_data_ready_y = '1') or (uart_data_ready_z = '1') then
-            next_state <= PREP_TRANSMIT;
+            next_state <= GET_BUS;
           else
             next_state <= IDLE;
+          end if;
+
+        when GET_bus =>
+          uart_request_r <= '1';
+          if uart_grant = '1' then
+            next_state <= PREP_TRANSMIT;
+          else
+            next_state <= GET_BUS;
           end if;
 
         when PREP_TRANSMIT =>
           -- wait here for 1 clock to load the transmit buffer with the
           -- accelerometer data
-          next_state <= TRANSMIT;
+          next_state     <= TRANSMIT;
+          uart_request_r <= '1';
 
         when TRANSMIT =>
           -- Write the value from the transmit buffer at it's pointer to the
           -- output port and increment the pointer to the next character
+          uart_request_r  <= '1';
           uart_tx_start_r <= '1';
---          uart_data_tx_r  <= transmit_buffer(transmit_addr);
           uart_data_tx_r  <= transmit_buffer(to_integer (unsigned(transmit_addr)));
           next_state      <= START_TRANSMIT;
 
         when START_TRANSMIT =>
           -- wait for the transmission to start
+          uart_request_r <= '1';
           if uart_tx_busy = '0' then
             next_state <= START_TRANSMIT;
           else
@@ -223,6 +237,7 @@ begin
         when wait_TRANSMIT =>
           -- wait for the transmit process to be complete before either sending
           -- another character or being done sending characters
+          uart_request_r  <= '1';
           uart_tx_start_r <= '0';
           if uart_tx_busy = '1' then
             next_state <= wait_TRANSMIT;
@@ -254,9 +269,11 @@ begin
       if reset = '1' then
         uart_tx_start <= '0';
         uart_data_tx  <= (others => '0');
+        uart_request  <= '0';
       else
         uart_tx_start <= uart_tx_start_r;
         uart_data_tx  <= uart_data_tx_r;
+        uart_request  <= uart_request_r;
       end if;
     end if;
   end process;
