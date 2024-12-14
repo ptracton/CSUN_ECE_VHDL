@@ -9,6 +9,7 @@ tclapp::install ultrafast -quiet
 
 
 read_ip   generated_ip/clk_wiz_0/clk_wiz_0.xci
+read_ip ./generated_ip/fifo_generator_0/fifo_generator_0.xci
 upgrade_ip -quiet [get_ips *]
 generate_target {all} [get_ips *]
 

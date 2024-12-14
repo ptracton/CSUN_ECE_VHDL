@@ -6,7 +6,7 @@
 -- Author     : Phil Tracton  <ptracton@gmail.com>
 -- Company    :
 -- Created    : 2024-11-21
--- Last update: 2024-11-26
+-- Last update: 2024-12-05
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ begin
 
         when READ_DATA =>
           --sda_int    <= data_shift(7);
-          data_shift <= data_shift(6 downto 0) & '0';
+         -- data_shift <= data_shift(6 downto 0) & '0';
           if bit_count = 0 then
             if sda_current = '0' then   -- ACK received
               bit_count  <= 7;

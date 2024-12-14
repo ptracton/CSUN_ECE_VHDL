@@ -15,13 +15,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="7,756.096000 us"></ZoomStartTime>
-      <ZoomEndTime time="14,236.096001 us"></ZoomEndTime>
-      <Cursor1Time time="12,871.096000 us"></Cursor1Time>
+      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="50.300720001 ms"></ZoomEndTime>
+      <Cursor1Time time="50.300720000 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="195"></NameColumnWidth>
-      <ValueColumnWidth column_width="78"></ValueColumnWidth>
+      <ValueColumnWidth column_width="74"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="9" />
    <wvobject type="group" fp_name="group187">
@@ -197,6 +197,7 @@
    <wvobject type="group" fp_name="group425">
       <obj_property name="label">I2C Master</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_master_0/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -309,6 +310,7 @@
    <wvobject type="group" fp_name="group451">
       <obj_property name="label">PMOD HYGRO</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -417,7 +419,6 @@
    <wvobject type="group" fp_name="group122">
       <obj_property name="label">DUT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/testbench/DUT/rx_busy_falling">
          <obj_property name="ElementShortName">rx_busy_falling</obj_property>
          <obj_property name="ObjectShortName">rx_busy_falling</obj_property>
@@ -461,7 +462,6 @@
    <wvobject type="group" fp_name="group884">
       <obj_property name="label">HYGRO to UART</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/testbench/DUT/hygro_to_uart/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -537,7 +537,6 @@
    <wvobject type="group" fp_name="group267">
       <obj_property name="label">ACCEL to UART</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/testbench/DUT/accel_to_uart/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
