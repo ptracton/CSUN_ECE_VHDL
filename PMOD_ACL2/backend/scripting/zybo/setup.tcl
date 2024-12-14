@@ -21,6 +21,7 @@ read_vhdl -vhdl2008 -library xil_defaultlib {
     ../../../../Common/CSUN/edge_detector.vhd
     ../../../rtl/accelerometer_processing.vhd
     ../../../rtl/accelerometer_to_uart.vhd
+    ../../../rtl/hygrometer_to_uart.vhd        
     ../../../rtl/system_controller.vhd
     ../../../rtl/top.vhd      
 }

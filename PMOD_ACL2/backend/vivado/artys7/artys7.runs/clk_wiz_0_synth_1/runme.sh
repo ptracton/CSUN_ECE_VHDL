@@ -21,7 +21,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='/home/ptracton/CSUN/CSUN_ECE_VHDL/UART_ECHO/backend/vivado/artys7/artys7.runs/clk_wiz_0_synth_1'
+HD_PWD='/home/ptracton/CSUN/CSUN_ECE_VHDL/PMOD_ACL2/backend/vivado/artys7/artys7.runs/clk_wiz_0_synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

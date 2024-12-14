@@ -34,3 +34,25 @@ set_property -dict [list \
 ] [get_ips clk_wiz_0]
 generate_target all [get_ips]
 
+set_property -dict [list \
+  CONFIG.CLKOUT2_JITTER {197.700} \
+  CONFIG.CLKOUT2_PHASE_ERROR {96.948} \
+  CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {10.000} \
+  CONFIG.CLKOUT2_USED {true} \
+  CONFIG.MMCM_CLKOUT1_DIVIDE {100} \
+  CONFIG.NUM_OUT_CLKS {2} \
+] [get_ips clk_wiz_0]
+
+create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.2 -module_name fifo_generator_0 -dir generated_ip
+set_property -dict [list \
+  CONFIG.Enable_Reset_Synchronization {true} \
+  CONFIG.Fifo_Implementation {Independent_Clocks_Block_RAM} \
+  CONFIG.Input_Data_Width {12} \
+  CONFIG.Input_Depth {16} \
+  CONFIG.Performance_Options {First_Word_Fall_Through} \
+  CONFIG.Read_Data_Count {true} \
+  CONFIG.Read_Data_Count_Width {5} \
+  CONFIG.Use_Extra_Logic {true} \
+  CONFIG.Write_Data_Count {true} \
+  CONFIG.Write_Data_Count_Width {5} \
+] [get_ips fifo_generator_0]
