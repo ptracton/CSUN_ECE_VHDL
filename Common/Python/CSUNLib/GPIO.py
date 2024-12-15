@@ -2,11 +2,10 @@
 
 import enum
 
-import PyQt5
-import PyQt5.QtCore
-
 
 class GPIODirection(enum.Enum):
+    """Basic enum class for GPIO directions."""
+
     INPUT = 0
     OUTPUT = 1
     BIDIRECTIONAL = 2
@@ -14,18 +13,25 @@ class GPIODirection(enum.Enum):
 
 
 class GPIOState(enum.Enum):
+    """Basic GPIO state enum."""
+
     OFF = 0
     ON = 1
 
 
-class GPIO(PyQt5.QtCore.QObject):
+class GPIO:
+    """Container class for the GPIO on the FPGA board."""
 
-    """
-    Container class for the GPIO on the FPGA board
-    """
-    pushButtonSignal = PyQt5.QtCore.pyqtSignal(int)
-
-    def __init__(self, state=GPIOState.OFF, direction=GPIODirection.INPUT, index=None, enableIcon=None, disableIcon=None, pushButton=None):
+    def __init__(
+        self,
+        state=GPIOState.OFF,
+        direction=GPIODirection.INPUT,
+        index=None,
+        enableIcon=None,
+        disableIcon=None,
+        pushButton=None,
+    ):
+        """GPIO contructor."""
         super(GPIO, self).__init__()
         self.direction = direction
         self.state = state
@@ -34,11 +40,12 @@ class GPIO(PyQt5.QtCore.QObject):
         self.disableIcon = disableIcon
         self.currentIcon = self.disableIcon
         self.pushButton = pushButton
-        self.pushButton.clicked.connect(self.clicked)
+        # self.pushButton.clicked.connect(self.clicked)
         self.pushButton.setIcon(self.currentIcon)
         # self.pushButton.setText(str(index))
 
     def updateState(self):
+        """Toggle the state of the GPIO pin."""
         print("Update State {}".format(self.index))
         if self.state == GPIOState.OFF:
             self.state = GPIOState.ON
@@ -50,9 +57,8 @@ class GPIO(PyQt5.QtCore.QObject):
         self.pushButton.setIcon(self.currentIcon)
         return
 
-    def clicked(self):
-        """
-        """
-        print("Clicked {} {}".format(self.index, self.state))
-        self.pushButtonSignal.emit(self.index)
-        return
+    # def clicked(self):
+    #     """ """
+    #     print("Clicked {} {}".format(self.index, self.state))
+    #     self.pushButtonSignal.emit(self.index)
+    #     return

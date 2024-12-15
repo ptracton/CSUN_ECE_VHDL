@@ -6,59 +6,71 @@ UI Class for interfacing with GPIOs on the Basys 3 FPGA board
 
 import sys
 
-import PyQt5
-import PyQt5.QtGui
-import PyQt5.QtWidgets
+import PySide6
+import PySide6.QtGui
+import PySide6.QtWidgets
 
-import GPIO
+from . import GPIO
+
+# import GPIO
 
 
 class GPIOUI:
+    """GUI class for GPIO modules."""
 
-    def __init__(self, width=16, direction=None, label="GPIO", enableIcon=None, disableIcon=None):
-
+    def __init__(
+        self, width=16, direction=None, label="GPIO", enableIcon=None, disableIcon=None
+    ):
+        """UI constructor."""
         self.width = width
         self.direction = direction
         self.enableIcon = enableIcon
         self.disableIcon = disableIcon
         self.listGPIO = []
-        self.gpioLayout = PyQt5.QtWidgets.QHBoxLayout()
+        self.gpioLayout = PySide6.QtWidgets.QHBoxLayout()
 
-        self.gpioLayout.addWidget(PyQt5.QtWidgets.QLabel(label))
+        self.gpioLayout.addWidget(PySide6.QtWidgets.QLabel(label))
 
         for x in reversed(range(self.width)):
-            button = PyQt5.QtWidgets.QPushButton()
-            myGPIO = GPIO.GPIO(index=x, pushButton=button,
-                               enableIcon=self.enableIcon, disableIcon=self.disableIcon)
+            button = PySide6.QtWidgets.QPushButton()
+            myGPIO = GPIO.GPIO(
+                index=x,
+                pushButton=button,
+                enableIcon=self.enableIcon,
+                disableIcon=self.disableIcon,
+            )
             self.gpioLayout.addWidget(myGPIO.pushButton)
             self.listGPIO.append(myGPIO)
-            del(myGPIO)
+            del myGPIO
 
         pass
 
     def getLayout(self):
-        """
-        Return our layout for easy GUI integration
-        """
+        """Return our layout for easy GUI integration."""
         return self.gpioLayout
 
 
 if __name__ == "__main__":
-    class TestUI(PyQt5.QtWidgets.QDialog):
+
+    class TestUI(PySide6.QtWidgets.QDialog):
+        """Simple UI testing class."""
 
         def __init__(self, parent=None):
+            """UI testing constructor."""
             super(TestUI, self).__init__(parent)
-            layOut = PyQt5.QtWidgets.QVBoxLayout()
+            layOut = PySide6.QtWidgets.QVBoxLayout()
 
-            enableIcon = PyQt5.QtGui.QIcon("green_ball.png")
-            disableIcon = PyQt5.QtGui.QIcon("black_ball.png")
+            enableIcon = PySide6.QtGui.QIcon("green_ball.png")
+            disableIcon = PySide6.QtGui.QIcon("black_ball.png")
             self.gpio_ui = GPIOUI(
-                label="LEDS", enableIcon=enableIcon, disableIcon=disableIcon)
+                label="LEDS", enableIcon=enableIcon, disableIcon=disableIcon
+            )
 
-            enableIcon = PyQt5.QtGui.QIcon("upward.png")
-            disableIcon = PyQt5.QtGui.QIcon("download.png")
+            enableIcon = PySide6.QtGui.QIcon("upward.png")
+            disableIcon = PySide6.QtGui.QIcon("download.png")
             self.gpio_ui_sw = GPIOUI(
-                label="Switches", enableIcon=enableIcon, disableIcon=disableIcon)
+                label="Switches", enableIcon=enableIcon, disableIcon=disableIcon
+            )
 
             layOut.addLayout(self.gpio_ui.getLayout())
             layOut.addLayout(self.gpio_ui_sw.getLayout())
@@ -66,7 +78,7 @@ if __name__ == "__main__":
             self.setLayout(layOut)
             pass
 
-    app = PyQt5.QtWidgets.QApplication(sys.argv)
+    app = PySide6.QtWidgets.QApplication(sys.argv)
     GUI = TestUI()
     GUI.show()
-    app.exec_()
+    app.exec()
