@@ -29,3 +29,8 @@ clk_wiz_0_1/
 *.veo
 *.vho
 *.bak
+*.rst
+*.rpt
+*.dcp
+*.gen/
+*.Xil/

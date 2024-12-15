@@ -39,7 +39,8 @@ ENTITY pmod_accelerometer_adxl362 IS
     mosi           : OUT     STD_LOGIC;                      --SPI bus: master out, slave in
     acceleration_x : OUT     STD_LOGIC_VECTOR(11 DOWNTO 0);  --x-axis acceleration data
     acceleration_y : OUT     STD_LOGIC_VECTOR(11 DOWNTO 0);  --y-axis acceleration data
-    acceleration_z : OUT     STD_LOGIC_VECTOR(11 DOWNTO 0)); --z-axis acceleration data
+    acceleration_z : OUT     STD_LOGIC_VECTOR(11 DOWNTO 0);  --z-axis acceleration data
+    data_ready     : out     STD_LOGIC);                     --data ready to read
 END pmod_accelerometer_adxl362;
 
 ARCHITECTURE behavior OF pmod_accelerometer_adxl362 IS
@@ -102,6 +103,7 @@ BEGIN
       acceleration_y <= (OTHERS => '0');  --clear y-axis acceleration data
       acceleration_z <= (OTHERS => '0');  --clear z-axis acceleration data
       state <= start;                     --restart state machine
+      data_ready <= '0';
     ELSIF(clk'EVENT AND clk = '1') THEN --rising edge of system clock
       CASE state IS                       --state machine
 
@@ -110,9 +112,11 @@ BEGIN
           count := 0;      --clear universal counter
           parameter <= 0;  --clear parameter indicator
           state <= pause;
+          data_ready <= '0';
           
         --pauses 200ns between SPI transactions and selects SPI transaction
         WHEN pause =>
+          data_ready <= '0';
           IF(spi_busy = '0') THEN                --SPI component not busy
             IF(count < clk_freq/5) THEN            --less than 200ns
               count := count + 1;                    --increment counter
@@ -203,6 +207,7 @@ BEGIN
             acceleration_x <= acceleration_x_int(11 DOWNTO 0);  --output x-axis data
             acceleration_y <= acceleration_y_int(11 DOWNTO 0);  --output y-axis data
             acceleration_z <= acceleration_z_int(11 DOWNTO 0);  --output z-axis data
+            data_ready <= '1';
             state <= pause;                                     --return to pause state
         
         --default to start state
