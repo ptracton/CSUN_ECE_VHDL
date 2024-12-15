@@ -34,3 +34,4 @@ clk_wiz_0_1/
 *.dcp
 *.gen/
 *.Xil/
+Python/CSUN_PYTHON/*
