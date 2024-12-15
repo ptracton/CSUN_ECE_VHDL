@@ -35,8 +35,8 @@ set_property -dict [list \
 generate_target all [get_ips]
 
 set_property -dict [list \
-  CONFIG.CLKOUT2_JITTER {197.700} \
-  CONFIG.CLKOUT2_PHASE_ERROR {96.948} \
+  CONFIG.CLKOUT2_JITTER {209.588} \
+  CONFIG.CLKOUT2_PHASE_ERROR {98.575} \
   CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {10.000} \
   CONFIG.CLKOUT2_USED {true} \
   CONFIG.MMCM_CLKOUT1_DIVIDE {100} \

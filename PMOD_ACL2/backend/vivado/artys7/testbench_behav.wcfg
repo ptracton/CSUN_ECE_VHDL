@@ -5,41 +5,403 @@
    <db_ref_list>
       <db_ref path="testbench_behav.wdb" id="1">
          <top_modules>
+            <top_module name="adxl362_pkg" />
             <top_module name="board_pkg" />
             <top_module name="glbl" />
+            <top_module name="hdc1080_pkg" />
             <top_module name="testbench" />
             <top_module name="uart_tb_pkg" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="352,739,994 ps"></ZoomStartTime>
-      <ZoomEndTime time="352,740,002 ps"></ZoomEndTime>
-      <Cursor1Time time="352,740,000 ps"></Cursor1Time>
+      <ZoomStartTime time="5.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="54.021731501 ms"></ZoomEndTime>
+      <Cursor1Time time="49.021731500 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="148"></NameColumnWidth>
-      <ValueColumnWidth column_width="68"></ValueColumnWidth>
+      <NameColumnWidth column_width="142"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="5" />
-   <wvobject type="logic" fp_name="/testbench/clk">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <WVObjectSize size="4" />
+   <wvobject type="group" fp_name="group15">
+      <obj_property name="label">TB</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/testbench/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/locked">
+         <obj_property name="ElementShortName">locked</obj_property>
+         <obj_property name="ObjectShortName">locked</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/tx">
+         <obj_property name="ElementShortName">tx</obj_property>
+         <obj_property name="ObjectShortName">tx</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/rx">
+         <obj_property name="ElementShortName">rx</obj_property>
+         <obj_property name="ObjectShortName">rx</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/sclk">
+         <obj_property name="ElementShortName">sclk</obj_property>
+         <obj_property name="ObjectShortName">sclk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/ss_n">
+         <obj_property name="ElementShortName">ss_n[0:0]</obj_property>
+         <obj_property name="ObjectShortName">ss_n[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/sclk_buffer">
+         <obj_property name="ElementShortName">sclk_buffer</obj_property>
+         <obj_property name="ObjectShortName">sclk_buffer</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/ss_n_buffer">
+         <obj_property name="ElementShortName">ss_n_buffer[0:0]</obj_property>
+         <obj_property name="ObjectShortName">ss_n_buffer[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/miso">
+         <obj_property name="ElementShortName">miso</obj_property>
+         <obj_property name="ObjectShortName">miso</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/mosi">
+         <obj_property name="ElementShortName">mosi</obj_property>
+         <obj_property name="ObjectShortName">mosi</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/scl">
+         <obj_property name="ElementShortName">scl</obj_property>
+         <obj_property name="ObjectShortName">scl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/XSCL">
+         <obj_property name="ElementShortName">XSCL</obj_property>
+         <obj_property name="ObjectShortName">XSCL</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/XSDA">
+         <obj_property name="ElementShortName">XSDA</obj_property>
+         <obj_property name="ObjectShortName">XSDA</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="logic" fp_name="/testbench/reset">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
+   <wvobject type="group" fp_name="group61">
+      <obj_property name="label">DUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/testbench/DUT/XCLK">
+         <obj_property name="ElementShortName">XCLK</obj_property>
+         <obj_property name="ObjectShortName">XCLK</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XRESET">
+         <obj_property name="ElementShortName">XRESET</obj_property>
+         <obj_property name="ObjectShortName">XRESET</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XLOCKED">
+         <obj_property name="ElementShortName">XLOCKED</obj_property>
+         <obj_property name="ObjectShortName">XLOCKED</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XRX">
+         <obj_property name="ElementShortName">XRX</obj_property>
+         <obj_property name="ObjectShortName">XRX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XTX">
+         <obj_property name="ElementShortName">XTX</obj_property>
+         <obj_property name="ObjectShortName">XTX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XSCLK">
+         <obj_property name="ElementShortName">XSCLK</obj_property>
+         <obj_property name="ObjectShortName">XSCLK</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/XSS_N">
+         <obj_property name="ElementShortName">XSS_N[0:0]</obj_property>
+         <obj_property name="ObjectShortName">XSS_N[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XMISO">
+         <obj_property name="ElementShortName">XMISO</obj_property>
+         <obj_property name="ObjectShortName">XMISO</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XMOSI">
+         <obj_property name="ElementShortName">XMOSI</obj_property>
+         <obj_property name="ObjectShortName">XMOSI</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XSCL">
+         <obj_property name="ElementShortName">XSCL</obj_property>
+         <obj_property name="ObjectShortName">XSCL</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/XSDA">
+         <obj_property name="ElementShortName">XSDA</obj_property>
+         <obj_property name="ObjectShortName">XSDA</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/tx_start">
+         <obj_property name="ElementShortName">tx_start</obj_property>
+         <obj_property name="ObjectShortName">tx_start</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/uart_data_rx">
+         <obj_property name="ElementShortName">uart_data_rx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">uart_data_rx[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/uart_data_tx">
+         <obj_property name="ElementShortName">uart_data_tx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">uart_data_tx[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/accel_uart_data_tx">
+         <obj_property name="ElementShortName">accel_uart_data_tx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">accel_uart_data_tx[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/rx_busy">
+         <obj_property name="ElementShortName">rx_busy</obj_property>
+         <obj_property name="ObjectShortName">rx_busy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/tx_busy">
+         <obj_property name="ElementShortName">tx_busy</obj_property>
+         <obj_property name="ObjectShortName">tx_busy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/rx_error">
+         <obj_property name="ElementShortName">rx_error</obj_property>
+         <obj_property name="ObjectShortName">rx_error</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/rx_busy_rising">
+         <obj_property name="ElementShortName">rx_busy_rising</obj_property>
+         <obj_property name="ObjectShortName">rx_busy_rising</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/rx_busy_falling">
+         <obj_property name="ElementShortName">rx_busy_falling</obj_property>
+         <obj_property name="ObjectShortName">rx_busy_falling</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/uart_tx_start">
+         <obj_property name="ElementShortName">uart_tx_start</obj_property>
+         <obj_property name="ObjectShortName">uart_tx_start</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/reset_n">
+         <obj_property name="ElementShortName">reset_n</obj_property>
+         <obj_property name="ObjectShortName">reset_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/clk_pmod">
+         <obj_property name="ElementShortName">clk_pmod</obj_property>
+         <obj_property name="ObjectShortName">clk_pmod</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/reset_pmod">
+         <obj_property name="ElementShortName">reset_pmod</obj_property>
+         <obj_property name="ObjectShortName">reset_pmod</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_x">
+         <obj_property name="ElementShortName">acceleration_x[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_x[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_y">
+         <obj_property name="ElementShortName">acceleration_y[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_y[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_z">
+         <obj_property name="ElementShortName">acceleration_z[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_z[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/accel_data_ready">
+         <obj_property name="ElementShortName">accel_data_ready</obj_property>
+         <obj_property name="ObjectShortName">accel_data_ready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_out_x">
+         <obj_property name="ElementShortName">acceleration_out_x[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_x[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_out_y">
+         <obj_property name="ElementShortName">acceleration_out_y[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_y[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/acceleration_out_z">
+         <obj_property name="ElementShortName">acceleration_out_z[11:0]</obj_property>
+         <obj_property name="ObjectShortName">acceleration_out_z[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/uart_data_ready_x">
+         <obj_property name="ElementShortName">uart_data_ready_x</obj_property>
+         <obj_property name="ObjectShortName">uart_data_ready_x</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/uart_data_ready_y">
+         <obj_property name="ElementShortName">uart_data_ready_y</obj_property>
+         <obj_property name="ObjectShortName">uart_data_ready_y</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/uart_data_ready_z">
+         <obj_property name="ElementShortName">uart_data_ready_z</obj_property>
+         <obj_property name="ObjectShortName">uart_data_ready_z</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/hygro_data_ready">
+         <obj_property name="ElementShortName">hygro_data_ready</obj_property>
+         <obj_property name="ObjectShortName">hygro_data_ready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_ack_err">
+         <obj_property name="ElementShortName">i2c_ack_err</obj_property>
+         <obj_property name="ObjectShortName">i2c_ack_err</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/relative_humidity">
+         <obj_property name="ElementShortName">relative_humidity[7:0]</obj_property>
+         <obj_property name="ObjectShortName">relative_humidity[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/temperature">
+         <obj_property name="ElementShortName">temperature[10:0]</obj_property>
+         <obj_property name="ObjectShortName">temperature[10:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/scl">
+         <obj_property name="ElementShortName">scl</obj_property>
+         <obj_property name="ObjectShortName">scl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/hygro_uart_tx_start">
+         <obj_property name="ElementShortName">hygro_uart_tx_start</obj_property>
+         <obj_property name="ObjectShortName">hygro_uart_tx_start</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/hygro_uart_data_tx">
+         <obj_property name="ElementShortName">hygro_uart_data_tx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">hygro_uart_data_tx[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/uart_request">
+         <obj_property name="ElementShortName">uart_request[1:0]</obj_property>
+         <obj_property name="ObjectShortName">uart_request[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/uart_grant">
+         <obj_property name="ElementShortName">uart_grant[1:0]</obj_property>
+         <obj_property name="ObjectShortName">uart_grant[1:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="logic" fp_name="/testbench/locked">
-      <obj_property name="ElementShortName">locked</obj_property>
-      <obj_property name="ObjectShortName">locked</obj_property>
+   <wvobject type="group" fp_name="group149">
+      <obj_property name="label">PMOD HYGRO</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/reset_n">
+         <obj_property name="ElementShortName">reset_n</obj_property>
+         <obj_property name="ObjectShortName">reset_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/scl">
+         <obj_property name="ElementShortName">scl</obj_property>
+         <obj_property name="ObjectShortName">scl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/sda">
+         <obj_property name="ElementShortName">sda</obj_property>
+         <obj_property name="ObjectShortName">sda</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_ack_err">
+         <obj_property name="ElementShortName">i2c_ack_err</obj_property>
+         <obj_property name="ObjectShortName">i2c_ack_err</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/data_ready">
+         <obj_property name="ElementShortName">data_ready</obj_property>
+         <obj_property name="ObjectShortName">data_ready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/relative_humidity">
+         <obj_property name="ElementShortName">relative_humidity[7:0]</obj_property>
+         <obj_property name="ObjectShortName">relative_humidity[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/temperature">
+         <obj_property name="ElementShortName">temperature[10:0]</obj_property>
+         <obj_property name="ObjectShortName">temperature[10:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/i2c_pmod_hygro/state">
+         <obj_property name="ElementShortName">state</obj_property>
+         <obj_property name="ObjectShortName">state</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_ena">
+         <obj_property name="ElementShortName">i2c_ena</obj_property>
+         <obj_property name="ObjectShortName">i2c_ena</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_addr">
+         <obj_property name="ElementShortName">i2c_addr[6:0]</obj_property>
+         <obj_property name="ObjectShortName">i2c_addr[6:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_rw">
+         <obj_property name="ElementShortName">i2c_rw</obj_property>
+         <obj_property name="ObjectShortName">i2c_rw</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_data_wr">
+         <obj_property name="ElementShortName">i2c_data_wr[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i2c_data_wr[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_data_rd">
+         <obj_property name="ElementShortName">i2c_data_rd[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i2c_data_rd[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/i2c_busy">
+         <obj_property name="ElementShortName">i2c_busy</obj_property>
+         <obj_property name="ObjectShortName">i2c_busy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/busy_prev">
+         <obj_property name="ElementShortName">busy_prev</obj_property>
+         <obj_property name="ObjectShortName">busy_prev</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/i2c_pmod_hygro/rh_time">
+         <obj_property name="ElementShortName">rh_time</obj_property>
+         <obj_property name="ObjectShortName">rh_time</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/i2c_pmod_hygro/temp_time">
+         <obj_property name="ElementShortName">temp_time</obj_property>
+         <obj_property name="ObjectShortName">temp_time</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/rh_res_bits">
+         <obj_property name="ElementShortName">rh_res_bits[1:0]</obj_property>
+         <obj_property name="ObjectShortName">rh_res_bits[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/DUT/i2c_pmod_hygro/temp_res_bit">
+         <obj_property name="ElementShortName">temp_res_bit</obj_property>
+         <obj_property name="ObjectShortName">temp_res_bit</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/humidity_data">
+         <obj_property name="ElementShortName">humidity_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">humidity_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/temperature_data">
+         <obj_property name="ElementShortName">temperature_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">temperature_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/i2c_pmod_hygro/sys_clk_freq">
+         <obj_property name="ElementShortName">sys_clk_freq</obj_property>
+         <obj_property name="ObjectShortName">sys_clk_freq</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/i2c_pmod_hygro/humidity_resolution">
+         <obj_property name="ElementShortName">humidity_resolution</obj_property>
+         <obj_property name="ObjectShortName">humidity_resolution</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/testbench/DUT/i2c_pmod_hygro/temperature_resolution">
+         <obj_property name="ElementShortName">temperature_resolution</obj_property>
+         <obj_property name="ObjectShortName">temperature_resolution</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/DUT/i2c_pmod_hygro/hygrometer_addr">
+         <obj_property name="ElementShortName">hygrometer_addr[6:0]</obj_property>
+         <obj_property name="ObjectShortName">hygrometer_addr[6:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="logic" fp_name="/testbench/tx">
-      <obj_property name="ElementShortName">tx</obj_property>
-      <obj_property name="ObjectShortName">tx</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/testbench/rx">
-      <obj_property name="ElementShortName">rx</obj_property>
-      <obj_property name="ObjectShortName">rx</obj_property>
+   <wvobject type="group" fp_name="group156">
+      <obj_property name="label">TB PMOD HYGRO</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/testbench/test/pmod1/scl">
+         <obj_property name="ElementShortName">scl</obj_property>
+         <obj_property name="ObjectShortName">scl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/pmod1/sda">
+         <obj_property name="ElementShortName">sda</obj_property>
+         <obj_property name="ObjectShortName">sda</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/test/pmod1/reg_addr">
+         <obj_property name="ElementShortName">reg_addr[7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/testbench/test/pmod1/reg_write">
+         <obj_property name="ElementShortName">reg_write</obj_property>
+         <obj_property name="ObjectShortName">reg_write</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/test/pmod1/reg_write_data">
+         <obj_property name="ElementShortName">reg_write_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_write_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/testbench/test/pmod1/reg_read_data">
+         <obj_property name="ElementShortName">reg_read_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_read_data[15:0]</obj_property>
+      </wvobject>
    </wvobject>
 </wave_config>
