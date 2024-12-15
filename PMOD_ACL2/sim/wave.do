@@ -8,30 +8,32 @@ add wave -noupdate -group TESTBENCH /testbench/ss_n
 add wave -noupdate -group TESTBENCH /testbench/miso
 add wave -noupdate -group TESTBENCH /testbench/mosi
 add wave -noupdate -group TESTBENCH /testbench/sclk
-add wave -noupdate -group DUT /testbench/DUT/XSS_N
-add wave -noupdate -group DUT /testbench/DUT/XMISO
-add wave -noupdate -group DUT /testbench/DUT/XMOSI
-add wave -noupdate -group DUT /testbench/DUT/XSCLK
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_x
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_y
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/acceleration_z
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/tx_start
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/uart_data_rx
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/uart_data_tx
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XCLK
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XRESET
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XRX
-add wave -noupdate -group DUT -radix hexadecimal /testbench/DUT/XTX
-add wave -noupdate -group DUT /testbench/DUT/clk
-add wave -noupdate -group DUT /testbench/DUT/reset
-add wave -noupdate -group DUT /testbench/DUT/clk_pmod
-add wave -noupdate -group DUT /testbench/DUT/reset_pmod
-add wave -noupdate -group DUT /testbench/DUT/reset_n
-add wave -noupdate -group DUT /testbench/DUT/rx_busy
-add wave -noupdate -group DUT /testbench/DUT/rx_busy_falling
-add wave -noupdate -group DUT /testbench/DUT/rx_busy_rising
-add wave -noupdate -group DUT /testbench/DUT/rx_error
-add wave -noupdate -group DUT /testbench/DUT/tx_start
+add wave -noupdate -expand -group DUT /testbench/DUT/XSS_N
+add wave -noupdate -expand -group DUT /testbench/DUT/XMISO
+add wave -noupdate -expand -group DUT /testbench/DUT/XMOSI
+add wave -noupdate -expand -group DUT /testbench/DUT/XSCLK
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_x
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_y
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/acceleration_z
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/tx_start
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/uart_data_rx
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/uart_data_tx
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XCLK
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XRESET
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XRX
+add wave -noupdate -expand -group DUT -radix hexadecimal /testbench/DUT/XTX
+add wave -noupdate -expand -group DUT /testbench/DUT/clk
+add wave -noupdate -expand -group DUT /testbench/DUT/reset
+add wave -noupdate -expand -group DUT /testbench/DUT/clk_pmod
+add wave -noupdate -expand -group DUT /testbench/DUT/reset_pmod
+add wave -noupdate -expand -group DUT /testbench/DUT/reset_n
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy_falling
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_busy_rising
+add wave -noupdate -expand -group DUT /testbench/DUT/uart_request
+add wave -noupdate -expand -group DUT /testbench/DUT/uart_grant
+add wave -noupdate -expand -group DUT /testbench/DUT/rx_error
+add wave -noupdate -expand -group DUT /testbench/DUT/tx_start
 add wave -noupdate -group TEST /testbench/test/XSCLK
 add wave -noupdate -group TEST /testbench/test/XSS_N
 add wave -noupdate -group TEST /testbench/test/XMISO
@@ -136,103 +138,6 @@ add wave -noupdate -group {SPI PMOD} -radix hexadecimal -childformat {{/testbenc
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/acceleration_x_int
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/acceleration_y_int
 add wave -noupdate -group {SPI PMOD} -radix hexadecimal /testbench/DUT/spi_pmod_acl2/acceleration_z_int
-add wave -noupdate -group PMOD /testbench/test/pmod/accel_x_file
-add wave -noupdate -group PMOD /testbench/test/pmod/accel_y_file
-add wave -noupdate -group PMOD /testbench/test/pmod/accel_z_file
-add wave -noupdate -group PMOD /testbench/test/pmod/temp_file
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/SCLK
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/nCS
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/MOSI
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/MISO
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/INT1
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/INT2
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/clk
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/clk_51p2KHz
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/reset
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/address
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/data_write
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/data_read
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/write_sig
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/data_fifo_write
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/read_data_fifo
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/data_fifo_read
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/threshold_active
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/time_active
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/threshold_inactive
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/time_inactive
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/act_inact_ctrl
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/fifo_ctrl
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/fifo_samples
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/intmap1
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/intmap2
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/filter_ctrl
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/power_ctrl
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/self_test
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/xdata
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/ydata
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/zdata
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/temperature
-add wave -noupdate -group PMOD -radix hexadecimal /testbench/test/pmod/status
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/clk_51p2KHz
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/clk_sys
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/reset
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/clk_sys_internal
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/clk_internal
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/c_CLK_SYS_PERIOD
-add wave -noupdate -group {PMOD CLOCKS} /testbench/test/pmod/sys_con/c_CLK_51KHZ_PERIOD
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/clk
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/reset
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/sclk
-add wave -noupdate -group {PMOD SPI} -color Yellow -radix hexadecimal /testbench/test/pmod/spi_slave/nss
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/mosi
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/miso
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/command
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/data_write
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/data_read
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/write_sig
-add wave -noupdate -group {PMOD SPI} /testbench/test/pmod/spi_slave/read_sig
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/bit_count
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/bit_count_previous
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/spi_data_in
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/spi_data_out
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/state
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/next_state
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/spi_byte_done
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/address
-add wave -noupdate -group {PMOD SPI} -radix hexadecimal /testbench/test/pmod/spi_slave/spi_byte_begin
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/clk
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/reset
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/write_sig
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/address
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/data_write
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/data_read
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/threshold_active
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/time_active
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/threshold_inactive
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/time_inactive
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/act_inact_ctrl
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/fifo_ctrl
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/fifo_samples
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/intmap1
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/intmap2
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/filter_ctrl
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/power_ctrl
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/self_test
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/xdata
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/ydata
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/zdata
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/temperature
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/status
-add wave -noupdate -group {PMOD REGS} -radix hexadecimal /testbench/test/pmod/registers/local_address
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/clk
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/reset
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/clk_51p2KHz
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/address
-add wave -noupdate -group {PMOD ACCEL} /testbench/test/pmod/accelerometer/read_sig
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/xdata
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/ydata
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/zdata
-add wave -noupdate -group {PMOD ACCEL} -radix hexadecimal /testbench/test/pmod/accelerometer/temperature
 add wave -noupdate -group {TB UART RX} -radix unsigned /testbench/test/receive/g_CLKS_PER_BIT
 add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_Clk
 add wave -noupdate -group {TB UART RX} -radix hexadecimal /testbench/test/receive/i_RX_Serial
@@ -296,34 +201,102 @@ add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_proces
 add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/empty
 add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/wr_rst_busy
 add wave -noupdate -group {FIFO Y} -radix hexadecimal /testbench/DUT/data_processing/fifo_y_accel/rd_rst_busy
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rst
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_clk
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_clk
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/din
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_en
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_en
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/dout
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/full
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/empty
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_rst_busy
-add wave -noupdate -expand -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_rst_busy
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/clk
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/reset
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_ready_x
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_ready_y
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_ready_z
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/acceleration_out_x
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/acceleration_out_y
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/acceleration_out_z
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_tx_start
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_tx
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_tx_busy
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/transmit_buffer
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/transmit_addr
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/state
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/next_state
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_tx_start_r
-add wave -noupdate -expand -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_tx_r
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rst
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_clk
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_clk
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/din
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_en
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_en
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/dout
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/full
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/empty
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/wr_rst_busy
+add wave -noupdate -group {FIFO Z} -radix hexadecimal /testbench/DUT/data_processing/fifo_z_accel/rd_rst_busy
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/clk
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/reset
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_ready_x
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_ready_y
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_ready_z
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/acceleration_out_x
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/acceleration_out_y
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/acceleration_out_z
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_tx_start
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_tx
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_tx_busy
+add wave -noupdate -group {ACCEL to UART} -radix ascii /testbench/DUT/accel_to_uart/transmit_buffer
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/transmit_addr
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/state
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/next_state
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_tx_start_r
+add wave -noupdate -group {ACCEL to UART} -radix hexadecimal /testbench/DUT/accel_to_uart/uart_data_tx_r
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/sys_clk_freq
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/humidity_resolution
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/temperature_resolution
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/clk
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/reset_n
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/scl
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/sda
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_ack_err
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/data_ready
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/relative_humidity
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/temperature
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/state
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_ena
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_addr
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_rw
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_data_wr
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_data_rd
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/i2c_busy
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/busy_prev
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/rh_time
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/temp_time
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/rh_res_bits
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/temp_res_bit
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/humidity_data
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/temperature_data
+add wave -noupdate -group {PMOD HYGRO} -radix hexadecimal /testbench/DUT/i2c_pmod_hygro/hygrometer_addr
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/clk
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/reset
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/temperature
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/humidity
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_data_ready
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_request
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_grant
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_tx_start
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_data_tx
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_tx_busy
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/transmit_buffer
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/transmit_addr
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/state
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/next_state
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_tx_start_r
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_data_tx_r
+add wave -noupdate -group {HYGRO UART} -radix hexadecimal /testbench/DUT/hygro_to_uart/uart_request_r
+add wave -noupdate -group {HDC1080 TOP} /testbench/test/pmod1/scl
+add wave -noupdate -group {HDC1080 TOP} /testbench/test/pmod1/sda
+add wave -noupdate -group {HDC1080 TOP} /testbench/test/pmod1/reg_addr
+add wave -noupdate -group {HDC1080 TOP} /testbench/test/pmod1/reg_write
+add wave -noupdate -group {HDC1080 TOP} /testbench/test/pmod1/reg_write_data
+add wave -noupdate -group {HDC1080 TOP} /testbench/test/pmod1/reg_read_data
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/SLAVE_ID_ADDR
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/scl
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/sda
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/reg_addr
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/reg_write
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/reg_write_data
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/reg_read_data
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/state
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/sda_int
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/sda_prev
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/scl_prev
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/bit_count
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/data_shift
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/addr_match
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/rw_bit
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/sda_out
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/start_detected
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/sda_enable
+add wave -noupdate -group {HDC1080 I2C} /testbench/test/pmod1/i2c_slave/i2c_addr
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {480896100000 fs} 0}
 quietly wave cursor active 1

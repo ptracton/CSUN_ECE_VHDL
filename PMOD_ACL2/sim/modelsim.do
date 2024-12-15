@@ -34,9 +34,13 @@ vcom -2008 ../../Common/Boards/${2}/${2}_pkg.vhd -work work
 vcom -2008 ../../Common/DigiKey/UART/uart.vhd
 vcom  ../../Common/DigiKey/PMOD/pmod_accelerometer_adxl362.vhd
 vcom  ../../Common/DigiKey/SPI/spi_master.vhd
+vcom  ../../Common/DigiKey/I2C/i2c_master.vhd
+vcom  ../../Common/DigiKey/PMOD/pmod_hygrometer.vhd    
+
 vcom -2008 ../../Common/CSUN/edge_detector.vhd
 vcom -2008 ../rtl/accelerometer_processing.vhd
 vcom -2008 ../rtl/accelerometer_to_uart.vhd
+vcom -2008 ../rtl/hygrometer_to_uart.vhd    
 vcom -2008 ../rtl/system_controller.vhd
 vcom -2008 ../rtl/top.vhd
 
@@ -51,6 +55,10 @@ vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_regs.vhd
 vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_spi.vhd
 vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362_system_controller.vhd
 vcom -2008 ../../Common/CSUN/PMOD/ACL2/adxl362.vhd
+
+vcom -2008 ../../Common/CSUN/PMOD/Hygrometer/hdc1080_pkg.vhd -work work
+vcom -2008 ../../Common/CSUN/PMOD/Hygrometer/hdc1080_i2c.vhd
+vcom -2008 ../../Common/CSUN/PMOD/Hygrometer/hdc1080.vhd
 
 # Testbench and simulation source code
 vcom -2008 ../testbench/testbench.vhd

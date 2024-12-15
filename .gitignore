@@ -31,3 +31,6 @@ clk_wiz_0_1/
 *.bak
 *.rst
 *.rpt
+*.dcp
+*.gen/
+*.Xil/
