@@ -81,6 +81,42 @@ architecture rtl of basic_packet_coms is
       );
   end component;
 
+  component blk_mem_gen_0
+    port (
+      clka  : in  std_logic;
+      ena   : in  std_logic;
+      wea   : in  std_logic_vector(0 downto 0);
+      addra : in  std_logic_vector(8 downto 0);
+      dina  : in  std_logic_vector(7 downto 0);
+      clkb  : in  std_logic;
+      enb   : in  std_logic;
+      addrb : in  std_logic_vector(8 downto 0);
+      doutb : out std_logic_vector(7 downto 0)
+      );
+  end component;
+
+  component bytes_to_packet is
+    port(
+      -- System Interface
+      clk   : in std_logic;
+      reset : in std_logic;
+
+      -- UART Interface
+      byte_valid   : in std_logic;
+      uart_data_rx : in std_logic_vector(7 downto 0);
+
+      -- BRAM Interface
+      ena   : out std_logic;
+      wea   : out std_logic_vector(0 downto 0);
+      addra : out std_logic_vector(8 downto 0);
+      dina  : out std_logic_vector(7 downto 0);
+
+      -- Processing Interface
+      packet_valid : out std_logic;
+      packet_error : out std_logic
+      );
+  end component;
+
   -- UART Signals
   signal tx_start        : std_logic;
   signal uart_data_rx    : std_logic_vector(7 downto 0);
@@ -93,12 +129,21 @@ architecture rtl of basic_packet_coms is
   -- System Signals
   signal clk     : std_logic;
   signal reset   : std_logic;
-  signal reset_n : std_logic;  
+  signal reset_n : std_logic;
 
+  -- RX Packet memory
+  signal rx_ena   : std_logic;
+  signal rx_wea   : std_logic_vector(0 downto 0);
+  signal rx_addra : std_logic_vector(8 downto 0);
+  signal rx_dina  : std_logic_vector(7 downto 0);
+  signal rx_enb   : std_logic;
+  signal rx_addrb : std_logic_vector(8 downto 0);
+  signal rx_doutb : std_logic_vector(7 downto 0);
 
 begin
-
-------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+  -- System clock and reset controller
+  ------------------------------------------------------------------------------
   sys_con : system_controller
     port map(
       clk_in    => XCLK,
@@ -143,5 +188,55 @@ begin
       data_in => rx_busy,
       rising  => rx_busy_rising,
       falling => rx_busy_falling
-      );  
+      );
+
+  ------------------------------------------------------------------------------
+  -- Catch received byte and transmit it back to user
+  ------------------------------------------------------------------------------
+  echo : process (clk)
+  begin
+    if rising_edge(clk) then
+      if (reset = '1') then
+        tx_start     <= '0';
+        uart_data_tx <= x"00";
+      elsif rx_busy_falling = '1' then
+        tx_start     <= '1';
+        uart_data_tx <= uart_data_rx;
+      else
+        tx_start <= '0';
+      end if;
+    end if;
+  end process;
+
+  ------------------------------------------------------------------------------
+  -- Memory to hold the incoming packet from the PC
+  ------------------------------------------------------------------------------
+  rx_packet : blk_mem_gen_0
+    port map (
+      clka  => clk,
+      ena   => rx_ena,
+      wea   => rx_wea,
+      addra => rx_addra,
+      dina  => rx_dina,
+      clkb  => clk,
+      enb   => rx_enb,
+      addrb => rx_addrb,
+      doutb => rx_doutb
+      );
+
+  ------------------------------------------------------------------------------
+  -- FSM to take data from UART and create packet in BRAM
+  ------------------------------------------------------------------------------  
+  packet_rx : bytes_to_packet
+    port map(
+      clk          => clk,
+      reset        => reset,
+      byte_valid   => rx_busy_falling,
+      uart_data_rx => uart_data_rx,
+      ena          => rx_ena,
+      wea          => rx_wea,
+      addra        => rx_addra,
+      dina         => rx_dina
+      );
+
 end rtl;
