@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--board",
-        help="Which board are we running on, basys3 or zybo",
+        help="Which board are we running on, artys7, basys3 boolean or zybo",
         required=True,
         action="store",
     )
