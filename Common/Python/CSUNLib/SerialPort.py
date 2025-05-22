@@ -7,6 +7,8 @@ our needs as a packet communication system.
 import array
 import logging
 import serial
+import threading
+import time
 import serial.tools.list_ports
 
 # import Packet
@@ -34,7 +36,6 @@ class SerialPort(serial.Serial):
         This will open the serial port specified or terminate the program if it can not open it.
         """
         super(SerialPort, self).__init__(timeout=0.25)
-
         try:
             com_port_list = list(serial.tools.list_ports.comports())
             self.ports = [x[0] for x in com_port_list]
@@ -43,7 +44,9 @@ class SerialPort(serial.Serial):
 
         print("List of Ports {}".format(self.ports))
 
-        self.baudrate = baud_rate
+        bits = 8
+        parity = "None"
+        self.baudrate = 115200
 
         if bits == 8:
             # self.setByteSize(serial.EIGHTBITS)
@@ -75,10 +78,18 @@ class SerialPort(serial.Serial):
             self.parity = serial.PARITY_SPACE
         if stop_bits == 1:
             # self.setStopbits(serial.STOPBITS_ONE)
-            self.stopbits - serial.STOPBITS_ONE
+            self.stopbits = serial.STOPBITS_ONE
         elif stop_bits == 2:
             # self.setStopbits(serial.STOPBITS_TWO)
             self.stopbits = serial.STOPBITS_TWO
+
+        self.running = True
+        self.receive_thread = threading.Thread(target=self.receive_data)
+        self.receive_thread.daemon = (
+            True  # Allow program to exit even if thread is running
+        )
+        self.receive_thread.start()
+
         return
 
     def connect(self):
@@ -94,6 +105,18 @@ class SerialPort(serial.Serial):
         """Return a list of serial ports on this computer."""
         return self.ports
 
+    def receive_data(self):
+        data = None
+        print(f"Receive Data Starting")
+        while self.running:
+            print(f"Receive Data Running {self.in_waiting}")
+            if self.is_open is True and self.in_waiting > 0:
+                data = self.read()
+                print(f"Received: {data} {self.in_waiting}")
+                # time.sleep(0.1)
+            else:
+                time.sleep(1)
+
     def transmit_binary(self, data):
         """Send binary data and NOT ASCII data.
 
@@ -102,37 +125,10 @@ class SerialPort(serial.Serial):
         #
         # http://stackoverflow.com/questions/472977/binary-data-with-pyserialpython-serial-port
         #
-        # print("Trans Binary: ", data)
-        transmit = array.array("B", data).tostring()
+        print("Trans Binary: ", data)
+        # transmit = array.array("B", data).tostring()
+        # transmit = {!r}'.format(data)'
         # print("Transmit", transmit)
-        self.write(transmit)
+        self.write(data.encode())
 
         return
-
-    # def CPU_Write(self, address=None, data=None):
-
-    #     if address is None or data is None:
-    #         return
-
-    #     command = COMMAND_CPU_WRITE
-    #     pkt = Packet.Packet(command=command, write=False, address=address, data=data)
-    #     pkt.to_bytes()
-    #     transmit = array.array("B", pkt.bytesList).tostring()
-    #     self.write(transmit)
-    #     print("CPU_WRITE: Address={:08x} Data={:08x}".format(address, data))
-    #     return
-
-    # def CPU_Read(self, address=None):
-
-    #     if address is None:
-    #         return
-
-    #     command = COMMAND_CPU_READ
-    #     pkt = Packet.Packet(command=command, write=False, address=address, data=[])
-    #     pkt.to_bytes()
-    #     transmit = array.array("B", pkt.bytesList).tostring()
-    #     self.write(transmit)
-    #     response = self.read(4)
-    #     uint32 = int.from_bytes(response, "little")
-    #     print("CPU_READ: Address={:08x} Data={:08x}".format(address, uint32))
-    #     return uint32
