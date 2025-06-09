@@ -15,17 +15,16 @@ import SerialPort
 
 
 class SerialPortUI(PySide6.QtCore.QObject):
-
-    # connectButtonSignabl = PySide6.QtCore.pyqtSignal()
+    """UI Class for managing the Serial Port"""
 
     def __init__(
         self,
         parent=None,
         name="Serial Port",
-        port="/dev/ttyUSB0",
+        port="/dev/ttyUSB1",
         baud_rate="115200",
         bits=8,
-        parity=None,
+        parity="None",
         stop_bits=1,
     ):
         super(SerialPortUI, self).__init__()
@@ -92,7 +91,8 @@ class SerialPortUI(PySide6.QtCore.QObject):
         self.serial_port.baudrate = self.BaudRateComboBox.currentText()
 
         try:
-            self.serial_port.open()
+            # self.serial_port.open()
+            self.serial_port.connect()
         except:
             print(
                 "FAILED TO OPEN PORT {}".format(self.SerialPortComboBox.currentText())

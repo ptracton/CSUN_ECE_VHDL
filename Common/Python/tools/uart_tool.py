@@ -19,6 +19,9 @@ class UI_CentralWidget(PySide6.QtWidgets.QDialog):
         top_vbox_layout = PySide6.QtWidgets.QVBoxLayout()
         self.my_serial_port = SerialPortUI.SerialPortUI()
 
+        self.my_serial_port.serial_port.set_data_callback(self.serial_data_callback)
+        self.my_serial_port.serial_port.set_error_callback(self.serial_error_callback)
+
         top_hbox_layout = PySide6.QtWidgets.QHBoxLayout()
         uart_tx_name = PySide6.QtWidgets.QLabel("Transmit Character")
         uart_rx_name = PySide6.QtWidgets.QLabel("Receive Character")
@@ -46,6 +49,18 @@ class UI_CentralWidget(PySide6.QtWidgets.QDialog):
                 self.my_serial_port.serial_port.transmit_binary(x)
         else:
             print(f"Can't TRANSMIT CLICKED {character} {type(character)}")
+        return
+
+    def serial_data_callback(self, data):
+        """Callback on receiving data"""
+        print(f"Data Callback {data}")
+        current_text = self.rx_char_line_edit.text()
+        self.rx_char_line_edit.setText(current_text + data.decode("utf-8"))
+        return
+
+    def serial_error_callback(self, msg):
+        """When an error happens, this is the handler"""
+        print(f"Error Callback {msg}")
         return
 
 
